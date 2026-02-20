@@ -1,0 +1,16 @@
+{
+    "name": "Runtime.UI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e34a0c7686e9c774191f633f16032572"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

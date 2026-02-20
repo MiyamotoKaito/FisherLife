@@ -1,0 +1,16 @@
+{
+    "name": "Develop.Mock",
+    "rootNamespace": "",
+    "references": [
+        "GUID:76a7fb025d91af34cab90ac4ce807755"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
