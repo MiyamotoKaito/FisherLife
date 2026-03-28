@@ -2,8 +2,8 @@
 {
     public interface IFish
     {
-        string Name { get; }
-        public int Level { get; }
-
+        void Patrol();
+        void FindBait();
+        void CaughtBait();
     }
 }
