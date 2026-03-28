@@ -2,8 +2,8 @@
 {
     public interface IRod
     {
-        public string Name { get; }
-        public int Level { get; }
-        public string Description { get; }
+        void Skill();
+        void Attack();
+        void Fishing();
     }
 }
