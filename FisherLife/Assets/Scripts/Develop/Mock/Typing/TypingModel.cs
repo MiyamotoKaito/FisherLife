@@ -6,19 +6,19 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace Miyamoto.FisherLife.Develop.Mock.Typing
 {
     /// <summary>
-    /// タイピングシステム
+    /// タイピングModel
     /// </summary>
-    public class TypingSystem : MonoBehaviour
+    public class TypingModel
     {
-        [SerializeField] private AssetReferenceT<TextAsset> _textAssetReference;
-        private LoadWords _loadWords;
+        private AssetReferenceT<TextAsset> _textAssetReference;
         private AsyncOperationHandle<TextAsset> _handle;
 
-        private void Awake()
+
+        public TypingModel(AssetReferenceT<TextAsset> textAsset)
         {
-            TextLoadAsync().Forget();
+            _textAssetReference = textAsset;
         }
-        
+
         private async UniTask TextLoadAsync()
         {
             _handle = Addressables.LoadAssetAsync<TextAsset>(_textAssetReference);
