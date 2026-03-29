@@ -16,10 +16,10 @@ namespace Miyamoto.FisherLife.Develop.Mock.Typing
 
         private void Awake()
         {
-            LoadAsync().Forget();
+            TextLoadAsync().Forget();
         }
         
-        private async UniTask LoadAsync()
+        private async UniTask TextLoadAsync()
         {
             _handle = Addressables.LoadAssetAsync<TextAsset>(_textAssetReference);
             await _handle.Task;
