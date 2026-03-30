@@ -1,9 +1,8 @@
 using Cysharp.Threading.Tasks;
-using Miyamoto.FisherLife.Develop.Mock.Typing;
+using Miyamoto.FisherLife.Develop.Input;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.UI;
 
 namespace Miyamoto.FisherLife.Develop.Mock.Typing
 {
@@ -18,9 +17,10 @@ namespace Miyamoto.FisherLife.Develop.Mock.Typing
         private AsyncOperationHandle<TextAsset> _handle;
         private TypingModelMock _modelMock;
         private TypingViewMock _viewMock;
-        
+        private InputActions _input;
         private void Start()
         {
+            _input = GetComponent<InputActions>();
             _viewMock = GetComponent<TypingViewMock>();
             _modelMock = new TypingModelMock();
             TextLoadAsync().Forget();
