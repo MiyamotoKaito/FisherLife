@@ -33,7 +33,9 @@ namespace Miyamoto.FisherLife.Develop.Input
         {
             if (context.started)
             {
-                OnType?.Invoke(Keyboard.current.ToString());
+                Debug.unityLogger.Log(context.action.name);
+                var key = context.control.displayName;
+                OnType?.Invoke(key);
             }
         }
 
