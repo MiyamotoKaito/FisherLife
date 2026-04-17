@@ -1,10 +1,17 @@
 ﻿using System;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// ActionMapの切り替えを管理するクラス
+/// </summary>
 public class InputActionMapSwitcher : IDisposable
 {
-    private FisherLifeInputActions _inputActions;
     private InputActionMap _currentActionMap;
+
+    /// <summary>
+    /// ActionMap切り替えを行う
+    /// </summary>
+    /// <param name="actionMap"></param>
     public void ChangeContext(InputActionMap actionMap)
     {
         // 初回のアクションマップ設定
