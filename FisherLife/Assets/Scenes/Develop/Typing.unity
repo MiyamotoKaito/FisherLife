@@ -347,9 +347,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 999104686}
-  - component: {fileID: 999104687}
-  - component: {fileID: 999104688}
-  - component: {fileID: 999104689}
   m_Layer: 0
   m_Name: TypingSystem
   m_TagString: Untagged
@@ -372,51 +369,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &999104687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999104684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 497a2d60bc9fbc240ac0608a31e70cf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Develop.Mock::TypingPresenter
-  _textAssetReference:
-    m_AssetGUID: 7e4791a0f3afcd14db7c9d847355be6e
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _level: 1
---- !u!114 &999104688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999104684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a369efe522ae1d42be908b87d45488a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Develop.Mock::Miyamoto.FisherLife.Develop.Mock.Typing.TypingViewMock
-  _questionText: {fileID: 1861261972}
-  _typingText: {fileID: 1411190542}
---- !u!114 &999104689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999104684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fd778384bb9c8049ab22f133f16599c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Develop.Mock::Miyamoto.FisherLife.Develop.Mock.Typing.TypingInput
 --- !u!1 &1411190540
 GameObject:
   m_ObjectHideFlags: 0
