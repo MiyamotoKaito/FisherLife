@@ -93,9 +93,18 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
             ""id"": ""16d736cd-7e61-4c78-8419-ddbc1dbbada2"",
             ""actions"": [
                 {
-                    ""name"": ""KeyType"",
+                    ""name"": ""Enter"",
                     ""type"": ""Button"",
                     ""id"": ""2ad8b0d9-343f-4b98-8bb2-6fff84993b0f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackSpace"",
+                    ""type"": ""Button"",
+                    ""id"": ""2981c3b6-cf77-46be-8903-761394e156dc"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -106,11 +115,22 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
                 {
                     ""name"": """",
                     ""id"": ""a00b3b2d-b890-4931-b956-e2793d56cb80"",
-                    ""path"": ""<Keyboard>/anyKey"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""KeyType"",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c4c85d2-c364-438b-908f-09cd9550279b"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackSpace"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -149,7 +169,8 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
 }");
         // Typing
         m_Typing = asset.FindActionMap("Typing", throwIfNotFound: true);
-        m_Typing_KeyType = m_Typing.FindAction("KeyType", throwIfNotFound: true);
+        m_Typing_Enter = m_Typing.FindAction("Enter", throwIfNotFound: true);
+        m_Typing_BackSpace = m_Typing.FindAction("BackSpace", throwIfNotFound: true);
         // Fishing
         m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
         m_Fishing_Interact = m_Fishing.FindAction("Interact", throwIfNotFound: true);
@@ -234,7 +255,8 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
     // Typing
     private readonly InputActionMap m_Typing;
     private List<ITypingActions> m_TypingActionsCallbackInterfaces = new List<ITypingActions>();
-    private readonly InputAction m_Typing_KeyType;
+    private readonly InputAction m_Typing_Enter;
+    private readonly InputAction m_Typing_BackSpace;
     /// <summary>
     /// Provides access to input actions defined in input action map "Typing".
     /// </summary>
@@ -247,9 +269,13 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
         /// </summary>
         public TypingActions(@FisherLifeInputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Typing/KeyType".
+        /// Provides access to the underlying input action "Typing/Enter".
         /// </summary>
-        public InputAction @KeyType => m_Wrapper.m_Typing_KeyType;
+        public InputAction @Enter => m_Wrapper.m_Typing_Enter;
+        /// <summary>
+        /// Provides access to the underlying input action "Typing/BackSpace".
+        /// </summary>
+        public InputAction @BackSpace => m_Wrapper.m_Typing_BackSpace;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -276,9 +302,12 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
         {
             if (instance == null || m_Wrapper.m_TypingActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_TypingActionsCallbackInterfaces.Add(instance);
-            @KeyType.started += instance.OnKeyType;
-            @KeyType.performed += instance.OnKeyType;
-            @KeyType.canceled += instance.OnKeyType;
+            @Enter.started += instance.OnEnter;
+            @Enter.performed += instance.OnEnter;
+            @Enter.canceled += instance.OnEnter;
+            @BackSpace.started += instance.OnBackSpace;
+            @BackSpace.performed += instance.OnBackSpace;
+            @BackSpace.canceled += instance.OnBackSpace;
         }
 
         /// <summary>
@@ -290,9 +319,12 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
         /// <seealso cref="TypingActions" />
         private void UnregisterCallbacks(ITypingActions instance)
         {
-            @KeyType.started -= instance.OnKeyType;
-            @KeyType.performed -= instance.OnKeyType;
-            @KeyType.canceled -= instance.OnKeyType;
+            @Enter.started -= instance.OnEnter;
+            @Enter.performed -= instance.OnEnter;
+            @Enter.canceled -= instance.OnEnter;
+            @BackSpace.started -= instance.OnBackSpace;
+            @BackSpace.performed -= instance.OnBackSpace;
+            @BackSpace.canceled -= instance.OnBackSpace;
         }
 
         /// <summary>
@@ -430,12 +462,19 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
     public interface ITypingActions
     {
         /// <summary>
-        /// Method invoked when associated input action "KeyType" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Enter" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnKeyType(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BackSpace" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBackSpace(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Fishing" which allows adding and removing callbacks.

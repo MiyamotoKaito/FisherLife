@@ -7,9 +7,18 @@
             "id": "16d736cd-7e61-4c78-8419-ddbc1dbbada2",
             "actions": [
                 {
-                    "name": "KeyType",
+                    "name": "Enter",
                     "type": "Button",
                     "id": "2ad8b0d9-343f-4b98-8bb2-6fff84993b0f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BackSpace",
+                    "type": "Button",
+                    "id": "2981c3b6-cf77-46be-8903-761394e156dc",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -20,11 +29,22 @@
                 {
                     "name": "",
                     "id": "a00b3b2d-b890-4931-b956-e2793d56cb80",
-                    "path": "<Keyboard>/anyKey",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "KeyType",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c4c85d2-c364-438b-908f-09cd9550279b",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BackSpace",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
