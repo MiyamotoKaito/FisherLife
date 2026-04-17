@@ -344,6 +344,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "jp.hadashikick.vcontainer": {
+      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ae12048ca8fb9900518f40bb691bca5266efc760"
+    },
     "template": {
       "version": "https://github.com/MiyamotoKaito/MySoloDevelopSetUp.git?path=MySoloDevelopSetUp/Assets/Template",
       "depth": 0,
