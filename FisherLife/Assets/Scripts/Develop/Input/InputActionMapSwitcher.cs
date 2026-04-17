@@ -6,13 +6,36 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class InputActionMapSwitcher : IDisposable
 {
+    private FisherLifeInputActions _inputActions;
     private InputActionMap _currentActionMap;
 
+    public InputActionMapSwitcher(FisherLifeInputActions inputActions)
+    {
+        _inputActions = inputActions;
+    }
+
+    /// <summary>
+    /// 外側から呼び出すActionMapの切り替えを行うためのメソッド
+    /// </summary>
+    /// <param name="actionMapType"></param>
+    public void ChangeMap(ActionMapType actionMapType)
+    {
+        switch (actionMapType)
+        {
+            case ActionMapType.Typing:
+                MapSwitch(_inputActions.Typing);
+                break;
+
+            case ActionMapType.Fishing:
+                MapSwitch(_inputActions.Fishing);
+                break;
+        }
+    }
     /// <summary>
     /// ActionMap切り替えを行う
     /// </summary>
     /// <param name="actionMap"></param>
-    public void ChangeContext(InputActionMap actionMap)
+    private void MapSwitch(InputActionMap actionMap)
     {
         // 初回のアクションマップ設定
         if (_currentActionMap == null)
@@ -35,4 +58,12 @@ public class InputActionMapSwitcher : IDisposable
         _currentActionMap?.Disable();
         _currentActionMap = null;
     }
+}
+
+public enum ActionMapType
+{
+    Typing = 0,
+    Fishing = 1,
+    Player = 2,
+    UI = 3,
 }
