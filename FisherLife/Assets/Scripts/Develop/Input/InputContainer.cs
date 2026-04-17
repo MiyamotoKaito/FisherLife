@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class InputContaine : MonoBehaviour
 {
     private void Awake()
     {
@@ -13,4 +13,6 @@ public class InputController : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
+
+    
 }
