@@ -93,15 +93,6 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
             ""id"": ""16d736cd-7e61-4c78-8419-ddbc1dbbada2"",
             ""actions"": [
                 {
-                    ""name"": ""Enter"",
-                    ""type"": ""Button"",
-                    ""id"": ""14f5a15c-5a6a-4d35-bd23-ec8a90dc633f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""KeyType"",
                     ""type"": ""Button"",
                     ""id"": ""2ad8b0d9-343f-4b98-8bb2-6fff84993b0f"",
@@ -114,17 +105,6 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""0462e31c-b947-458a-af09-401d4c938767"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Enter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a00b3b2d-b890-4931-b956-e2793d56cb80"",
                     ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
@@ -135,19 +115,50 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Fishing"",
+            ""id"": ""289e9444-7133-44b8-a17a-5320cfcf87b6"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ef93b1b-2d9f-44c7-8fb5-96a9c0c54cf4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""43e65e3a-4bf1-4864-97c4-6ac2dc08e70a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
         // Typing
         m_Typing = asset.FindActionMap("Typing", throwIfNotFound: true);
-        m_Typing_Enter = m_Typing.FindAction("Enter", throwIfNotFound: true);
         m_Typing_KeyType = m_Typing.FindAction("KeyType", throwIfNotFound: true);
+        // Fishing
+        m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
+        m_Fishing_Interact = m_Fishing.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@FisherLifeInputActions()
     {
         UnityEngine.Debug.Assert(!m_Typing.enabled, "This will cause a leak and performance issues, FisherLifeInputActions.Typing.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Fishing.enabled, "This will cause a leak and performance issues, FisherLifeInputActions.Fishing.Disable() has not been called.");
     }
 
     /// <summary>
@@ -223,7 +234,6 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
     // Typing
     private readonly InputActionMap m_Typing;
     private List<ITypingActions> m_TypingActionsCallbackInterfaces = new List<ITypingActions>();
-    private readonly InputAction m_Typing_Enter;
     private readonly InputAction m_Typing_KeyType;
     /// <summary>
     /// Provides access to input actions defined in input action map "Typing".
@@ -236,10 +246,6 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
         public TypingActions(@FisherLifeInputActions wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "Typing/Enter".
-        /// </summary>
-        public InputAction @Enter => m_Wrapper.m_Typing_Enter;
         /// <summary>
         /// Provides access to the underlying input action "Typing/KeyType".
         /// </summary>
@@ -270,9 +276,6 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
         {
             if (instance == null || m_Wrapper.m_TypingActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_TypingActionsCallbackInterfaces.Add(instance);
-            @Enter.started += instance.OnEnter;
-            @Enter.performed += instance.OnEnter;
-            @Enter.canceled += instance.OnEnter;
             @KeyType.started += instance.OnKeyType;
             @KeyType.performed += instance.OnKeyType;
             @KeyType.canceled += instance.OnKeyType;
@@ -287,9 +290,6 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
         /// <seealso cref="TypingActions" />
         private void UnregisterCallbacks(ITypingActions instance)
         {
-            @Enter.started -= instance.OnEnter;
-            @Enter.performed -= instance.OnEnter;
-            @Enter.canceled -= instance.OnEnter;
             @KeyType.started -= instance.OnKeyType;
             @KeyType.performed -= instance.OnKeyType;
             @KeyType.canceled -= instance.OnKeyType;
@@ -326,6 +326,102 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
     /// Provides a new <see cref="TypingActions" /> instance referencing this action map.
     /// </summary>
     public TypingActions @Typing => new TypingActions(this);
+
+    // Fishing
+    private readonly InputActionMap m_Fishing;
+    private List<IFishingActions> m_FishingActionsCallbackInterfaces = new List<IFishingActions>();
+    private readonly InputAction m_Fishing_Interact;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Fishing".
+    /// </summary>
+    public struct FishingActions
+    {
+        private @FisherLifeInputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public FishingActions(@FisherLifeInputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Fishing/Interact".
+        /// </summary>
+        public InputAction @Interact => m_Wrapper.m_Fishing_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Fishing; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="FishingActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(FishingActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="FishingActions" />
+        public void AddCallbacks(IFishingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_FishingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_FishingActionsCallbackInterfaces.Add(instance);
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="FishingActions" />
+        private void UnregisterCallbacks(IFishingActions instance)
+        {
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="FishingActions.UnregisterCallbacks(IFishingActions)" />.
+        /// </summary>
+        /// <seealso cref="FishingActions.UnregisterCallbacks(IFishingActions)" />
+        public void RemoveCallbacks(IFishingActions instance)
+        {
+            if (m_Wrapper.m_FishingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="FishingActions.AddCallbacks(IFishingActions)" />
+        /// <seealso cref="FishingActions.RemoveCallbacks(IFishingActions)" />
+        /// <seealso cref="FishingActions.UnregisterCallbacks(IFishingActions)" />
+        public void SetCallbacks(IFishingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_FishingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_FishingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="FishingActions" /> instance referencing this action map.
+    /// </summary>
+    public FishingActions @Fishing => new FishingActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Typing" which allows adding and removing callbacks.
     /// </summary>
@@ -334,18 +430,26 @@ public partial class @FisherLifeInputActions: IInputActionCollection2, IDisposab
     public interface ITypingActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Enter" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnEnter(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "KeyType" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnKeyType(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Fishing" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="FishingActions.AddCallbacks(IFishingActions)" />
+    /// <seealso cref="FishingActions.RemoveCallbacks(IFishingActions)" />
+    public interface IFishingActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

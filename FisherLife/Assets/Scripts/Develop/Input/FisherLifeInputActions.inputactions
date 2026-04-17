@@ -7,15 +7,6 @@
             "id": "16d736cd-7e61-4c78-8419-ddbc1dbbada2",
             "actions": [
                 {
-                    "name": "Enter",
-                    "type": "Button",
-                    "id": "14f5a15c-5a6a-4d35-bd23-ec8a90dc633f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "KeyType",
                     "type": "Button",
                     "id": "2ad8b0d9-343f-4b98-8bb2-6fff84993b0f",
@@ -28,23 +19,40 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "0462e31c-b947-458a-af09-401d4c938767",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Enter",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a00b3b2d-b890-4931-b956-e2793d56cb80",
                     "path": "<Keyboard>/anyKey",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "KeyType",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Fishing",
+            "id": "289e9444-7133-44b8-a17a-5320cfcf87b6",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "6ef93b1b-2d9f-44c7-8fb5-96a9c0c54cf4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "43e65e3a-4bf1-4864-97c4-6ac2dc08e70a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
