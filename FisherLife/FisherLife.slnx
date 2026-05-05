@@ -1,5 +1,7 @@
 ﻿<Solution>
   <Project Path="Develop.Core.csproj" />
+  <Project Path="Develo.Input.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Develop.Mock.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
 </Solution>
