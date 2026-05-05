@@ -2,6 +2,7 @@
 using Miyamoto.FisherLife.Develop.Mock.Typing;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using VContainer;
 
 public class TypingPresenter : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class TypingPresenter : MonoBehaviour
     private TypingModel _model;
     private LoadWords _loadWords;
 
-    private InputContainer _container;
+    [Inject]private readonly InputActionMapSwitcher _mapSwitcher;
     private void Awake()
     {
         _view = GetComponent<TypingView>();
@@ -20,9 +21,8 @@ public class TypingPresenter : MonoBehaviour
     }
     private void Start()
     {
-        _container = FindAnyObjectByType<InputContainer>();
-
-        _container.MapSwitcher.MapSwitch();
+        _mapSwitcher.PushMap(ActionMapType.Typing);
+        _mapSwitcher.ChangeMap(ActionMapType.Typing);
     }
 
     private async UniTask GetWordList()
