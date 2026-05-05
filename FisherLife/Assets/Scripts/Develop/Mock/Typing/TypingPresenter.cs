@@ -22,7 +22,8 @@ public class TypingPresenter : MonoBehaviour
     {
         _container = FindAnyObjectByType<InputContainer>();
 
-        _container.MapSwitcher.MapSwitch();
+        _container.MapSwitcher.PushMap(ActionMapType.Typing);
+        _container.MapSwitcher.ChangeMap(ActionMapType.Typing);
     }
 
     private async UniTask GetWordList()

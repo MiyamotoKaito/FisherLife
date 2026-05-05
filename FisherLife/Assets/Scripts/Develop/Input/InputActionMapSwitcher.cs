@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -8,6 +9,7 @@ public class InputActionMapSwitcher : IDisposable
 {
     private FisherLifeInputActions _inputActions;
     private InputActionMap _currentActionMap;
+    private Stack<ActionMapType> _actionMapTypes;
 
     public InputActionMapSwitcher(FisherLifeInputActions inputActions)
     {
@@ -30,6 +32,14 @@ public class InputActionMapSwitcher : IDisposable
                 MapSwitch(_inputActions.Fishing);
                 break;
         }
+    }
+    /// <summary>
+    /// ActionMapの切り替えを行い、切り替えたActionMapTypeをStackに積む
+    /// </summary>
+    /// <param name="actionMapType"></param>
+    public void PushMap(ActionMapType actionMapType)
+    {
+        _actionMapTypes.Push(actionMapType);
     }
     /// <summary>
     /// ActionMap切り替えを行う
