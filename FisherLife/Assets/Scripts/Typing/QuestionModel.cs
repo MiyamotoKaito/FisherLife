@@ -1,3 +1,5 @@
+using R3;
+
 namespace TypingModule
 {
     /// <summary>
@@ -5,23 +7,27 @@ namespace TypingModule
     /// </summary>
     public class QuestionModel
     {
-        public string Question => _question;
-        private string _question;
+        public ReadOnlyReactiveProperty<string> Question => _question;
+        private ReactiveProperty<string> _question;
+        private ReactiveProperty<string> _currentQuestion;
+        private int _index = 0;
         /// <summary>
         /// 問題を設定する
         /// </summary>
         /// <param name="question"></param>
         public void SetQuestion(string question)
         {
-            _question = question;
+            _question.Value = question;
+            _index = question.Length;
+            _currentQuestion.Value = string.Empty;
         }
-        /// <summary>
-        /// 問題を取得する
-        /// </summary>
-        /// <returns></returns>
-        public string GetQuestion()
+        public void AddChar(char c)
         {
-            return _question;
+            if (_question.Value[_index] != c)
+                return;
+
+            _currentQuestion.Value += c;
+            return;
         }
     }
 }
