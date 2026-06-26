@@ -1,5 +1,8 @@
 namespace TypingModule
 {
+    /// <summary>
+    /// 問題のモデル
+    /// </summary>
     public class QuestionModel
     {
         public string Question => _question;
