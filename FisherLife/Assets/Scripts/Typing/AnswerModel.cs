@@ -21,7 +21,7 @@ namespace TypingModule
         /// </summary>
         public void Delete()
         {
-
+            _answer.Value.TrimEnd();
         }
     }
 }
