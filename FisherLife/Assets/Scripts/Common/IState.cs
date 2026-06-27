@@ -3,7 +3,8 @@
     public interface IState
     {
         WorldStateType WorldState { get; }
+        void Init(IInputActionMapStack inputActionMapStack);
         void Entry();
-        void Exit(WorldStateType worldState);
+        void Exit();
     }
 }
