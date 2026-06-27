@@ -1,0 +1,17 @@
+{
+    "name": "WorldStateModule",
+    "rootNamespace": "WorldStateModule",
+    "references": [
+        "GUID:21da53c35248408429a4dd1947910187",
+        ""
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
