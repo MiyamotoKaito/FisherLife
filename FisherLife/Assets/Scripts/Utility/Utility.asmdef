@@ -1,11 +1,7 @@
 {
-    "name": "InputModule",
-    "rootNamespace": "InputModule",
-    "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:21da53c35248408429a4dd1947910187",
-        "GUID:d2e83e46d6e3ff7449778a8c8e1b7919"
-    ],
+    "name": "Utility",
+    "rootNamespace": "Utility",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
