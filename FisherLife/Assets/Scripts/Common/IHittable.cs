@@ -1,9 +1,7 @@
-using UnityEngine;
-
-namespace Common
+﻿namespace Common
 {
-    public class IHittable
+    public interface IHittable
     {
-    
+        int Defence { get; }
     }
 }
