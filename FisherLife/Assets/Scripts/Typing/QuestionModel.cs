@@ -1,38 +1,46 @@
-﻿using R3;
+using System;
+using R3;
 
 namespace TypingModule
 {
     /// <summary>
-    /// 問題のモデル
+    /// 問題のモデル。出題文字列と「今どこまで正しく打てたか」を管理する。
     /// </summary>
-    public class QuestionModel
+    public class QuestionModel : IDisposable
     {
-        public QuestionModel()
-        {
-            _currentQuestion = new();
-            _question = new();
-        }
         public ReadOnlyReactiveProperty<string> Question => _question;
-        private ReactiveProperty<string> _question;
-        private ReactiveProperty<string> _currentQuestion;
-        private int _index = 0;
+        /// <summary>現在の問題を最後まで打ち切ったか</summary>
+        public bool IsCompleted => !string.IsNullOrEmpty(_question.Value) && _index >= _question.Value.Length;
+
+        private readonly ReactiveProperty<string> _question = new(string.Empty);
+        private int _index;
+
         /// <summary>
-        /// 問題を設定する
+        /// 問題を設定する（進捗はリセット）
         /// </summary>
-        /// <param name="question"></param>
         public void SetQuestion(string question)
         {
             _question.Value = question;
-            _index = question.Length;
-            _currentQuestion.Value = string.Empty;
+            _index = 0;
         }
-        public void AddChar(char c)
-        {
-            if (_question.Value[_index] != c)
-                return;
 
-            _currentQuestion.Value += c;
-            return;
+        /// <summary>
+        /// 入力された1文字を現在位置と照合する。正しければ true。
+        /// </summary>
+        public bool Input(char c)
+        {
+            var q = _question.Value;
+            if (string.IsNullOrEmpty(q)) return false;
+            if (_index >= q.Length) return false;
+            if (q[_index] != c) return false;   // ミスタイプは無視
+
+            _index++;
+            return true;
+        }
+
+        public void Dispose()
+        {
+            _question.Dispose();
         }
     }
 }
