@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Common
 {
     public interface IWordSeparatorUsecase
     {
-        Dictionary<uint, string[]> WordSeparate(string text);
+        ValueTask<Dictionary<uint, string[]>> WordSeparate(string text);
     }
 }
