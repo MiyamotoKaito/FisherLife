@@ -1,4 +1,4 @@
-using R3;
+﻿using R3;
 
 namespace TypingModule
 {
@@ -7,6 +7,11 @@ namespace TypingModule
     /// </summary>
     public class QuestionModel
     {
+        public QuestionModel()
+        {
+            _currentQuestion = new();
+            _question = new();
+        }
         public ReadOnlyReactiveProperty<string> Question => _question;
         private ReactiveProperty<string> _question;
         private ReactiveProperty<string> _currentQuestion;
