@@ -12,6 +12,7 @@ namespace InputModule
         public InputActionMapStack(InputActionAsset inputActions)
         {
             _assets = inputActions;
+            _stack = new();
         }
 
         /// <summary>
@@ -32,7 +33,10 @@ namespace InputModule
         public void Push(InputActionMapType mapType)
         {
             var nextMap = MapOf(mapType);
-            _currentActionMap.Disable();
+            if (_stack.Count > 0)
+            {
+                _currentActionMap.Disable();
+            }
             _stack.Push(mapType);
             nextMap.Enable();
         }
