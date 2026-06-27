@@ -1,4 +1,4 @@
-using Common;
+﻿using Common;
 using R3;
 using System;
 using System.Threading;
@@ -34,8 +34,8 @@ namespace TypingModule
             {
                 if (!_questionModel.Input(c)) return;   // ミスタイプは無視
 
-                _answerModel.Write(c);                  // 先に解答欄へ反映してから
-                if (_questionModel.IsCompleted)         // 完了判定（順序が重要）
+                _answerModel.Write(c);                  // 解答欄へ反映
+                if (_questionModel.IsCompleted)         // 完了判定
                     Completed?.Invoke();
             }).RegisterTo(_tokenSource.Token);
 
@@ -67,7 +67,6 @@ namespace TypingModule
             _tokenSource?.Cancel();
             _answerModel?.Dispose();
             _questionModel?.Dispose();
-            // _typingInput はコンテナが破棄するのでここでは触らない
         }
 
         private readonly AnswerModel _answerModel;
