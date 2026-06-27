@@ -383,8 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09dfbd905d050b14689e04e2b1767194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Develop.Mock::TypingView
-  _question: {fileID: 1861261972}
-  _answer: {fileID: 1411190542}
 --- !u!114 &999104688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,12 +395,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a27ff14a5784a4a96deb1282372c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Develop.Mock::TypingPresenter
-  _questionListTextAsset:
-    m_AssetGUID: 7e4791a0f3afcd14db7c9d847355be6e
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+--- !u!1 &1052422937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1052422940}
+  - component: {fileID: 1052422939}
+  - component: {fileID: 1052422938}
+  m_Layer: 0
+  m_Name: WorldStateMachine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1052422938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052422937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6940b43a70d44d4cae8e1eac448812b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Container::WorldStateModule.WorldStateLifetimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!114 &1052422939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052422937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835d174fb4e2ca448833a289b5004d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WorldStateModule::WorldStateModule.WorldStateMachine
+  _stateList:
+  - rid: 8353672147229474988
+  references:
+    version: 2
+    RefIds:
+    - rid: 8353672147229474988
+      type: {class: FishingState, ns: FishingModule, asm: FishingModule}
+      data: 
+--- !u!4 &1052422940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052422937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 955.75793, y: 758.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411190540
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,3 +933,4 @@ SceneRoots:
   - {fileID: 999104686}
   - {fileID: 2011581394}
   - {fileID: 1834845009}
+  - {fileID: 1052422940}
