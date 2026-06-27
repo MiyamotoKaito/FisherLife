@@ -1,9 +1,7 @@
-using UnityEngine;
-
-namespace Common
+﻿namespace Common
 {
-    public class AttackPipeline
+    public interface AttackPipeline
     {
-    
+        void Caluclate(IHittable targer, IDamagable attacker);
     }
 }
