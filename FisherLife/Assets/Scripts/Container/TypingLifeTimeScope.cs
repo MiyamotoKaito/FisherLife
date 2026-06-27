@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Common;
 using InputModule;
 using TypingModule;
@@ -23,7 +24,24 @@ namespace Container
             // Presenter(ピュアクラス)。VContainer に依存させたくないので
             // EntryPoint(IStartable等) ではなく BuildCallback で起動する。
             builder.Register<TypingPresenter>(Lifetime.Singleton);
-            builder.RegisterBuildCallback(resolver => resolver.Resolve<TypingPresenter>());
+
+            // --- 動作確認用の仮ドライバ（後で正式な出題ロジックに差し替える） ---
+            builder.RegisterBuildCallback(resolver =>
+            {
+                var presenter = resolver.Resolve<TypingPresenter>();
+                var questions = new Queue<string>(new[] { "fish", "rod", "sea" });
+
+                void Next()
+                {
+                    if (questions.Count > 0)
+                        presenter.StartTyping(questions.Dequeue());
+                    else
+                        presenter.StopTyping();
+                }
+
+                presenter.Completed += Next;
+                Next();
+            });
         }
     }
 }
