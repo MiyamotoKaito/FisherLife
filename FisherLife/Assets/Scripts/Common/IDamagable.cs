@@ -1,9 +1,7 @@
-using UnityEngine;
-
-namespace Common
+﻿namespace Common
 {
-    public class IDamagable
+    public interface IDamagable
     {
-    
+        int Power { get; }
     }
 }
