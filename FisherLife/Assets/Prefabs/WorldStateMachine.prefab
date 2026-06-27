@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7638127182246848265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4118710828354987108}
+  - component: {fileID: 6515714637278101467}
+  - component: {fileID: 2440440958493520900}
+  m_Layer: 0
+  m_Name: WorldStateMachine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4118710828354987108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7638127182246848265}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 955.75793, y: 758.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6515714637278101467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7638127182246848265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835d174fb4e2ca448833a289b5004d22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WorldStateModule::WorldStateModule.WorldStateMachine
+  _states:
+  - rid: 8353672151857365095
+  - rid: 8353672151857365103
+  references:
+    version: 2
+    RefIds:
+    - rid: 8353672151857365095
+      type: {class: FishingState, ns: FishingModule, asm: FishingModule}
+      data: 
+    - rid: 8353672151857365103
+      type: {class: TypingState, ns: TypingModule, asm: TypingModule}
+      data: 
+--- !u!114 &2440440958493520900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7638127182246848265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6940b43a70d44d4cae8e1eac448812b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Container::WorldStateModule.WorldStateLifetimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+  _action: {fileID: -944628639613478452, guid: aa9e52b4dafaf2547acc8cda792b3724, type: 3}
