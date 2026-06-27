@@ -17,17 +17,17 @@ namespace TypingModule
         {
             var dictionaty = new Dictionary<uint, string[]>();
 
-            var lines = text.Split("\n");
+            var lines = text.Split('\n', '\r');
             foreach (var line in lines)
             {
-                var str = line.Split(",");
+                var str = line.Trim().Split(",");
                 var num = str[0].ToString();//TryParse用にStringに変換
                 if (!uint.TryParse(num, out uint resule))
                 {
                     continue;
                 }
                 var words = new List<string>();
-                for (int i = 2; i < str.Length; i++)
+                for (int i = 2; i < str.Length - 1; i++)
                 {
                     words.Add(str[i]);
                 }
