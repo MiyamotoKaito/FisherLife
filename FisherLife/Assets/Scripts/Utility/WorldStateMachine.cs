@@ -5,7 +5,7 @@ using VContainer;
 
 namespace WorldStateModule
 {
-    public class WorldStateMachine : MonoBehaviour
+    public class WorldStateMachine : MonoBehaviour, IWorldStateMachine
     {
         public static WorldStateMachine Instance;
         [SerializeReference, SubclassSelector]
