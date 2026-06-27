@@ -43,7 +43,6 @@ namespace TypingModule
         public void Dispose()
         {
             _tokenSource?.Cancel();
-            _typingInput?.Dispose();
         }
 
         private readonly AnswerModel _answerModel;
