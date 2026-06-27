@@ -1,4 +1,4 @@
-﻿using Common;
+using Common;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -17,29 +17,40 @@ namespace TypingModule
         private uint _level;
         private IWordSeparatorUsecase _wordSeparatorUsecase;
         private TypingPresenter _typingPresenter;
-        private async void Start()
-        {
-            _wordDictionary = await _wordSeparatorUsecase.WordSeparate(_textAsset.text);
-            Next();
-            WorldStateMachine.Instance.ChangeState(WorldStateType.Typing);
-        }
-        private void OnEnable()
-        {
-            _typingPresenter.Completed += Next;
-        }
-        private void OnDisable()
-        {
-            _typingPresenter.Completed -= Next;
-        }
+
         [Inject]
-        public async void Inject(IWordSeparatorUsecase wordSeparatorUsecase, TypingPresenter typingPresenter)
+        public void Inject(IWordSeparatorUsecase wordSeparatorUsecase, TypingPresenter typingPresenter)
         {
             _wordSeparatorUsecase = wordSeparatorUsecase;
             _typingPresenter = typingPresenter;
         }
+
+        private async void Start()
+        {
+            // 購読は注入(Inject)後に行う。OnEnable だと _typingPresenter が null の恐れがある
+            _typingPresenter.Completed += Next;
+
+            _wordDictionary = await _wordSeparatorUsecase.WordSeparate(_textAsset.text);
+
+            if (!_wordDictionary.ContainsKey(_level))
+            {
+                Debug.LogError($"[TypingController] レベル {_level} の単語が CSV に見つかりません。");
+                return;
+            }
+
+            Next();
+            WorldStateMachine.Instance.ChangeState(WorldStateType.Typing);
+        }
+
+        private void OnDestroy()
+        {
+            if (_typingPresenter != null)
+                _typingPresenter.Completed -= Next;
+        }
+
         private void Next()
         {
-            var words = new string[_wordDictionary[_level].Length];
+            var words = _wordDictionary[_level];               // 辞書の実配列を使う
             var word = words[UnityEngine.Random.Range(0, words.Length)];
             _typingPresenter.StartTyping(word);
         }
