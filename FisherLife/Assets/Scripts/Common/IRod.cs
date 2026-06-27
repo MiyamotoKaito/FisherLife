@@ -1,9 +1,10 @@
-using UnityEngine;
-
-namespace Common
+﻿namespace Common
 {
-    public class IRod
+    public interface IRod
     {
-    
+        int Power { get; }
+
+        float CriticalMultiplier { get; }
+        float CriticalProbability { get; }
     }
 }
