@@ -1,5 +1,6 @@
 ﻿using Common;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TypingModule
 {
@@ -12,21 +13,26 @@ namespace TypingModule
         /// 与えられたテキストファイルをカンマ区切りで辞書に代入する
         /// </summary>
         /// <param name="text"></param>
-        public Dictionary<uint, string[]> WordSeparate(string text)
+        public async ValueTask<Dictionary<uint, string[]>> WordSeparate(string text)
         {
             var dictionaty = new Dictionary<uint, string[]>();
 
             var lines = text.Split("\n");
             foreach (var line in lines)
             {
-                var num = line[0].ToString();//TryParse用にStringに変換
+                var str = line.Split(",");
+                var num = str[0].ToString();//TryParse用にStringに変換
                 if (!uint.TryParse(num, out uint resule))
                 {
                     continue;
                 }
-                var words = line.Split(",", line[0]);// カンマとレベルで区切る
+                var words = new List<string>();
+                for (int i = 2; i < str.Length; i++)
+                {
+                    words.Add(str[i]);
+                }
 
-                dictionaty[resule] = words;
+                dictionaty[resule] = words.ToArray();
             }
 
             return dictionaty;
