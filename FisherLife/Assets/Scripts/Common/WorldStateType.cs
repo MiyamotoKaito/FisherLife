@@ -2,10 +2,11 @@
 {
     public enum WorldStateType
     {
-        Typing,
-        Fishing,
-        Moveing,
-        Menu,
-        OutGame,
+        None = 0,
+        Typing = 1,
+        Fishing = 2,
+        Moving = 3,
+        Menu = 4,
+        OutGame = 5,
     }
 }
