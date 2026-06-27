@@ -1,14 +1,16 @@
-using System;
+﻿using System;
+using Common;
 using R3;
 using UnityEngine.InputSystem;
 
 namespace InputModule
 {
-    public class TypingInput : IDisposable
+    public class TypingInput : ITypingInput
     {
         public TypingInput()
         {
             Keyboard.current.onTextInput += OnTextInput;
+            _onChar = new();
         }
         public Observable<char> OnChar => _onChar;
         public void SetEnable(bool enable) => _enabled = enable;
