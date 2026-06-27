@@ -19,7 +19,7 @@ namespace FishingModule
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
+            _inputActionMapStack?.Pop();
         }
         private IInputActionMapStack _inputActionMapStack;
     }
