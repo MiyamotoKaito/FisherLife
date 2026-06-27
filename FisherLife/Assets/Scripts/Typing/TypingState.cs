@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace TypingModule
 {
+    [System.Serializable]
     public class TypingState : IState
     {
         public WorldStateType WorldState => WorldStateType.Typing;
