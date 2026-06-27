@@ -1,9 +1,9 @@
-using UnityEngine;
-
-namespace Common
+﻿namespace Common
 {
-    public class IFish
+    public interface IFish
     {
-    
+        int Hp { get; }
+        int Defence { get; }
+        float Time { get; }
     }
 }
