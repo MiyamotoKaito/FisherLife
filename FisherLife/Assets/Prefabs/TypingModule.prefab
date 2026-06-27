@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: TypingModule::TypingModule.TypingController
   _textAsset: {fileID: 4900000, guid: c845001badffabe42a2c256760f4fa72, type: 3}
-  _level: 4
+  _level: 2
 --- !u!1 &6430119190212331088
 GameObject:
   m_ObjectHideFlags: 0
