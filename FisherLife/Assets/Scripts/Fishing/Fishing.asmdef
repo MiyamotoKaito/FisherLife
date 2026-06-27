@@ -2,8 +2,7 @@
     "name": "FishingModule",
     "rootNamespace": "FishingModule",
     "references": [
-        "GUID:21da53c35248408429a4dd1947910187",
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+        "GUID:21da53c35248408429a4dd1947910187"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
