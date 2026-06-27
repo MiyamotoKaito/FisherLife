@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FishingModule
 {
-    public class FIshingEvent
+    public class FishingEvent
     {
     
     }
