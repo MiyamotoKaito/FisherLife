@@ -27,9 +27,10 @@ namespace TypingModule
                     continue;
                 }
                 var words = new List<string>();
-                for (int i = 2; i < str.Length - 1; i++)
+                for (int i = 2; i < str.Length; i++)
                 {
-                    words.Add(str[i]);
+                    if (!string.IsNullOrEmpty(str[i])) 
+                        words.Add(str[i]);
                 }
 
                 dictionaty[resule] = words.ToArray();
