@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Common;
+using R3;
+using System;
 using System.Linq;
 using System.Threading;
-using InputModule;
-using R3;
 
 namespace TypingModule
 {
@@ -11,7 +11,7 @@ namespace TypingModule
     /// </summary>
     public class TypingPresenter : IDisposable
     {
-        public TypingPresenter(TypingInput typingInput, TypingView typingView)
+        public TypingPresenter(ITypingInput typingInput, ITypingView typingView)
         {
             _typingInput = typingInput;
             _typingView = typingView;
@@ -46,10 +46,10 @@ namespace TypingModule
             _typingInput?.Dispose();
         }
 
-        private readonly TypingInput _typingInput;
         private readonly AnswerModel _answerModel;
         private readonly QuestionModel _questionModel;
-        private readonly TypingView _typingView;
+        private readonly ITypingInput _typingInput;
+        private readonly ITypingView _typingView;
         private CancellationTokenSource _tokenSource;
     }
 }
