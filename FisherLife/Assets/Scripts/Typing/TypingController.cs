@@ -1,4 +1,4 @@
-using Common;
+﻿using Common;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -27,7 +27,6 @@ namespace TypingModule
 
         private async void Start()
         {
-            // 購読は注入(Inject)後に行う。OnEnable だと _typingPresenter が null の恐れがある
             _typingPresenter.Completed += Next;
 
             _wordDictionary = await _wordSeparatorUsecase.WordSeparate(_textAsset.text);
