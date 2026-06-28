@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8389619133957950565, guid: 618efee3fbb136f4fbc78ad56b19a818, type: 3}
       propertyPath: parentReference.TypeName
-      value: Container.InGameLifetimeScope
+      value: Container.RootLifetimeScope
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
