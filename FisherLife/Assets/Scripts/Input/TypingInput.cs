@@ -1,10 +1,12 @@
-﻿using System;
-using Common;
+﻿using Common;
 using R3;
 using UnityEngine.InputSystem;
 
 namespace InputModule
 {
+    /// <summary>
+    ///     タイピング専用のInputクラス。通常のInputSystemの運用方法とは勝手が違うため
+    /// </summary>
     public class TypingInput : ITypingInput
     {
         public TypingInput()
@@ -12,6 +14,7 @@ namespace InputModule
             Keyboard.current.onTextInput += OnTextInput;
             _onChar = new();
         }
+        /// <summary>入力された値を知らせる</summary>
         public Observable<char> OnChar => _onChar;
         public void SetEnable(bool enable) => _enabled = enable;
 
