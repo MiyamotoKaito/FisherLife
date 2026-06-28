@@ -14,7 +14,8 @@ namespace InputModule
             _assets = inputActions;
             _stack = new();
         }
-
+        /// <summary>現在有効になっているアクションマップ</summary>
+        public InputActionMap CurrentMap => _stack.Count > 0 ? MapOf(_stack.Peek()) : null;
         /// <summary>
         /// 現在のアクションマップを無効化して一つ前のアクションマップを有効化する
         /// </summary>
@@ -22,9 +23,9 @@ namespace InputModule
         {
             if (_stack.Count <= 0) return;
 
-            _currentActionMap.Disable();
+            CurrentMap.Disable();
             _stack.Pop();
-            _currentActionMap.Enable();
+            CurrentMap.Enable();
         }
         /// <summary>
         /// 現在のアクションマップを無効化して追加されたアクションマップを有効化する
@@ -35,7 +36,7 @@ namespace InputModule
             var nextMap = MapOf(mapType);
             if (_stack.Count > 0)
             {
-                _currentActionMap.Disable();
+                CurrentMap.Disable();
             }
             _stack.Push(mapType);
             nextMap.Enable();
@@ -50,8 +51,6 @@ namespace InputModule
         {
             return _assets.FindActionMap(mapType.ToString(), throwIfNotFound: true);
         }
-        /// <summary>現在有効になっているアクションマップ</summary>
-        private InputActionMap _currentActionMap => _stack.Count > 0 ? MapOf(_stack.Peek()) : null;
         private readonly InputActionAsset _assets;
         private Stack<InputActionMapType> _stack;
     }
