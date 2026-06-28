@@ -1,6 +1,6 @@
 ﻿using UnityEngine.InputSystem;
 
-namespace Common
+namespace Commons
 {
     public interface IInputActionMapStack
     {
