@@ -21,12 +21,12 @@ namespace Container
             builder.RegisterComponentInHierarchy<TypingController>();
 
             // 入力(ピュアクラス) を ITypingInput として登録
-            builder.Register<TypingInput>(Lifetime.Singleton).As<ITypingInput>();
+            builder.Register<ITypingInput, TypingInput>(Lifetime.Singleton);
             
             // 
             builder.Register<TypingPresenter>(Lifetime.Singleton);
 
-            builder.Register<WordSeparatorUsecase>(Lifetime.Singleton).As<IWordSeparatorUsecase>();
+            builder.Register<IWordSeparatorUsecase, CSVSeparatorUsecase>(Lifetime.Singleton);
         }
     }
 }
