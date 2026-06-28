@@ -7,7 +7,7 @@ namespace TypingModule
     /// <summary>
     /// 単語をレベル別に分けるUsecase
     /// </summary>
-    public class WordSeparatorUsecase : IWordSeparatorUsecase
+    public class CSVSeparatorUsecase : IWordSeparatorUsecase
     {
         /// <summary>
         /// 与えられたテキストファイルをカンマ区切りで辞書に代入する
