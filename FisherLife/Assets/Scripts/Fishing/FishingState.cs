@@ -1,4 +1,5 @@
 ﻿using Common;
+using System;
 
 namespace FishingModule
 {
@@ -15,6 +16,7 @@ namespace FishingModule
         public void Entry()
         {
             _inputActionMapStack.Push(InputActionMapType.Player);
+            OnStateChange?.Invoke();
         }
 
         public void Exit()
@@ -22,5 +24,7 @@ namespace FishingModule
             _inputActionMapStack?.Pop();
         }
         private IInputActionMapStack _inputActionMapStack;
+
+        public event Action OnStateChange;
     }
 }
