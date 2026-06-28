@@ -1,6 +1,6 @@
 ﻿namespace Commons
 {
-    public enum FishingModeType
+    public enum FishingMode
     {
         Typing,
         Circle,
