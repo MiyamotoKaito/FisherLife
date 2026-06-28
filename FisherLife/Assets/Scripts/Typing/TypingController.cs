@@ -15,14 +15,17 @@ namespace TypingModule
         private TextAsset _textAsset;
         [SerializeField]
         private uint _level;
+
         private IWordSeparatorUsecase _wordSeparatorUsecase;
         private TypingPresenter _typingPresenter;
+        private IWorldStateMachine _worldStateMachine;
 
         [Inject]
-        public void Inject(IWordSeparatorUsecase wordSeparatorUsecase, TypingPresenter typingPresenter)
+        public void Inject(IWordSeparatorUsecase wordSeparatorUsecase, TypingPresenter typingPresenter, IWorldStateMachine worldStateMachine)
         {
             _wordSeparatorUsecase = wordSeparatorUsecase;
             _typingPresenter = typingPresenter;
+            _worldStateMachine = worldStateMachine;
         }
 
         private async void Start()
@@ -38,7 +41,7 @@ namespace TypingModule
             }
 
             Next();
-            WorldStateMachine.Instance.ChangeState(WorldStateType.Typing);
+            _worldStateMachine.ChangeState(WorldStateType.Typing);
         }
 
         private void OnDestroy()
