@@ -1,6 +1,5 @@
-﻿using Common;
+﻿using Commons;
 using System;
-using UnityEngine;
 
 namespace TypingModule
 {
