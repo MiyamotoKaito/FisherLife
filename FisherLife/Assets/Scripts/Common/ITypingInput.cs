@@ -1,7 +1,7 @@
 ﻿using R3;
 using System;
 
-namespace Common
+namespace Commons
 {
     public interface ITypingInput : IDisposable
     {
