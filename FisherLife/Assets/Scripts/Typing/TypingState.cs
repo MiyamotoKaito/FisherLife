@@ -1,4 +1,5 @@
 ﻿using Common;
+using System;
 using UnityEngine;
 
 namespace TypingModule
@@ -15,6 +16,7 @@ namespace TypingModule
         public void Entry()
         {
             _inputActionMapStack.Push(InputActionMapType.Typing);
+            OnStateChange?.Invoke();
         }
 
         public void Exit()
@@ -23,5 +25,7 @@ namespace TypingModule
         }
 
         private IInputActionMapStack _inputActionMapStack;
+
+        public event Action OnStateChange;
     }
 }
