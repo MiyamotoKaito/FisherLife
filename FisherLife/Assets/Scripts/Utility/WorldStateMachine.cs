@@ -5,20 +5,20 @@ using VContainer;
 
 namespace Utility
 {
-    public class WorldStateMachine : MonoBehaviour
+    public class WorldStateMachine : MonoBehaviour, IWorldStateMachine
     {
-        public static WorldStateMachine Instance;
+        private static WorldStateMachine _instance;
         [SerializeReference, SubclassSelector]
         private IState[] _states;
         private Dictionary<WorldStateType, IState> _stateDic;
 
         private IState _currentState;
         private IInputActionMapStack _inputActionMapStack;
-        private void Awake()
+        private void Start()
         {
-            if (Instance == null)
+            if (_instance == null)
             {
-                Instance = this;
+                _instance = this;
                 DontDestroyOnLoad(gameObject);
             }
             else
