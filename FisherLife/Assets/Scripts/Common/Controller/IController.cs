@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace Commons
 {
-    public interface IController
+    public interface IController : IDisposable
     {
-    
+        InputActionMapType InputActionMapType { get; }
+        void Enable();
+        void Disable();
     }
 }
