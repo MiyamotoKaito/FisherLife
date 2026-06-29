@@ -3,6 +3,7 @@ using InputModule;
 using PlayerModule;
 using StateMachine;
 using TypingModule;
+using UnityEditor.Build.Content;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,6 +14,8 @@ namespace Container
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<WorldStateMachine>().As<IWorldStateMachine>();
+            builder.Register<IState[]>(Lifetime.Singleton);
+            builder.Register<IState, TypingState>(Lifetime.Singleton);
             #region PlayerMoveの登録
             builder.RegisterComponentInHierarchy<PlayerView>();
             #endregion
