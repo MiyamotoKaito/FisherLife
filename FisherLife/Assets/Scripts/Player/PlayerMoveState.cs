@@ -11,17 +11,17 @@ namespace PlayerModule
             _playerController = playerController;
         }
         public WorldStateType WorldState => WorldStateType.Moving;
-
-        public event Action OnStateChange;
         private readonly IInputActionMapStack _inputMapStack;
         private readonly PlayerController _playerController;
         public void Entry()
         {
+            _playerController.Enable();
             _inputMapStack.Push(InputActionMapType.Player);
         }
 
         public void Exit()
         {
+            _playerController.Disable();
             _inputMapStack.Pop();
         }
     }
