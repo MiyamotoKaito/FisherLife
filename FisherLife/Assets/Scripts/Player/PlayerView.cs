@@ -10,11 +10,6 @@ namespace PlayerModule
         private Rigidbody _rb;
         private Animator _animator;
         private InputActionAsset _actionAsset;
-        [Inject]
-        public void Inject(InputActionAsset inputActions)
-        {
-            _actionAsset = inputActions;
-        }
         public void Move(Vector3 dir)
         {
             _rb.linearVelocity = dir;
