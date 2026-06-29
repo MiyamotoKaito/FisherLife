@@ -1,7 +1,7 @@
 ﻿namespace Commons
 {
-    public interface IFishingModeController
+    public interface IFishingModeController : IController
     {
-
+        FishingMode FishingMode { get; }
     }
 }
