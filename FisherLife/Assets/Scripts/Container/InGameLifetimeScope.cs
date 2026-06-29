@@ -3,7 +3,7 @@ using InputModule;
 using PlayerModule;
 using StateMachine;
 using TypingModule;
-using UnityEditor.Build.Content;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -11,13 +11,19 @@ namespace Container
 {
     public class InGameLifetimeScope : LifetimeScope
     {
+        [SerializeField] private TextAsset _textAsset;
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<WorldStateMachine>().As<IWorldStateMachine>();
+            #region Stateの登録
+            builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
             builder.Register<IState[]>(Lifetime.Singleton);
             builder.Register<IState, TypingState>(Lifetime.Singleton);
+            #endregion
+
             #region PlayerMoveの登録
             builder.RegisterComponentInHierarchy<PlayerView>();
+            builder.Register<PlayerController>(Lifetime.Singleton);
+            builder.Register<PlayerMovePresenter>(Lifetime.Singleton);
             #endregion
 
             #region Typingの登録
