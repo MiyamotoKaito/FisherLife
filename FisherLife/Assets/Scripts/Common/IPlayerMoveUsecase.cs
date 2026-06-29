@@ -1,9 +1,9 @@
-﻿using System.Numerics;
+﻿using UnityEngine;
 
 namespace Commons
 {
     public interface IPlayerMoveUsecase
     {
-        void ToVector3(Vector2 readValue);
+        Vector3 ToVector3(Vector2 readValue);
     }
 }
