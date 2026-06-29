@@ -8,6 +8,10 @@ namespace PlayerModule
     /// </summary>
     public class PlayerModel
     {
+        public PlayerModel()
+        {
+            _dir = new();
+        }
         public ReadOnlyReactiveProperty<Vector3> MoveDirection => _dir;
         private ReactiveProperty<Vector3> _dir;
         /// <summary>
