@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-
-namespace Commons
+﻿namespace Commons
 {
-    public interface IPlayerController
+    public interface IPlayerController : IController
     {
-    
     }
 }
