@@ -16,29 +16,6 @@ namespace Container
         {
             #region Stateの登録
             builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
-            builder.Register<IState[]>(Lifetime.Singleton);
-            builder.Register<IState, TypingState>(Lifetime.Singleton);
-            #endregion
-
-            #region PlayerMoveの登録
-            builder.RegisterComponentInHierarchy<PlayerView>();
-            builder.Register<PlayerController>(Lifetime.Singleton);
-            builder.Register<PlayerMovePresenter>(Lifetime.Singleton);
-            #endregion
-
-            #region Typingの登録
-            // View(MonoBehaviour) を ITypingView として登録（シーン階層から取得）
-            builder.RegisterComponentInHierarchy<TypingView>().As<ITypingView>();
-
-            builder.RegisterComponentInHierarchy<TypingController>();
-
-            // 入力(ピュアクラス) を ITypingInput として登録
-            builder.Register<ITypingInput, TypingInput>(Lifetime.Singleton);
-
-            // 
-            builder.Register<TypingPresenter>(Lifetime.Singleton);
-
-            builder.Register<IWordSeparatorUsecase, CSVSeparatorUsecase>(Lifetime.Singleton);
             #endregion
         }
     }
