@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4118710828354987108}
   - component: {fileID: 1851127497099001323}
   m_Layer: 0
-  m_Name: WorldStateMachine
+  m_Name: InGameLifetimeScope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,3 +48,4 @@ MonoBehaviour:
     TypeName: Container.RootLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
+  _textAsset: {fileID: 4900000, guid: c845001badffabe42a2c256760f4fa72, type: 3}
