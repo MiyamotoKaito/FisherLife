@@ -5,14 +5,17 @@ using VContainer;
 
 namespace TypingModule
 {
-    public class TypingController : MonoBehaviour
+    public class TypingController : IFishingModeController
     {
         public Dictionary<uint, string[]> WordDictionary => _wordDictionary;
+
+        public FishingMode FishingMode => FishingMode.Typing;
+
+        public InputActionMapType InputActionMapType => InputActionMapType.Typing;
+
         private Dictionary<uint, string[]> _wordDictionary;
 
-        [SerializeField]
         private TextAsset _textAsset;
-        [SerializeField]
         private uint _level;
 
         private IWordSeparatorUsecase _wordSeparatorUsecase;
@@ -20,17 +23,39 @@ namespace TypingModule
         private IWorldStateMachine _worldStateMachine;
 
         [Inject]
-        public void Inject(IWordSeparatorUsecase wordSeparatorUsecase, TypingPresenter typingPresenter, IWorldStateMachine worldStateMachine)
+        public TypingController(IWordSeparatorUsecase wordSeparatorUsecase,
+            TypingPresenter typingPresenter,
+            IWorldStateMachine worldStateMachine,
+            TextAsset textAsset)
         {
             _wordSeparatorUsecase = wordSeparatorUsecase;
             _typingPresenter = typingPresenter;
             _worldStateMachine = worldStateMachine;
+            _textAsset = textAsset;
+            Init();
+        }
+        public void Enable()
+        {
+            Start();
         }
 
+        public void Disable()
+        {
+            _typingPresenter.Completed -= Next;
+        }
         private async void Start()
         {
             _typingPresenter.Completed += Next;
-
+            Next();
+            _worldStateMachine.ChangeState(WorldStateType.Typing);
+        }
+        public void Dispose()
+        {
+            if (_typingPresenter != null)
+                _typingPresenter.Completed -= Next;
+        }
+        private async void Init()
+        {
             _wordDictionary = await _wordSeparatorUsecase.WordSeparate(_textAsset.text);
 
             if (!_wordDictionary.ContainsKey(_level))
@@ -38,17 +63,7 @@ namespace TypingModule
                 Debug.LogError($"[TypingController] レベル {_level} の単語が CSV に見つかりません。");
                 return;
             }
-
-            Next();
-            _worldStateMachine.ChangeState(WorldStateType.Typing);
         }
-
-        private void OnDestroy()
-        {
-            if (_typingPresenter != null)
-                _typingPresenter.Completed -= Next;
-        }
-
         private void Next()
         {
             var words = _wordDictionary[_level];               // 辞書の実配列を使う
