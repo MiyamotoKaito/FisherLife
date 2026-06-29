@@ -2,7 +2,6 @@
 using InputModule;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Utility;
 using VContainer;
 using VContainer.Unity;
 
@@ -17,7 +16,6 @@ namespace Container
 
             builder.RegisterInstance(_action);
             builder.Register<IInputActionMapStack, InputActionMapStack>(Lifetime.Singleton);
-            builder.RegisterComponentInHierarchy<WorldStateMachine>();
         }
     }
 }
