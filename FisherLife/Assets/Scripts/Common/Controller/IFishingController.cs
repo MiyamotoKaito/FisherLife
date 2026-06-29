@@ -1,6 +1,6 @@
 ﻿namespace Commons
 {
-    public interface IFishingController
+    public interface IFishingController : IController
     {
     
     }
