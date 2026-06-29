@@ -25,7 +25,7 @@ namespace Container
 
             builder.Register<IWordSeparatorUsecase, CSVSeparatorUsecase>(Lifetime.Singleton);
 
-            builder.Register<IState, TypingState>(Lifetime.Singleton);
+            builder.Register<TypingState>(Lifetime.Singleton);
             builder.RegisterBuildCallback(resolver =>
             {
                 var machine = resolver.Resolve<IWorldStateMachine>();
