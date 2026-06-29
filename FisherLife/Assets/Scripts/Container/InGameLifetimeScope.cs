@@ -4,6 +4,7 @@ using PlayerModule;
 using StateMachine;
 using TypingModule;
 using UnityEngine;
+using Utility;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,9 +14,8 @@ namespace Container
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            #region Stateの登録
             builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
-            #endregion
+            builder.RegisterComponentInHierarchy<ModuleTest>();
         }
     }
 }
