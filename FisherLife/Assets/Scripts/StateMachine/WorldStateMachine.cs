@@ -5,14 +5,14 @@ namespace StateMachine
 {
     public class WorldStateMachine : IWorldStateMachine
     {
+        public WorldStateMachine()
+        {
+            _stateDic = new Dictionary<WorldStateType, IState>();
+            _stateStack = new Stack<IState>();
+        }
         private IState _currentState;
         private Dictionary<WorldStateType, IState> _stateDic;
         private Stack<IState> _stateStack;
-
-        public WorldStateMachine(IState[] states)
-        {
-            Init(states);
-        }
         public void ChangeState(WorldStateType worldStateType)
         {
             if (_stateStack.Count > 0)
@@ -34,14 +34,10 @@ namespace StateMachine
 
             _currentState.Exit();
         }
-        private void Init(IState[] states)
+
+        public void AddState(IState state)
         {
-            _stateDic = new Dictionary<WorldStateType, IState>();
-            _stateStack = new Stack<IState>();
-            foreach (var state in states)
-            {
-                _stateDic[state.WorldState] = state;
-            }
+            _stateDic.Add(state.WorldState, state);
         }
     }
 }
