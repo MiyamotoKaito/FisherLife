@@ -1,0 +1,13 @@
+namespace Commons
+{
+    /// <summary>
+    ///     攻撃処理のパイプラインのインターフェース。
+    /// </summary>
+    public interface IAttackPipeline
+    {
+        /// <summary>
+        ///     対象へ攻撃を計算して適用する。
+        /// </summary>
+        void Calculate(IAttackable target, IDamageable attacker);
+    }
+}
