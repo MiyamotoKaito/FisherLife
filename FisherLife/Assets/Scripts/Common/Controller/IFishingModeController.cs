@@ -1,3 +1,5 @@
+using R3;
+
 namespace Commons
 {
     /// <summary>
@@ -7,5 +9,6 @@ namespace Commons
     {
         /// <summary> 対応する釣りモード。 </summary>
         FishingMode FishingMode { get; }
+        Observable<Unit> OnAttack { get; }
     }
 }
