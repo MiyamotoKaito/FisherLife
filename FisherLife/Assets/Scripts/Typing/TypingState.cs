@@ -7,24 +7,26 @@ namespace TypingModule
     public class TypingState : IState
     {
         public WorldStateType WorldState => WorldStateType.Typing;
-        public void Init(IInputActionMapStack inputActionMapStack)
+        public TypingState(IInputActionMapStack inputActionMapStack,
+            TypingController typingController)
         {
             _inputActionMapStack = inputActionMapStack;
+            _typingController = typingController;
         }
 
         public void Entry()
         {
             _inputActionMapStack.Push(InputActionMapType.Typing);
-            OnStateChange?.Invoke();
+            _typingController.Enable();
         }
 
         public void Exit()
         {
             _inputActionMapStack.Pop();
+            _typingController.Disable();
         }
 
-        private IInputActionMapStack _inputActionMapStack;
-
-        public event Action OnStateChange;
+        private readonly IInputActionMapStack _inputActionMapStack;
+        private readonly TypingController _typingController;
     }
 }
