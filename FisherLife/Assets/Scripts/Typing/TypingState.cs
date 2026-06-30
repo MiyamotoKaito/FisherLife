@@ -27,7 +27,7 @@ namespace TypingModule
         public void Entry()
         {
             _inputActionMapStack.Push(InputActionMapType.Typing);
-            _typingController.Enable();
+            _typingController.Begin();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace TypingModule
         public void Exit()
         {
             _inputActionMapStack.Pop();
-            _typingController.Disable();
+            _typingController.End();
         }
 
         private readonly IInputActionMapStack _inputActionMapStack;
