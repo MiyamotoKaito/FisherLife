@@ -15,7 +15,7 @@ namespace Container
             // View(MonoBehaviour) を ITypingView として登録（シーン階層から取得）
             builder.RegisterComponentInHierarchy<TypingView>().As<ITypingView>();
 
-            builder.RegisterComponentInHierarchy<TypingController>();
+            builder.Register<TypingController>(Lifetime.Singleton);
 
             // 入力(ピュアクラス) を ITypingInput として登録
             builder.Register<ITypingInput, TypingInput>(Lifetime.Singleton);
