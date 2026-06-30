@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575dde19698cd5c4f9c1aa377f670331, type: 3}
   m_Name: PlayerParametor
   m_EditorClassIdentifier: PlayerModule::PlayerModule.PlayerParametor
-  MoveSpeed: 7
+  _moveSpeed: 7
