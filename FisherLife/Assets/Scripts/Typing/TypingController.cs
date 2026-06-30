@@ -16,21 +16,17 @@ namespace TypingModule
         private Dictionary<uint, string[]> _wordDictionary;
 
         private TextAsset _textAsset;
-        private uint _level;
+        private uint _level = 3;
 
         private IWordSeparatorUsecase _wordSeparatorUsecase;
         private TypingPresenter _typingPresenter;
-        private IWorldStateMachine _worldStateMachine;
 
-        [Inject]
         public TypingController(IWordSeparatorUsecase wordSeparatorUsecase,
             TypingPresenter typingPresenter,
-            IWorldStateMachine worldStateMachine,
             TextAsset textAsset)
         {
             _wordSeparatorUsecase = wordSeparatorUsecase;
             _typingPresenter = typingPresenter;
-            _worldStateMachine = worldStateMachine;
             _textAsset = textAsset;
             Init();
         }
@@ -47,7 +43,6 @@ namespace TypingModule
         {
             _typingPresenter.Completed += Next;
             Next();
-            _worldStateMachine.ChangeState(WorldStateType.Typing);
         }
         public void Dispose()
         {
