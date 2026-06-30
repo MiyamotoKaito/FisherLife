@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Commons;
+using R3;
 using UnityEngine;
 
 namespace TypingModule
@@ -29,10 +30,12 @@ namespace TypingModule
         /// <summary> 対応するアクションマップ種別。 </summary>
         public InputActionMapType InputActionMapType => InputActionMapType.Typing;
 
+        public Observable<Unit> OnAttack => _onAttack;
+
         /// <summary>
         ///     出題を開始する。
         /// </summary>
-        public void Enable()
+        public void Begin()
         {
             Start();
         }
@@ -40,7 +43,7 @@ namespace TypingModule
         /// <summary>
         ///     出題を停止する。
         /// </summary>
-        public void Disable()
+        public void End()
         {
             _typingPresenter.Completed -= Next;
         }
@@ -54,6 +57,7 @@ namespace TypingModule
             {
                 _typingPresenter.Completed -= Next;
             }
+            _onAttack.Dispose();
         }
 
         private const uint TARGET_LEVEL = 3;
@@ -62,6 +66,7 @@ namespace TypingModule
         private readonly TypingPresenter _typingPresenter;
         private readonly TextAsset _textAsset;
         private Dictionary<uint, string[]> _wordDictionary;
+        private Subject<Unit> _onAttack;
 
         /// <summary>
         ///     CSVから単語辞書を生成する。
@@ -95,6 +100,7 @@ namespace TypingModule
             var words = _wordDictionary[TARGET_LEVEL];
             var word = words[UnityEngine.Random.Range(0, words.Length)];
             _typingPresenter.StartTyping(word);
+            _onAttack.OnNext(Unit.Default);
         }
     }
 }

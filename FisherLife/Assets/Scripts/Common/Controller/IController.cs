@@ -13,11 +13,11 @@ namespace Commons
         /// <summary>
         ///     入力を有効化する。
         /// </summary>
-        void Enable();
+        void Begin();
 
         /// <summary>
         ///     入力を無効化する。
         /// </summary>
-        void Disable();
+        void End();
     }
 }

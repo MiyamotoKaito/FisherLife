@@ -31,7 +31,7 @@ namespace PlayerModule
         /// <summary>
         ///     移動入力の購読を開始する。
         /// </summary>
-        public void Enable()
+        public void Begin()
         {
             _moveAction.performed += MoveHandler;
             _moveAction.canceled += MoveHandler;
@@ -40,7 +40,7 @@ namespace PlayerModule
         /// <summary>
         ///     移動入力の購読を解除する。
         /// </summary>
-        public void Disable()
+        public void End()
         {
             _moveAction.performed -= MoveHandler;
             _moveAction.canceled -= MoveHandler;
@@ -51,7 +51,7 @@ namespace PlayerModule
         /// </summary>
         public void Dispose()
         {
-            Disable();
+            End();
         }
 
         private const string MOVE_ACTION = "Move";
