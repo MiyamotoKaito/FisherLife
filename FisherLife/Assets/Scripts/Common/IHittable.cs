@@ -1,8 +1,9 @@
-﻿namespace Commons
+namespace Commons
 {
+    /// <summary>
+    ///     攻撃が当たる対象のインターフェース。
+    /// </summary>
     public interface IHittable
     {
-        int Hp { get; }
-        int Defence { get; }
     }
 }

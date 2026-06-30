@@ -1,19 +1,24 @@
 using UnityEngine;
 
-namespace FishingModule
+namespace FishModule
 {
+    /// <summary>
+    ///     魚の見た目を扱うView。
+    /// </summary>
     public class FishView : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        /// <summary>
+        ///     初期化を行う。
+        /// </summary>
+        private void Start()
         {
-        
         }
 
-        // Update is called once per frame
-        void Update()
+        /// <summary>
+        ///     毎フレームの更新を行う。
+        /// </summary>
+        private void Update()
         {
-        
         }
     }
 }

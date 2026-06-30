@@ -4,19 +4,17 @@ using R3;
 namespace TypingModule
 {
     /// <summary>
-    /// 問題のモデル。出題文字列と「今どこまで正しく打てたか」を管理する。
+    ///     問題のモデル。出題文字列と「今どこまで正しく打てたか」を管理する。
     /// </summary>
     public class QuestionModel : IDisposable
     {
+        /// <summary> 現在の問題文字列。 </summary>
         public ReadOnlyReactiveProperty<string> Question => _question;
-        /// <summary>現在の問題を最後まで打ち切ったか</summary>
+        /// <summary> 現在の問題を最後まで打ち切ったか。 </summary>
         public bool IsCompleted => !string.IsNullOrEmpty(_question.Value) && _index >= _question.Value.Length;
 
-        private readonly ReactiveProperty<string> _question = new(string.Empty);
-        private int _index;
-
         /// <summary>
-        /// 問題を設定する（進捗はリセット）
+        ///     問題を設定する。進捗はリセットされる。
         /// </summary>
         public void SetQuestion(string question)
         {
@@ -25,22 +23,40 @@ namespace TypingModule
         }
 
         /// <summary>
-        /// 入力された1文字を現在位置と照合する。正しければ true。
+        ///     入力された1文字を現在位置と照合する。正しければtrueを返す。
         /// </summary>
         public bool Input(char c)
         {
             var q = _question.Value;
-            if (string.IsNullOrEmpty(q)) return false;
-            if (_index >= q.Length) return false;
-            if (q[_index] != c) return false;   // ミスタイプは無視
+            if (string.IsNullOrEmpty(q))
+            {
+                return false;
+            }
+
+            if (_index >= q.Length)
+            {
+                return false;
+            }
+
+            // ミスタイプは無視する。
+            if (q[_index] != c)
+            {
+                return false;
+            }
 
             _index++;
             return true;
         }
 
+        /// <summary>
+        ///     リアクティブプロパティを破棄する。
+        /// </summary>
         public void Dispose()
         {
             _question.Dispose();
         }
+
+        private readonly ReactiveProperty<string> _question = new(string.Empty);
+        private int _index;
     }
 }

@@ -1,18 +1,19 @@
-﻿using Commons;
+using Commons;
 using UnityEngine;
 
 namespace PlayerModule
 {
+    /// <summary>
+    ///     プレイヤー移動に関する変換処理のユースケース。
+    /// </summary>
     public class PlayerMoveUsecase : IPlayerMoveUsecase
     {
         /// <summary>
-        /// InputSystemの渡されたVector2をVector3に変換する
+        ///     InputSystemから渡されたVector2を移動方向のVector3へ変換する。
         /// </summary>
-        /// <param name="readValue"></param>
-        /// <returns></returns>
         public Vector3 ToVector3(Vector2 readValue)
         {
-            return new Vector3(readValue.x, 0, readValue.y); 
+            return new Vector3(readValue.x, 0, readValue.y);
         }
     }
 }

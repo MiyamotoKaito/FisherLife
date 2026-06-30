@@ -1,22 +1,34 @@
-﻿using Commons;
+using Commons;
 using TMPro;
 using UnityEngine;
+
 namespace TypingModule
 {
     /// <summary>
-    /// タイピングのUI管理のViewクラス
+    ///     タイピングのUIを管理するView。
     /// </summary>
     public class TypingView : MonoBehaviour, ITypingView
     {
-        public void SetQuestion(string q)
+        /// <summary>
+        ///     問題文を設定する。
+        /// </summary>
+        public void SetQuestion(string question)
         {
-            _question.text = q;
+            _question.text = question;
         }
-        public void UpdateAnswer(string str)
+
+        /// <summary>
+        ///     解答欄の表示を更新する。
+        /// </summary>
+        public void UpdateAnswer(string answer)
         {
-            _answer.text = str;
+            _answer.text = answer;
         }
-        [SerializeField] private TextMeshProUGUI _answer;
-        [SerializeField] private TextMeshProUGUI _question;
+
+        [SerializeField, Tooltip("解答を表示するテキスト。")]
+        private TextMeshProUGUI _answer;
+
+        [SerializeField, Tooltip("問題文を表示するテキスト。")]
+        private TextMeshProUGUI _question;
     }
 }
