@@ -8,6 +8,6 @@ namespace Commons
         /// <summary>
         ///     体力と防御力をもとに攻撃を計算する。
         /// </summary>
-        void Calculate(int hp, int defence);
+        AttackResult Calculate(IAttacker attacker, IDamageable target);
     }
 }
