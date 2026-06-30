@@ -24,7 +24,7 @@ namespace PlayerModule
         /// </summary>
         public void Entry()
         {
-            _playerController.Enable();
+            _playerController.Begin();
             _inputMapStack.Push(InputActionMapType.Player);
         }
 
@@ -33,7 +33,7 @@ namespace PlayerModule
         /// </summary>
         public void Exit()
         {
-            _playerController.Disable();
+            _playerController.End();
             _inputMapStack.Pop();
         }
 
