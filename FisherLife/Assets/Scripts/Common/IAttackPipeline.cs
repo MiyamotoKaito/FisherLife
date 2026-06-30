@@ -8,6 +8,6 @@ namespace Commons
         /// <summary>
         ///     攻撃側の能力をもとに、対象へ攻撃を計算して適用する。
         /// </summary>
-        void Calculate(IAttacker attacker, IDamageable target);
+        AttackResult Attack(IAttacker attacker, IDamageable target);
     }
 }
