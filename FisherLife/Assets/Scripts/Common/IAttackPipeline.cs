@@ -6,8 +6,8 @@ namespace Commons
     public interface IAttackPipeline
     {
         /// <summary>
-        ///     対象へ攻撃を計算して適用する。
+        ///     攻撃側の能力をもとに、対象へ攻撃を計算して適用する。
         /// </summary>
-        void Calculate(IAttackable target, IDamageable attacker);
+        void Calculate(IAttacker attacker, IDamageable target);
     }
 }
