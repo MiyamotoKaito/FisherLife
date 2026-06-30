@@ -1,9 +1,9 @@
 ﻿namespace Commons
 {
-    public interface IFish
+    public interface IFish : IHittable
     {
-        int Hp { get; }
-        int Defence { get; }
-        float Time { get; }
+        string Name { get; }
+        int MoneyAmount { get; }
+        int Level { get; }
     }
 }
