@@ -1,4 +1,6 @@
+using BattleModule;
 using Commons;
+using FishingModule;
 using StateMachine;
 using Utility;
 using VContainer;
@@ -18,6 +20,8 @@ namespace Container
         {
             builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<ModuleTest>();
+            builder.Register<IAttackPipeline, AttackPipeline>(Lifetime.Singleton);
+            builder.Register<IAttackCalculator, AttackCalculator>(Lifetime.Singleton);
         }
     }
 }
