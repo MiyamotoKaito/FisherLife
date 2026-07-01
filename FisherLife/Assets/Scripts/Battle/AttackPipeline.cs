@@ -15,6 +15,11 @@ namespace FishingModule
             return result;
         }
 
+        public void Dispose()
+        {
+            
+        }
+
         private readonly IAttackCalculator _attackCalculator;
     }
 }
