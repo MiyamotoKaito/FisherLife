@@ -1,7 +1,7 @@
 using Commons;
 using UnityEngine;
 
-namespace FishingModule
+namespace BattleModule
 {
     public class AttackCalculator : IAttackCalculator
     {

@@ -1,5 +1,4 @@
 using Commons;
-using UnityEngine;
 
 namespace FishingModule
 {
