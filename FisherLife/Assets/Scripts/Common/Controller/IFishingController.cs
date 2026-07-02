@@ -5,5 +5,6 @@ namespace Commons
     /// </summary>
     public interface IFishingController : IController
     {
+        void ReturnToFishingState(BattleResult result);
     }
 }
