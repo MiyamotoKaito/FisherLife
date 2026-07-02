@@ -9,19 +9,17 @@ namespace FishingModule
     [System.Serializable]
     public class FishingState : IState
     {
-        /// <summary> 状態へ入ったときに通知する。 </summary>
-        public event Action OnStateChange;
-
-        /// <summary> 対応するワールド状態種別。 </summary>
-        public WorldStateType WorldState => WorldStateType.Fishing;
-
         /// <summary>
         ///     依存を初期化する。
         /// </summary>
-        public void Init(IInputActionMapStack inputActionMapStack)
+        public FishingState(IInputActionMapStack inputActionMapStack, IFishingController fishingController)
         {
             _inputActionMapStack = inputActionMapStack;
+            _fishingController = fishingController;
         }
+
+        /// <summary> 対応するワールド状態種別。 </summary>
+        public WorldStateType WorldState => WorldStateType.Fishing;
 
         /// <summary>
         ///     状態に入り、アクションマップを積んで通知する。
@@ -29,7 +27,7 @@ namespace FishingModule
         public void Entry()
         {
             _inputActionMapStack.Push(InputActionMapType.Player);
-            OnStateChange?.Invoke();
+            _fishingController.Begin();
         }
 
         /// <summary>
@@ -38,8 +36,9 @@ namespace FishingModule
         public void Exit()
         {
             _inputActionMapStack?.Pop();
+            _fishingController.End();
         }
-
-        private IInputActionMapStack _inputActionMapStack;
+        private readonly IFishingController _fishingController;
+        private readonly IInputActionMapStack _inputActionMapStack;
     }
 }
