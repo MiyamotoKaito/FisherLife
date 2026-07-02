@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Commons;
+using UnityEngine;
 
 namespace StateMachine
 {
@@ -30,16 +31,11 @@ namespace StateMachine
         /// </summary>
         public void ChangeState(WorldStateType worldStateType)
         {
-            // 現在積まれている状態を取り除く。
-            if (_stateStack.Count > 0)
-            {
-                _stateStack.Pop();
-            }
-
             // 新しい状態へ入り、スタックへ積む。
             _currentState = _stateDic[worldStateType];
             _currentState.Entry();
             _stateStack.Push(_currentState);
+            Debug.Log($"ステートを変えました。{worldStateType}");
         }
 
         /// <summary>
@@ -51,9 +47,11 @@ namespace StateMachine
             {
                 return;
             }
-
-            _currentState = _stateStack.Pop();
-            _currentState.Exit();
+            _currentState?.Exit();
+            _stateStack.Pop();
+            _currentState = _stateStack.Count > 0 ? _stateStack.Peek() : null;
+            _currentState?.Entry();
+            Debug.Log($"以前のステートに戻りました。{_currentState?.WorldState}");
         }
 
         private IState _currentState;
