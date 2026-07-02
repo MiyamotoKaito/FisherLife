@@ -1,5 +1,5 @@
 Level,文字数,単語(小文字)
-1,1~3,out,var,int,cin,ref,is,in ,ptr,di,
+1,1~3,out,var,int,cin,ref,is,in,ptr,di,
 2,4~6,uint,this,string,void,public,model,action,event,inject,entity,char,view,text,state,script,prefab,scene,long,struct,lock,task,object,vector,float,delete,
 3,7~9,private,protected,subscribe,dispose,interface,attribute,property,usecase,ayataka,reactive,presenter,keyboard,valuetask,binary,readonly,oobanyaki,
 4,10~12,cancellationtoken,serializefield,subclassselector,repository,valueobject,
