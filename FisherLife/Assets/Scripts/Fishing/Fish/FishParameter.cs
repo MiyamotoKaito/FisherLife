@@ -6,10 +6,10 @@ namespace FishModule
     ///     魚のパラメータを保持するデータコンテナ。
     /// </summary>
     [CreateAssetMenu(fileName = "FishParamater", menuName = "Scriptable Objects/FishParamater")]
-    public class FishParamater : ScriptableObject
+    public class FishParameter : ScriptableObject
     {
         /// <summary> レベル。 </summary>
-        public int Level => _level;
+        public byte Level => _level;
         /// <summary> 名前。 </summary>
         public string Name => _name;
         /// <summary> 体力。 </summary>
@@ -21,7 +21,7 @@ namespace FishModule
 
         [Header("レベル")]
         [SerializeField, Tooltip("レベル。")]
-        private int _level;
+        private byte _level;
 
         [Header("表示関連")]
         [SerializeField, Tooltip("名前。")]

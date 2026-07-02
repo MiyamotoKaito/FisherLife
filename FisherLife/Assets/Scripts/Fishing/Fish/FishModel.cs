@@ -11,7 +11,7 @@ namespace FishModule
         /// <summary>
         ///     パラメータから初期体力を設定する。
         /// </summary>
-        public FishModel(FishParamater fishParamater)
+        public FishModel(FishParameter fishParamater)
         {
             _paramater = fishParamater;
             _hp = new(fishParamater.Hp);
@@ -37,6 +37,6 @@ namespace FishModule
         }
 
         private readonly ReactiveProperty<int> _hp;
-        private readonly FishParamater _paramater;
+        private readonly FishParameter _paramater;
     }
 }
