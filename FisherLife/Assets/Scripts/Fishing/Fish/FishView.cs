@@ -7,18 +7,12 @@ namespace FishModule
     /// </summary>
     public class FishView : MonoBehaviour
     {
-        /// <summary>
-        ///     初期化を行う。
-        /// </summary>
-        private void Start()
+        public FishModel FishModel => _fishModel;
+        public void Init(FishParameter fishParameter)
         {
+            _fishModel = new FishModel(fishParameter);
         }
 
-        /// <summary>
-        ///     毎フレームの更新を行う。
-        /// </summary>
-        private void Update()
-        {
-        }
+        private FishModel _fishModel;
     }
 }
