@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Commons
 {
     /// <summary>
@@ -5,5 +7,7 @@ namespace Commons
     /// </summary>
     public interface IRod : IAttacker
     {
+        public byte Level { get; }
+        public Vector3 Position { get; }
     }
 }
