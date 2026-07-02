@@ -57,10 +57,10 @@ namespace TypingModule
             {
                 _typingPresenter.Completed -= Next;
             }
-            _onAttack.Dispose();
+            _onAttack?.Dispose();
         }
 
-        private const uint TARGET_LEVEL = 3;
+        private const uint TARGET_LEVEL = 1;
 
         private readonly IWordSeparatorUsecase _wordSeparatorUsecase;
         private readonly TypingPresenter _typingPresenter;
@@ -81,6 +81,7 @@ namespace TypingModule
                 Debug.LogError($"[TypingController] レベル {TARGET_LEVEL} の単語が CSV に見つかりません。");
                 return;
             }
+            _onAttack = new();
         }
 
         /// <summary>
@@ -97,6 +98,7 @@ namespace TypingModule
         /// </summary>
         private void Next()
         {
+            Debug.Log($"[TypingController] レベル {TARGET_LEVEL} の単語からランダムに1問を出題します。");
             var words = _wordDictionary[TARGET_LEVEL];
             var word = words[UnityEngine.Random.Range(0, words.Length)];
             _typingPresenter.StartTyping(word);
