@@ -12,7 +12,7 @@ namespace TypingModule
         ///     依存を受け取り初期化する。
         /// </summary>
         public TypingState(IInputActionMapStack inputActionMapStack,
-            TypingController typingController)
+            IFishingModeController typingController)
         {
             _inputActionMapStack = inputActionMapStack;
             _typingController = typingController;
@@ -40,6 +40,6 @@ namespace TypingModule
         }
 
         private readonly IInputActionMapStack _inputActionMapStack;
-        private readonly TypingController _typingController;
+        private readonly IFishingModeController _typingController;
     }
 }
