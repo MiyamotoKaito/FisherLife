@@ -22,6 +22,9 @@ namespace Container
             builder.RegisterComponentInHierarchy<ModuleTest>();
             builder.Register<IAttackPipeline, AttackPipeline>(Lifetime.Singleton);
             builder.Register<IAttackCalculator, AttackCalculator>(Lifetime.Singleton);
+            builder.Register<IBattleUsecase, BattleUsecase>(Lifetime.Singleton);
+            builder.Register<IFishingModeRegistry, FishingModeRegistry>(Lifetime.Singleton);
+            builder.Register<IRod, RodModel>(Lifetime.Singleton);
         }
     }
 }
