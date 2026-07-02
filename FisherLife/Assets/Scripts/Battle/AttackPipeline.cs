@@ -1,4 +1,5 @@
 using Commons;
+using UnityEngine;
 
 namespace FishingModule
 {
@@ -8,18 +9,12 @@ namespace FishingModule
         {
             _attackCalculator = attackCalculator;
         }
-        public AttackResult Attack(IAttacker attacker, IDamageable target)
+        public void Attack(IAttacker attacker, IDamageable target)
         {
             var result = _attackCalculator.Calculate(attacker, target);
             target.TakeDamage(result.Damage);
-            return result;
+            Debug.Log($"攻撃が命中しました。ダメージ: {result.Damage}\n残りHP: {target.Hp}");
         }
-
-        public void Dispose()
-        {
-            
-        }
-
         private readonly IAttackCalculator _attackCalculator;
     }
 }
