@@ -10,7 +10,8 @@ namespace BattleModule
             var isCritical = UnityEngine.Random.value < attacker.CriticalProbability / 100;
             var rawAttack = isCritical ? attacker.Power * attacker.CriticalMultiplier : attacker.Power;
             var damage = Mathf.Max(1, Mathf.RoundToInt(rawAttack) - target.Defence);
-            return new AttackResult(damage, isCritical);
+            Debug.Log($"Attacker: {attacker}, Target: {target}, Damage: {damage}, Critical: {isCritical}");
+            return new AttackResult(damage);
         }
     }
 }
