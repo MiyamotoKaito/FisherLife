@@ -23,7 +23,7 @@ namespace Container
             // View(MonoBehaviour)をITypingViewとしてシーン階層から登録する。
             builder.RegisterComponentInHierarchy<TypingView>().As<ITypingView>();
 
-            builder.Register<TypingController>(Lifetime.Singleton);
+            builder.Register<TypingController>(Lifetime.Singleton).As<IFishingModeController>().AsSelf();
 
             // 入力（ピュアクラス）をITypingInputとして登録する。
             builder.Register<ITypingInput, TypingInput>(Lifetime.Singleton);
@@ -31,13 +31,15 @@ namespace Container
             builder.Register<TypingPresenter>(Lifetime.Singleton);
             builder.Register<IWordSeparatorUsecase, CSVSeparatorUsecase>(Lifetime.Singleton);
 
-            builder.Register<TypingState>(Lifetime.Singleton);
+            builder.Register<TypingState>(Lifetime.Singleton).As<IState>().AsSelf();
 
             // 生成後にタイピング状態をステートマシンへ登録する。
             builder.RegisterBuildCallback(resolver =>
             {
                 var machine = resolver.Resolve<IWorldStateMachine>();
                 machine.AddState(resolver.Resolve<TypingState>());
+                var registry = resolver.Resolve<IFishingModeRegistry>();
+                registry.AddMode(resolver.Resolve<TypingController>());
             });
         }
     }
