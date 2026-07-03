@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using Commons;
 using R3;
@@ -42,6 +42,8 @@ namespace TypingModule
         /// </summary>
         public void StopTyping()
         {
+            _answerModel.Clear();
+            _questionModel.Clear();
             _typingInput.SetEnable(false);
         }
 
