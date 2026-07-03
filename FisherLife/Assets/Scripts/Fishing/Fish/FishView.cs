@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FishModule
 {
@@ -7,12 +7,13 @@ namespace FishModule
     /// </summary>
     public class FishView : MonoBehaviour
     {
-        public FishModel FishModel => _fishModel;
-        public void Init(FishParameter fishParameter)
+        public void SetEnable(bool enable)
         {
-            _fishModel = new FishModel(fishParameter);
+            gameObject.SetActive(enable);
         }
-
-        private FishModel _fishModel;
+        public void SetStartPosition(Vector3 pos)
+        {
+            transform.position = pos;
+        }
     }
 }
