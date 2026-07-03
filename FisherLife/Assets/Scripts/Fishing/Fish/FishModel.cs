@@ -1,4 +1,4 @@
-using Commons;
+﻿using Commons;
 using R3;
 
 namespace FishModule
@@ -8,13 +8,17 @@ namespace FishModule
     /// </summary>
     public class FishModel : IFish
     {
+        public FishModel()
+        {
+            _hp = new ReactiveProperty<int>(0);
+        }
         /// <summary>
         ///     パラメータから初期体力を設定する。
         /// </summary>
-        public FishModel(FishParameter fishParamater)
+        public void SetParameter(FishParameter fishParamater)
         {
             _paramater = fishParamater;
-            _hp = new(fishParamater.Hp);
+            _hp.Value = fishParamater.Hp;
         }
 
         /// <summary> 体力。 </summary>
@@ -36,7 +40,15 @@ namespace FishModule
             _hp.Value -= damage;
         }
 
-        private readonly ReactiveProperty<int> _hp;
-        private readonly FishParameter _paramater;
+        public void Dispose()
+        {
+            if(_hp != null)
+            {
+                _hp.Dispose();
+            }
+        }
+
+        private ReactiveProperty<int> _hp;
+        private FishParameter _paramater;
     }
 }
