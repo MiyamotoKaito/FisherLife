@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using R3;
 
 namespace TypingModule
@@ -47,7 +47,11 @@ namespace TypingModule
             _index++;
             return true;
         }
-
+        public void Clear()
+        {
+            _question.Value = string.Empty;
+            _index = 0;
+        }
         /// <summary>
         ///     リアクティブプロパティを破棄する。
         /// </summary>

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Commons;
 using R3;
 using UnityEngine;
@@ -45,6 +45,7 @@ namespace TypingModule
         /// </summary>
         public void End()
         {
+            _typingPresenter.StopTyping();
             _typingPresenter.Completed -= Next;
         }
 
