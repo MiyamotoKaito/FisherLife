@@ -1,5 +1,5 @@
+﻿using Commons;
 using System.Collections.Generic;
-using Commons;
 using UnityEngine;
 using VContainer;
 
@@ -14,30 +14,50 @@ namespace FishModule
         {
             Vector3 rodPos = rod.Position;
 
+            foreach(var fish in _fishPresenters)
+            {
+                fish.SetEnable(true);
+            }
+
             for (int i = 0; i < _defaultFishSpawnAmount; i++)
             {
-                var fish = new GameObject($"Fish_{i}");
                 var fishData = _fishListAsset.FishParameters[rod.Level];
                 var selectedFishParameter = fishData[Random.Range(0, fishData.Count)];
-                fish.AddComponent<FishView>().Init(selectedFishParameter);
+                _fishPresenters[i].SetFishParameter(selectedFishParameter);
 
                 Vector3 initPos = new Vector3(
                     rodPos.x + Mathf.Sin(Random.Range(0f, 2f * Mathf.PI)),
                     rodPos.y,
                     rodPos.z + Mathf.Cos(Random.Range(0f, 2f * Mathf.PI)));
 
-                fish.transform.position = initPos;
-                fish.transform.LookAt(initPos);
-                _fishViews.Add(fish.GetComponent<FishView>().FishModel);
+                _fishPresenters[i].SetStartPosition(initPos);
             }
-            return _fishViews[Random.Range(0, _fishViews.Count)];
+            var randomIndex = Random.Range(0, _fishPresenters.Count);
+            return _fishPresenters[randomIndex].FishModel;
+        }
+        public void HideFish()
+        {
+            foreach (var fish in _fishPresenters)
+            {
+                fish.SetEnable(false);
+            }
         }
         private void Awake()
         {
-            _fishViews = new List<IFish>();
+            _fishPresenters = new List<FishPresenter>();
+            for (int i = 0; i < _defaultFishSpawnAmount; i++)
+            {
+                var fishView = GameObject.Instantiate(_fishPrefab, Vector3.zero, Quaternion.identity).GetComponent<FishView>();
+                fishView.SetEnable(false);
+                fishView.name = $"Fish_{i}";
+
+                var newFishPresenter = new FishPresenter(fishView);
+                _fishPresenters.Add(newFishPresenter);
+            }
         }
         [Inject] private FishListAsset _fishListAsset;
+        [SerializeField] private GameObject _fishPrefab;
         [SerializeField] private int _defaultFishSpawnAmount = 3;
-        private List<IFish> _fishViews;
+        private List<FishPresenter> _fishPresenters;
     }
 }
