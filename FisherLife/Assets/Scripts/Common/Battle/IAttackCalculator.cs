@@ -1,4 +1,4 @@
-namespace Commons
+﻿namespace Commons
 {
     /// <summary>
     ///     攻撃計算のインターフェース。

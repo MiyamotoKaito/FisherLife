@@ -1,4 +1,4 @@
-namespace Commons
+﻿namespace Commons
 {
     /// <summary>
     ///     ワールド状態を管理するステートマシンのインターフェース。

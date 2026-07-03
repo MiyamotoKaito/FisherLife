@@ -1,9 +1,11 @@
+﻿using System;
+
 namespace Commons
 {
     /// <summary>
     ///     魚のインターフェース。
     /// </summary>
-    public interface IFish : IDamageable
+    public interface IFish : IDamageable, IDisposable
     {
         /// <summary> 名前。 </summary>
         string Name { get; }

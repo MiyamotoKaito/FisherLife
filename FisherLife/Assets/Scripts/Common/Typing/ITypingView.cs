@@ -1,4 +1,4 @@
-namespace Commons
+﻿namespace Commons
 {
     /// <summary>
     ///     タイピング画面の表示を担うインターフェース。

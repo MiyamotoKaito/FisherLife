@@ -1,4 +1,4 @@
-namespace Commons
+﻿namespace Commons
 {
     /// <summary>
     ///     攻撃する側のインターフェース。攻撃力やクリティカル能力を持つ。
