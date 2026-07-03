@@ -1,4 +1,4 @@
-using Commons;
+﻿using Commons;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -61,6 +61,7 @@ namespace FishingModule
             // 魚が釣れるまで待つ
             await UniTask.Delay(5000);
             // 魚が釣れたら戦闘状態に遷移する
+            _fishFactory.HideFish();
             _worldStateMachine.ChangeState(WorldStateType.Typing);
             // 戦闘開始
             var result = await _battleUsecase.BattleStart(_rod, target);
