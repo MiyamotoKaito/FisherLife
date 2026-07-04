@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3a14f1d803a9f49b90a6a1b67c3818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FishModule::FishModule.FishFactory
+  _fishPrefab: {fileID: 3489373103938959457, guid: 050a8c21588a75d40bdcbb8a73b02d17, type: 3}
   _defaultFishSpawnAmount: 3
 --- !u!4 &1185029409
 Transform:
