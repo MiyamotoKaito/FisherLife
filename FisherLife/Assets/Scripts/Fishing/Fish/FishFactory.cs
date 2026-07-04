@@ -1,5 +1,5 @@
-﻿using Commons;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Commons;
 using UnityEngine;
 using VContainer;
 
@@ -14,7 +14,7 @@ namespace FishModule
         {
             Vector3 rodPos = rod.Position;
 
-            foreach(var fish in _fishPresenters)
+            foreach (var fish in _fishPresenters)
             {
                 fish.SetEnable(true);
             }
@@ -47,11 +47,16 @@ namespace FishModule
             _fishPresenters = new List<FishPresenter>();
             for (int i = 0; i < _defaultFishSpawnAmount; i++)
             {
-                var fishView = GameObject.Instantiate(_fishPrefab, Vector3.zero, Quaternion.identity).GetComponent<FishView>();
-                fishView.SetEnable(false);
+                var fishView = Instantiate(_fishPrefab, Vector3.zero, Quaternion.identity);
+                if (!fishView.TryGetComponent<FishView>(out var fishViewComponent))
+                {
+                    Debug.LogError("生成された魚のビューにFishViewコンポーネントがありません。");
+                    return;
+                }
+                fishViewComponent.SetEnable(false);
                 fishView.name = $"Fish_{i}";
 
-                var newFishPresenter = new FishPresenter(fishView);
+                var newFishPresenter = new FishPresenter(fishViewComponent);
                 _fishPresenters.Add(newFishPresenter);
             }
         }
