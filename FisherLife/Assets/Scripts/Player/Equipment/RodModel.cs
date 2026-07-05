@@ -1,13 +1,13 @@
-using Commons;
+﻿using Commons;
 using UnityEngine;
 
-namespace FishingModule
+namespace PlayerModule
 {
     public class RodModel : IRod
     {
         public RodModel()
         {
-           
+
         }
 
         public int Power => 5;
@@ -18,11 +18,11 @@ namespace FishingModule
 
         public byte Level => 1;
 
-        public Vector3 Position => new(0,0,0);
+        public Vector3 Position => new(0, 0, 0);
         public void SetPosition(Vector3 position)
         {
             _position = position;
         }
-        private Vector3  _position;
+        private Vector3 _position;
     }
 }
