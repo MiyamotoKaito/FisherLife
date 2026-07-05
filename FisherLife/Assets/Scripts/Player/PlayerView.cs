@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace PlayerModule
@@ -9,6 +9,8 @@ namespace PlayerModule
     [RequireComponent(typeof(Rigidbody), typeof(Animator))]
     public class PlayerView : MonoBehaviour
     {
+        public bool CanFishing => _canFishing;
+
         /// <summary>
         ///     移動方向を設定する。
         /// </summary>
@@ -45,7 +47,7 @@ namespace PlayerModule
         private Animator _animator;
         private InputActionAsset _actionAsset;
         private Vector3 _direction;
-
+        private bool _canFishing;
         /// <summary>
         ///     必要なコンポーネントを取得する。
         /// </summary>
@@ -62,6 +64,21 @@ namespace PlayerModule
         {
             var v = _direction * _parametor.MoveSpeed;
             _rb.linearVelocity = new Vector3(v.x, _rb.linearVelocity.y, v.z);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent<FishingArea>(out var fishingArea))
+            {
+                _canFishing = true;
+            }
+            else
+            {
+                if (_canFishing)
+                {
+                    _canFishing = false;
+                }
+            }
         }
     }
 }
