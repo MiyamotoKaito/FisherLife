@@ -1,6 +1,7 @@
-using BattleModule;
+﻿using BattleModule;
 using Commons;
 using FishingModule;
+using PlayerModule;
 using StateMachine;
 using Utility;
 using VContainer;
