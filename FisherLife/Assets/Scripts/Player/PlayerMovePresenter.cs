@@ -1,5 +1,6 @@
+﻿using R3;
+using System;
 using System.Threading;
-using R3;
 using UnityEngine;
 
 namespace PlayerModule
@@ -7,7 +8,7 @@ namespace PlayerModule
     /// <summary>
     ///     プレイヤーの移動量をViewへ反映させるPresenter。
     /// </summary>
-    public class PlayerMovePresenter
+    public class PlayerMovePresenter : IDisposable
     {
         /// <summary>
         ///     View・Modelを準備し、購読を開始する。
@@ -39,6 +40,19 @@ namespace PlayerModule
         {
             _playerModel.MoveDirection.Subscribe(_playerView.Move)
                 .RegisterTo(_cancellationTokenSource.Token);
+        }
+
+        public void Dispose()
+        {
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource.Dispose();
+            }
+            if (_playerModel.MoveDirection != null)
+            {
+                _playerModel.MoveDirection.Dispose();
+            }
         }
     }
 }
