@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Commons;
 using UnityEngine;
 
@@ -31,6 +31,10 @@ namespace StateMachine
         /// </summary>
         public void ChangeState(WorldStateType worldStateType)
         {
+            if(_stateStack.Count > 0)
+            {
+                _currentState.Exit();
+            }
             // 新しい状態へ入り、スタックへ積む。
             _currentState = _stateDic[worldStateType];
             _currentState.Entry();
