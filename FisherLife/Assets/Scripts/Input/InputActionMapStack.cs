@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Commons;
 using UnityEngine.InputSystem;
 
@@ -33,7 +33,10 @@ namespace InputModule
 
             CurrentMap.Disable();
             _stack.Pop();
-            CurrentMap.Enable();
+            if(CurrentMap != null)
+            {
+                CurrentMap.Enable();
+            }
         }
 
         /// <summary>
