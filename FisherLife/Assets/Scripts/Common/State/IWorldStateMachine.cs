@@ -19,5 +19,9 @@
         ///     直前の状態へ戻る。
         /// </summary>
         void BackState();
+        /// <summary>
+        ///     すべての状態を停止する。
+        /// </summary>
+        void AllStop();
     }
 }

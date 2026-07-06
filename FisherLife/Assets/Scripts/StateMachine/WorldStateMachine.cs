@@ -57,7 +57,13 @@ namespace StateMachine
             _currentState?.Entry();
             Debug.Log($"以前のステートに戻りました。{_currentState?.WorldState}");
         }
-
+        public void AllStop()
+        {
+            _currentState?.Exit();
+            _stateStack.Clear();
+            _currentState = null;
+            Debug.Log("全てのステートを停止しました。");
+        }
         private IState _currentState;
         private readonly Dictionary<WorldStateType, IState> _stateDic;
         private readonly Stack<IState> _stateStack;
