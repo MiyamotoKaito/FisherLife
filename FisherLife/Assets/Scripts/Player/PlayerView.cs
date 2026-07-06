@@ -46,7 +46,6 @@ namespace PlayerModule
 
         private Rigidbody _rb;
         private Animator _animator;
-        private InputActionAsset _actionAsset;
         private Vector3 _direction;
         private IInteractable _currentInteractableObject;
         /// <summary>
