@@ -5,6 +5,7 @@
     /// </summary>
     public interface IWorldStateMachine
     {
+        public WorldStateType CurrentState { get; }
         /// <summary>
         ///     状態を登録する。
         /// </summary>
