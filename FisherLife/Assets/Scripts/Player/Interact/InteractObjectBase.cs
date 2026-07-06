@@ -5,8 +5,6 @@ namespace PlayerModule
 {
     public class InteractObjectBase : MonoBehaviour, IInteractable
     {
-        public string DisplayDescription => _displayDescription;
-
         public virtual void Interact()
         {
             throw new System.NotImplementedException("このオブジェクトはインタラクションに対応していません");
@@ -20,7 +18,5 @@ namespace PlayerModule
                 return;
             }
         }
-
-       [SerializeField] private string _displayDescription;
     }
 }
