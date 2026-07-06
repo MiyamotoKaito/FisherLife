@@ -1,4 +1,4 @@
-using Commons;
+﻿using Commons;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,11 +14,13 @@ namespace PlayerModule
         /// </summary>
         public PlayerController(InputActionAsset inputActions,
             PlayerMovePresenter playerMovePresenter,
+            Camera camera,
             IPlayerMoveUsecase playerMoveUsecase,
             IWorldStateMachine worldStateMachine)
         {
             _inputActions = inputActions;
             _playerMovePresenter = playerMovePresenter;
+            _camera = camera;
             _playerMoveUsecase = playerMoveUsecase;
             _worldStateMachine = worldStateMachine;
 
@@ -69,6 +71,7 @@ namespace PlayerModule
         private readonly PlayerMovePresenter _playerMovePresenter;
         private readonly IPlayerMoveUsecase _playerMoveUsecase;
         private readonly IWorldStateMachine _worldStateMachine;
+        private readonly Camera _camera;
 
         /// <summary>
         ///     移動入力を受け取り、変換した方向をPresenterへ渡す。
@@ -77,7 +80,8 @@ namespace PlayerModule
         {
             var readValue = callbackContext.ReadValue<Vector2>();
             var dir = _playerMoveUsecase.ToVector3(readValue);
-            _playerMovePresenter.SetMove(dir);
+            var calculatedDir = _camera.transform.TransformDirection(dir);
+            _playerMovePresenter.SetMove(calculatedDir);
         }
 
         private void InteractHandler(InputAction.CallbackContext callbackContext)
