@@ -1,16 +1,15 @@
-using UnityEngine;
+﻿using Commons;
+using VContainer;
 
 namespace PlayerModule
 {
-    public class FishingArea : MonoBehaviour
+    public class FishingArea : InteractObjectBase
     {
-        void Start()
+        public override void Interact()
         {
-            if (!TryGetComponent<Collider>(out var collider))
-            {
-                Debug.LogError($"このFishingAreaにはColliderがありません{name}");
-                return;
-            }
+            _worldStateMachine.ChangeState(WorldStateType.Fishing);
         }
+
+        [Inject] private IWorldStateMachine _worldStateMachine;
     }
 }
