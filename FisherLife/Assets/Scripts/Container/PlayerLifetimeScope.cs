@@ -1,4 +1,4 @@
-using Commons;
+﻿using Commons;
 using PlayerModule;
 using VContainer;
 using VContainer.Unity;
@@ -18,6 +18,7 @@ namespace Container
             builder.RegisterComponentInHierarchy<PlayerView>();
             builder.Register<PlayerController>(Lifetime.Singleton);
             builder.Register<PlayerMovePresenter>(Lifetime.Singleton);
+            builder.Register<PlayerInteractor>(Lifetime.Singleton);
             builder.Register<IPlayerMoveUsecase, PlayerMoveUsecase>(Lifetime.Singleton);
             builder.Register<PlayerMoveState>(Lifetime.Singleton);
 
