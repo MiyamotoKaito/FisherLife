@@ -17,7 +17,7 @@ namespace StateMachine
             _stateDic = new Dictionary<WorldStateType, IState>();
             _stateStack = new Stack<IState>();
         }
-
+        public WorldStateType CurrentState => _currentState.WorldState;
         /// <summary>
         ///     状態を登録する。
         /// </summary>
