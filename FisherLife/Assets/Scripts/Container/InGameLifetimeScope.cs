@@ -3,7 +3,7 @@ using Commons;
 using FishingModule;
 using PlayerModule;
 using StateMachine;
-using Utility;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -21,6 +21,7 @@ namespace Container
         {
             builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<InGameInitializer>();
+            builder.RegisterComponentInHierarchy<Camera>();
             builder.Register<IAttackPipeline, AttackPipeline>(Lifetime.Singleton);
             builder.Register<IAttackCalculator, AttackCalculator>(Lifetime.Singleton);
             builder.Register<IBattleUsecase, BattleUsecase>(Lifetime.Singleton);
