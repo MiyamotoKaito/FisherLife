@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Commons;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace PlayerModule
@@ -9,7 +10,7 @@ namespace PlayerModule
     [RequireComponent(typeof(Rigidbody), typeof(Animator))]
     public class PlayerView : MonoBehaviour
     {
-        public bool CanFishing => _canFishing;
+        public IInteractable Interactable => _currentInteractableObject != null ? _currentInteractableObject : null;
 
         /// <summary>
         ///     移動方向を設定する。
@@ -47,7 +48,7 @@ namespace PlayerModule
         private Animator _animator;
         private InputActionAsset _actionAsset;
         private Vector3 _direction;
-        private bool _canFishing;
+        private IInteractable _currentInteractableObject;
         /// <summary>
         ///     必要なコンポーネントを取得する。
         /// </summary>
@@ -68,16 +69,16 @@ namespace PlayerModule
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<FishingArea>(out var fishingArea))
+            if (other.TryGetComponent<IInteractable>(out var interactable))
             {
-                _canFishing = true;
+                _currentInteractableObject = interactable;
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent<FishingArea>(out var fishingArea))
+            if (other.TryGetComponent<IInteractable>(out var interactable))
             {
-                _canFishing = false;
+                _currentInteractableObject = null;
             }
         }
     }
