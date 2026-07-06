@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Commons;
 
 namespace FishingModule
@@ -26,7 +26,7 @@ namespace FishingModule
         /// </summary>
         public void Entry()
         {
-            _inputActionMapStack.Push(InputActionMapType.Player);
+            _inputActionMapStack.Push(InputActionMapType.Fishing);
             _fishingController.Begin();
         }
 
