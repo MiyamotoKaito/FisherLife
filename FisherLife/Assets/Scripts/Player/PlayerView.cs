@@ -72,12 +72,12 @@ namespace PlayerModule
             {
                 _canFishing = true;
             }
-            else
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<FishingArea>(out var fishingArea))
             {
-                if (_canFishing)
-                {
-                    _canFishing = false;
-                }
+                _canFishing = false;
             }
         }
     }
