@@ -20,7 +20,7 @@ namespace Container
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
-            builder.RegisterComponentInHierarchy<ModuleTest>();
+            builder.RegisterComponentInHierarchy<InGameInitializer>();
             builder.Register<IAttackPipeline, AttackPipeline>(Lifetime.Singleton);
             builder.Register<IAttackCalculator, AttackCalculator>(Lifetime.Singleton);
             builder.Register<IBattleUsecase, BattleUsecase>(Lifetime.Singleton);
