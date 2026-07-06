@@ -43,7 +43,10 @@ namespace FishingModule
         {
             
         }
-
+        /// <summary>
+        ///     戦闘結果に応じて釣り状態に戻る。
+        /// </summary>
+        /// <param name="result"></param>
         public void ReturnToFishingState(BattleResult result)
         {
             if (result == BattleResult.Caught)
@@ -55,6 +58,10 @@ namespace FishingModule
                 Debug.Log($"魚が逃げました。");
             }
         }
+        /// <summary>
+        ///     釣りの非同期処理を実行する。
+        /// </summary>
+        /// <returns></returns>
         private async UniTask RunAsync()
         {
             var target = _fishFactory.CreateFish(_rod);
