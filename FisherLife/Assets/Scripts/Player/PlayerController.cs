@@ -15,14 +15,14 @@ namespace PlayerModule
         public PlayerController(InputActionAsset inputActions,
             PlayerMovePresenter playerMovePresenter,
             Camera camera,
-            IPlayerMoveUsecase playerMoveUsecase,
-            IWorldStateMachine worldStateMachine)
+            PlayerInteractor playerInteractor,
+            IPlayerMoveUsecase playerMoveUsecase)
         {
             _inputActions = inputActions;
             _playerMovePresenter = playerMovePresenter;
             _camera = camera;
             _playerMoveUsecase = playerMoveUsecase;
-            _worldStateMachine = worldStateMachine;
+            _playerInteractor = playerInteractor;
 
             // 同名プロパティ（InputActionMapType.Player）の文字列でマップを取得する。
             _playerMap = _inputActions.FindActionMap(InputActionMapType.ToString(), true);
@@ -70,8 +70,8 @@ namespace PlayerModule
         private readonly InputAction _interactAction;
         private readonly PlayerMovePresenter _playerMovePresenter;
         private readonly IPlayerMoveUsecase _playerMoveUsecase;
-        private readonly IWorldStateMachine _worldStateMachine;
         private readonly Camera _camera;
+        private readonly PlayerInteractor _playerInteractor;
 
         /// <summary>
         ///     移動入力を受け取り、変換した方向をPresenterへ渡す。
@@ -80,6 +80,7 @@ namespace PlayerModule
         {
             var readValue = callbackContext.ReadValue<Vector2>();
             var dir = _playerMoveUsecase.ToVector3(readValue);
+            // カメラの向きに合わせて移動方向を変換する
             var calculatedDir = _camera.transform.TransformDirection(dir);
             _playerMovePresenter.SetMove(calculatedDir);
         }
@@ -88,7 +89,7 @@ namespace PlayerModule
         {
             if (callbackContext.started)
             {
-                _worldStateMachine.ChangeState(WorldStateType.Fishing);
+                _playerInteractor.Interact();
             }
         }
     }
