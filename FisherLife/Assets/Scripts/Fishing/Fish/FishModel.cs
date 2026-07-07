@@ -28,7 +28,7 @@ namespace FishModule
         /// <summary> 名前。 </summary>
         public string Name => _paramater.Name;
         /// <summary> 入手できる金額。 </summary>
-        public int MoneyAmount => _paramater.MoneyAmount;
+        public int SellingPrice => _paramater.SellingPrice;
         /// <summary> レベル。 </summary>
         public int Level => _paramater.Level;
 
@@ -42,7 +42,7 @@ namespace FishModule
 
         public void Dispose()
         {
-            if(_hp != null)
+            if (_hp != null)
             {
                 _hp.Dispose();
             }
