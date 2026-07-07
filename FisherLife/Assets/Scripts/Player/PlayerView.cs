@@ -8,7 +8,7 @@ namespace PlayerModule
     ///     プレイヤーの見た目と物理挙動を扱うView。
     /// </summary>
     [RequireComponent(typeof(Rigidbody), typeof(Animator))]
-    public class PlayerView : MonoBehaviour
+    public class PlayerView : MonoBehaviour, IPlayerFishingAnimation
     {
         public IInteractable Interactable => _currentInteractableObject != null ? _currentInteractableObject : null;
 
