@@ -88,7 +88,7 @@ namespace TypingModule
         /// <summary>
         ///     完了通知を購読し、最初の問題を出題する。
         /// </summary>
-        private async void Start()
+        private void Start()
         {
             _typingPresenter.Completed += Next;
             Next();
