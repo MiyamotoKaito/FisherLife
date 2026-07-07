@@ -17,21 +17,38 @@ namespace PlayerModule
         /// </summary>
         public void Move(Vector3 dir)
         {
+            if (_animator == null) return;
+
             _direction = dir;
+            if (_direction.sqrMagnitude > 0.01)
+            {
+                _animator.SetBool(MOVE_ANIMATION, true);
+            }
+            else
+            {
+                _animator.SetBool(MOVE_ANIMATION, false);
+            }
         }
-
         /// <summary>
-        ///     釣りを開始する。
+        ///     釣り竿を投げる
         /// </summary>
-        public void Fishing()
+        public void Throw()
         {
+            _animator.SetTrigger(THROW_ANIMATION);
         }
-
+        /// <summary>
+        ///     戦闘開始
+        /// </summary>
+        public void Fighting()
+        {
+            _animator.SetTrigger(FISHON_ANIMATION);
+        }
         /// <summary>
         ///     釣りを終了して戻る。
         /// </summary>
-        public void ReturnFishing()
+        public void Stop()
         {
+            _animator.SetTrigger(FAILED_ANIMATION);
         }
 
         /// <summary>
@@ -39,11 +56,16 @@ namespace PlayerModule
         /// </summary>
         public void GetFish()
         {
+            _animator.SetTrigger(CAUGHT_ANIMATION);
         }
+        private const string MOVE_ANIMATION = "Move";
+        private const string THROW_ANIMATION = "Throw";
+        private const string FAILED_ANIMATION = "Failed";
+        private const string FISHON_ANIMATION = "FishOn";
+        private const string CAUGHT_ANIMATION = "Caught";
 
         [SerializeField, Tooltip("プレイヤーのパラメータ設定。")]
         private PlayerParametor _parametor;
-
         private Rigidbody _rb;
         private Animator _animator;
         private Vector3 _direction;
@@ -55,6 +77,10 @@ namespace PlayerModule
         {
             _rb = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
+            if (_animator == null)
+            {
+                Debug.Log($"{_animator}コンポーネントがアタッチされていません");
+            }
         }
 
         /// <summary>
@@ -64,6 +90,15 @@ namespace PlayerModule
         {
             var v = _direction * _parametor.MoveSpeed;
             _rb.linearVelocity = new Vector3(v.x, _rb.linearVelocity.y, v.z);
+
+            var flat = new Vector3(_direction.x, 0f, _direction.z);
+            if (flat.sqrMagnitude < 0.001f)
+            {
+                return;
+            }
+
+            var target = Quaternion.LookRotation(flat);
+            _rb.MoveRotation(Quaternion.RotateTowards(_rb.rotation, target, 720 * Time.fixedDeltaTime));
         }
 
         private void OnTriggerEnter(Collider other)
