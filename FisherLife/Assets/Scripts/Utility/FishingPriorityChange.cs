@@ -16,10 +16,12 @@ namespace Utility
                 if (state == WorldStateType.Fishing || state == WorldStateType.Typing)
                 {
                     _cinemachineCamera.Priority = _priority;
+                    _cinemachineCamera.gameObject.SetActive(true);
                 }
                 else
                 {
                     _cinemachineCamera.Priority = CINEMACHINE_CAMERA_PRIORITY;
+                    _cinemachineCamera.gameObject.SetActive(false);
                 }
             }).RegisterTo(this.destroyCancellationToken);
         }
