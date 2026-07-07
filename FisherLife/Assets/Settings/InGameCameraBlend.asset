@@ -13,7 +13,40 @@ MonoBehaviour:
   m_Name: InGameCameraBlend
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBlenderSettings
   CustomBlends:
-  - From: CinemachineCamera
+  - From: MainCinemachineCamera
+    To: FishingAreaCinemachineCamera
+    Blend:
+      Style: 0
+      Time: 0
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - From: FishingAreaCinemachineCamera
+    To: MainCinemachineCamera
+    Blend:
+      Style: 0
+      Time: 0
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - From: FishingAreaCinemachineCamera
+    To: FishingCamera
+    Blend:
+      Style: 0
+      Time: 0
+      CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - From: FishingCamera
     To: FishingAreaCinemachineCamera
     Blend:
       Style: 0
