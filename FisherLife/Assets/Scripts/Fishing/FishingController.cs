@@ -13,12 +13,15 @@ namespace FishingModule
             IFishFactory fishFactory,
             IRod rod,
             IWorldStateMachine worldStateMachine,
-            IBattleUsecase battleUsecase)
+            IBattleUsecase battleUsecase,
+            IPlayerFishingAnimation playerFishingAnimation)
         {
             _fishFactory = fishFactory;
             _rod = rod;
             _worldStateMachine = worldStateMachine;
             _battleUsecase = battleUsecase;
+            _playerFishingAnimation = playerFishingAnimation;
+
         }
         public InputActionMapType InputActionMapType => InputActionMapType.Fishing;
         public void Begin()
@@ -36,12 +39,12 @@ namespace FishingModule
 
         public void Dispose()
         {
-           
+
         }
 
         public void End()
         {
-            
+
         }
         /// <summary>
         ///     戦闘結果に応じて釣り状態に戻る。
@@ -51,12 +54,16 @@ namespace FishingModule
         {
             if (result == BattleResult.Caught)
             {
+                _playerFishingAnimation.GetFish();
                 Debug.Log($"魚を釣りました！");
             }
             else if (result == BattleResult.Escaped)
             {
+                _playerFishingAnimation.Stop();
                 Debug.Log($"魚が逃げました。");
             }
+
+            _worldStateMachine.BackState();
         }
         /// <summary>
         ///     釣りの非同期処理を実行する。
@@ -64,15 +71,21 @@ namespace FishingModule
         /// <returns></returns>
         private async UniTask RunAsync()
         {
-            var target = _fishFactory.CreateFish(_rod);
+            _playerFishingAnimation.Throw();
+            _currentFish = _fishFactory.CreateFish(_rod);
+
             // 魚が釣れるまで待つ
             await UniTask.Delay(5000);
+
             // 魚が釣れたら戦闘状態に遷移する
             _fishFactory.HideFish();
             _worldStateMachine.ChangeState(WorldStateType.Typing);
+
             // 戦闘開始
-            var result = await _battleUsecase.BattleStart(_rod, target);
+            _playerFishingAnimation.Fighting();
+            var result = await _battleUsecase.BattleStart(_rod, _currentFish);
             _battleResult = result;
+
             // 戦闘終了後、釣り状態に戻る
             _worldStateMachine.BackState();
         }
@@ -80,6 +93,8 @@ namespace FishingModule
         private readonly IWorldStateMachine _worldStateMachine;
         private readonly IFishFactory _fishFactory;
         private readonly IRod _rod;
+        private readonly IPlayerFishingAnimation _playerFishingAnimation;
         private BattleResult _battleResult = BattleResult.None;
+        private IFish _currentFish;
     }
 }
