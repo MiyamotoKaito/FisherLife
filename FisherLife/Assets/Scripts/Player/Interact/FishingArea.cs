@@ -1,4 +1,6 @@
 ﻿using Commons;
+using R3;
+using System.Threading;
 using UnityEngine;
 using VContainer;
 
@@ -15,19 +17,25 @@ namespace PlayerModule
         {
             _mainCamera = Camera.main;
             _interactionCanvas.enabled = false;
+            _cancellationTokenSource = new CancellationTokenSource();
+            _worldStateMachine.CurrentStateType.Subscribe(state =>
+            {
+                if (state == WorldStateType.Moving)
+                {
+                    _enabled = true;
+                }
+                else
+                {
+                    _enabled = false;
+                }
+            }).RegisterTo(_cancellationTokenSource.Token);
         }
         private void Update()
         {
-            if (_worldStateMachine.CurrentState != WorldStateType.Moving)
-            {
-                _interactionCanvas.enabled = false;
-            }
-
-            if (_interactionCanvas.enabled)
-            {
-                _interactionCanvas.transform.LookAt(_mainCamera.transform);
-                _interactionCanvas.transform.Rotate(0, 180, 0);
-            }
+            if (!_enabled)
+                return;
+            _interactionCanvas.transform.LookAt(_mainCamera.transform);
+            _interactionCanvas.transform.Rotate(0, 180, 0);
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -43,8 +51,20 @@ namespace PlayerModule
                 _interactionCanvas.enabled = false;
             }
         }
+        private void OnDestroy()
+        {
+            if (_mainCamera)
+                _mainCamera = null;
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource.Dispose();
+            }
+        }
         [Inject] private IWorldStateMachine _worldStateMachine;
         [SerializeField] private Canvas _interactionCanvas;
+        private CancellationTokenSource _cancellationTokenSource;
+        private bool _enabled = false;
         private Camera _mainCamera;
     }
 }
