@@ -4,6 +4,7 @@ using FishingModule;
 using PlayerModule;
 using StateMachine;
 using UnityEngine;
+using Utility;
 using VContainer;
 using VContainer.Unity;
 
@@ -28,6 +29,7 @@ namespace Container
             builder.Register<IFishingModeRegistry, FishingModeRegistry>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<Door>();
             builder.RegisterComponentInHierarchy<FishingArea>();
+            builder.RegisterComponentInHierarchy<FishingPriorityChange>();
             builder.Register<IRod, RodModel>(Lifetime.Singleton);
         }
     }
