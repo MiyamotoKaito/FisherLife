@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Lv6_ MagmaRex
   m_EditorClassIdentifier: FishModule::FishModule.FishParameter
   _level: 6
-  _name: "\u30AA\u30FC\u30ED\u30E9\u30AF\u30BF\u30FC\u30F3"
-  _hp: 1500
-  _defence: 200
-  _sellingPrice: 1650
-  _image: {fileID: -555693514, guid: 81adb629dd23c5e44bad877834dd4689, type: 3}
+  _name: "\u30DE\u30B0\u30DE\u30EC\u30C3\u30AF\u30B9"
+  _hp: 3000
+  _defence: 300
+  _sellingPrice: 4000
+  _image: {fileID: -2086635420, guid: 81adb629dd23c5e44bad877834dd4689, type: 3}
