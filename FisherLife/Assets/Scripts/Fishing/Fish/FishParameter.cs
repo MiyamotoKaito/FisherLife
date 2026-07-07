@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FishModule
 {
@@ -17,7 +17,9 @@ namespace FishModule
         /// <summary> 防御力。 </summary>
         public int Defence => _defence;
         /// <summary> 入手できる金額。 </summary>
-        public int MoneyAmount => _moneyAmount;
+        public int SellingPrice => _sellingPrice;
+        /// <summary> 魚のイラスト。 </summary>
+        public Sprite Image => _image;
 
         [Header("レベル")]
         [SerializeField, Tooltip("レベル。")]
@@ -35,6 +37,9 @@ namespace FishModule
         private int _defence;
 
         [SerializeField, Tooltip("入手できる金額。")]
-        private int _moneyAmount;
+        private int _sellingPrice;
+
+        [SerializeField, Tooltip("魚のイラスト")]
+        private Sprite _image;
     }
 }
