@@ -10,7 +10,7 @@ namespace Commons
         /// <summary> 名前。 </summary>
         string Name { get; }
         /// <summary> 入手できる金額。 </summary>
-        int MoneyAmount { get; }
+        int SellingPrice { get; }
         /// <summary> レベル。 </summary>
         int Level { get; }
     }
