@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b292b18d59a8cc4591405de51c945e9, type: 3}
+  m_Name: Lv3_MeroMeroFish
+  m_EditorClassIdentifier: FishModule::FishModule.FishParameter
+  _level: 3
+  _name: "\u30E1\u30ED\u30E1\u30ED\u30D5\u30A3\u30C3\u30B7\u30E5"
+  _hp: 145
+  _defence: 18
+  _sellingPrice: 240
+  _image: {fileID: 1848053029, guid: 81adb629dd23c5e44bad877834dd4689, type: 3}

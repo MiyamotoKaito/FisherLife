@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b292b18d59a8cc4591405de51c945e9, type: 3}
-  m_Name: FishParamater
+  m_Name: Lv1_Togepyon
   m_EditorClassIdentifier: FishModule::FishModule.FishParameter
   _level: 1
-  _name: "\u4EEE"
-  _hp: 30
+  _name: "\u30C8\u30B2\u30D4\u30E7\u30F3"
+  _hp: 32
   _defence: 3
-  _moneyAmount: 10
+  _sellingPrice: 28
+  _image: {fileID: -608707373, guid: 81adb629dd23c5e44bad877834dd4689, type: 3}

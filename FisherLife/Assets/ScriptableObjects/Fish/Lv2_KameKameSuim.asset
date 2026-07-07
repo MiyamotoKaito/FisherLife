@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b292b18d59a8cc4591405de51c945e9, type: 3}
+  m_Name: Lv2_KameKameSuim
+  m_EditorClassIdentifier: FishModule::FishModule.FishParameter
+  _level: 2
+  _name: "\u30AB\u30E1\u30AB\u30E1\u30B9\u30A4\u30E0"
+  _hp: 48
+  _defence: 5
+  _sellingPrice: 55
+  _image: {fileID: 1102868420, guid: 81adb629dd23c5e44bad877834dd4689, type: 3}

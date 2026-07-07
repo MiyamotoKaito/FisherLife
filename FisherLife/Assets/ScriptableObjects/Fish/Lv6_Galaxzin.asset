@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b292b18d59a8cc4591405de51c945e9, type: 3}
+  m_Name: Lv6_Galaxzin
+  m_EditorClassIdentifier: FishModule::FishModule.FishParameter
+  _level: 6
+  _name: "\u30AE\u30E3\u30E9\u30AF\u30B8\u30F3"
+  _hp: 2000
+  _defence: 72
+  _sellingPrice: 1800
+  _image: {fileID: -1863163324, guid: 81adb629dd23c5e44bad877834dd4689, type: 3}
