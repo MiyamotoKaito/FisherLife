@@ -1,11 +1,14 @@
-﻿namespace Commons
+﻿using R3;
+using System;
+
+namespace Commons
 {
     /// <summary>
     ///     ワールド状態を管理するステートマシンのインターフェース。
     /// </summary>
-    public interface IWorldStateMachine
+    public interface IWorldStateMachine : IDisposable
     {
-        public WorldStateType CurrentState { get; }
+        public ReactiveProperty<WorldStateType> CurrentStateType { get; }
         /// <summary>
         ///     状態を登録する。
         /// </summary>

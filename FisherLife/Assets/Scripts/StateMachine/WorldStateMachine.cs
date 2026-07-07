@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using Commons;
+﻿using Commons;
+using R3;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace StateMachine
@@ -16,8 +17,10 @@ namespace StateMachine
         {
             _stateDic = new Dictionary<WorldStateType, IState>();
             _stateStack = new Stack<IState>();
+
+            _currentStateType = new();
         }
-        public WorldStateType CurrentState => _currentState.WorldState;
+        public ReactiveProperty<WorldStateType> CurrentStateType => _currentStateType;
         /// <summary>
         ///     状態を登録する。
         /// </summary>
@@ -31,12 +34,13 @@ namespace StateMachine
         /// </summary>
         public void ChangeState(WorldStateType worldStateType)
         {
-            if(_stateStack.Count > 0)
+            if (_stateStack.Count > 0)
             {
                 _currentState.Exit();
             }
             // 新しい状態へ入り、スタックへ積む。
             _currentState = _stateDic[worldStateType];
+            _currentStateType.Value = worldStateType;
             _currentState.Entry();
             _stateStack.Push(_currentState);
             Debug.Log($"ステートを変えました。{worldStateType}");
@@ -55,6 +59,7 @@ namespace StateMachine
             _stateStack.Pop();
             _currentState = _stateStack.Count > 0 ? _stateStack.Peek() : null;
             _currentState?.Entry();
+            _currentStateType.Value = _currentState.WorldState;
             Debug.Log($"以前のステートに戻りました。{_currentState?.WorldState}");
         }
         public void AllStop()
@@ -64,6 +69,16 @@ namespace StateMachine
             _currentState = null;
             Debug.Log("全てのステートを停止しました。");
         }
+
+        public void Dispose()
+        {
+            if (_currentStateType != null)
+            {
+                _currentStateType = null;
+            }
+        }
+
+        private ReactiveProperty<WorldStateType> _currentStateType;
         private IState _currentState;
         private readonly Dictionary<WorldStateType, IState> _stateDic;
         private readonly Stack<IState> _stateStack;
