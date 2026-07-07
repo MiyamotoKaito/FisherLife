@@ -4,7 +4,6 @@ using FishingModule;
 using PlayerModule;
 using StateMachine;
 using UnityEngine;
-using Utility;
 using VContainer;
 using VContainer.Unity;
 
@@ -27,6 +26,7 @@ namespace Container
             builder.Register<IAttackCalculator, AttackCalculator>(Lifetime.Singleton);
             builder.Register<IBattleUsecase, BattleUsecase>(Lifetime.Singleton);
             builder.Register<IFishingModeRegistry, FishingModeRegistry>(Lifetime.Singleton);
+            builder.RegisterComponentInHierarchy<PlayerView>().As<IPlayerFishingAnimation>().AsSelf();
             builder.Register<IRod, RodModel>(Lifetime.Singleton);
         }
     }

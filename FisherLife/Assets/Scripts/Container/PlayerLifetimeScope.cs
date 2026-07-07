@@ -14,8 +14,7 @@ namespace Container
         ///     プレイヤーのView・コントローラー・状態を登録する。
         /// </summary>
         protected override void Configure(IContainerBuilder builder)
-        {
-            builder.RegisterComponentInHierarchy<PlayerView>();
+        {            
             builder.Register<PlayerController>(Lifetime.Singleton);
             builder.Register<PlayerMovePresenter>(Lifetime.Singleton);
             builder.Register<PlayerInteractor>(Lifetime.Singleton);
