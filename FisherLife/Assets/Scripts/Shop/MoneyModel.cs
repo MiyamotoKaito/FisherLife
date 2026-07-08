@@ -1,19 +1,34 @@
-using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using R3;
+using Utility;
 
 namespace ShopModule
 {
-    public class MoneyModel : MonoBehaviour
+    public class MoneyModel
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        public ReadOnlyReactiveProperty<int> Money => _money;
+        private readonly ReactiveProperty<int> _money = new(0);
+
+        public async UniTask InitializeAsync()
         {
-        
+            var data = await SaveSystem.LoadAsync<MoneyData>();
+            _money.Value = data.Money;
         }
 
-        // Update is called once per frame
-        void Update()
+        public bool TrySpend(int cost)
         {
-        
+            if (_money.Value < cost) return false;
+            _money.Value -= cost;
+            return true;
+        }
+
+        public void Add(int amount) => _money.Value += amount;
+
+        public async UniTask SaveAsync()
+        {
+            var data = await SaveSystem.LoadAsync<MoneyData>();
+            data.Money = _money.Value;
+            await SaveSystem.SaveAsync<MoneyData>();
         }
     }
 }
