@@ -1,4 +1,4 @@
-namespace Commons
+﻿namespace Commons
 {
     /// <summary>
     ///     InputSystemのアクションマップ種別。
@@ -13,5 +13,7 @@ namespace Commons
         Fishing = 2,
         /// <summary> タイピング操作。 </summary>
         Typing = 3,
+        /// <summary> 買い物操作。 </summary>
+        Shopping = 4,
     }
 }
