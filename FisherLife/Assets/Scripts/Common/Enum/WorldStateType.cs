@@ -1,4 +1,4 @@
-namespace Commons
+﻿namespace Commons
 {
     /// <summary>
     ///     ワールド全体の状態種別。
@@ -13,8 +13,8 @@ namespace Commons
         Fishing = 2,
         /// <summary> 移動中。 </summary>
         Moving = 3,
-        /// <summary> メニュー表示中。 </summary>
-        Menu = 4,
+        /// <summary> 買い物中。 </summary>
+        Shopping = 4,
         /// <summary> ゲーム外。 </summary>
         OutGame = 5,
     }
