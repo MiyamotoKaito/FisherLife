@@ -22,7 +22,7 @@ namespace Utility
                 try
                 {
                     //　値の上書き
-                    JsonUtility.FromJsonOverwrite(_key, this);
+                    JsonUtility.FromJsonOverwrite(json, this);
                 }
                 catch(Exception ex)
                 {
