@@ -13,6 +13,8 @@ namespace PlayerModule
         public string Name => _name;
         /// <summary> 釣り竿のレベル。 </summary>
         public byte Level => _level;
+        /// <summary> 釣り竿の買値。 </summary>
+        public int Price => _price;
         /// <summary> 攻撃力。 </summary>
         public int AttackPower => _attackPower;
         /// <summary> クリティカル倍率。 </summary>
@@ -24,6 +26,8 @@ namespace PlayerModule
         private string _name;
         [SerializeField, Tooltip("釣り竿のレベル")]
         private byte _level;
+        [SerializeField, Tooltip("釣り竿の買値")]
+        private int _price;
         [Header("パラメーター設定")]
         [SerializeField, Tooltip("釣り竿の攻撃力")]
         private int _attackPower;
