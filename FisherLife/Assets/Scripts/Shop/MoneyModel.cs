@@ -18,7 +18,6 @@ namespace ShopModule
         public bool TrySpend(int cost)
         {
             if (_money.Value < cost) return false;
-            _money.Value -= cost;
             return true;
         }
 
