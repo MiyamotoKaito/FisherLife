@@ -33,7 +33,10 @@ namespace PlayerModule
         private void Update()
         {
             if (!_enabled)
+            {
+                _interactionCanvas.enabled = false;
                 return;
+            }
             _interactionCanvas.transform.LookAt(_mainCamera.transform);
             _interactionCanvas.transform.Rotate(0, 180, 0);
         }
