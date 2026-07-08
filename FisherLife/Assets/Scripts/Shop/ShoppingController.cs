@@ -18,7 +18,7 @@ namespace ShopModule
             _entryAction = _shoppingActionMap.FindAction("Entry");
         }
         public InputActionMapType InputActionMapType => InputActionMapType.Shopping;
-        private Stack<ShoppingPanelBase> _shoppingPanelStack;
+        private Stack<ShoppingPanelBase> _shoppingPanelStack = new();
         private readonly InputActionAsset _inputActions;
         private readonly InputActionMap _shoppingActionMap;
         private readonly InputAction _upAction;
@@ -63,12 +63,14 @@ namespace ShopModule
             if (_shoppingPanelStack.Count > 0)
             {
                 _shoppingPanelStack.Pop();
+                Peak().Begin();
             }
         }
 
         public void Push(ShoppingPanelBase panel)
         {
             _shoppingPanelStack.Push(panel);
+            Peak().Begin();
         }
         private void Up(InputAction.CallbackContext context)
         {
