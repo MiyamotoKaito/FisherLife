@@ -1,6 +1,7 @@
 ﻿using BattleModule;
 using Commons;
 using FishingModule;
+using FishModule;
 using PlayerModule;
 using StateMachine;
 using UnityEngine;
@@ -14,11 +15,13 @@ namespace Container
     /// </summary>
     public class InGameLifetimeScope : LifetimeScope
     {
+        [SerializeField] private FishListAsset _fishListAsset;
         /// <summary>
         ///     ワールドステートマシンと動作確認用コンポーネントを登録する。
         /// </summary>
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterInstance(_fishListAsset);
             builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<InGameInitializer>();
             builder.RegisterComponentInHierarchy<Camera>();
