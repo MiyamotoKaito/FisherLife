@@ -1,4 +1,5 @@
 ﻿using PlayerModule;
+using ShopModule;
 using Utility;
 using VContainer;
 using VContainer.Unity;
@@ -12,6 +13,9 @@ namespace Container
             builder.RegisterComponentInHierarchy<Door>();
             builder.RegisterComponentInHierarchy<FishingArea>();
             builder.RegisterComponentInHierarchy<FishingPriorityChange>();
+            builder.RegisterComponentInHierarchy<MoneyView>();
+            builder.RegisterComponentInHierarchy<MoneyPresenter>();
+            builder.Register<MoneyModel>(Lifetime.Singleton);
         }
     }
 }
