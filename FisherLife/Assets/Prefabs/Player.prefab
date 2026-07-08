@@ -926,7 +926,7 @@ GameObject:
   - component: {fileID: 8112384445166568267}
   - component: {fileID: 1136337781519394143}
   - component: {fileID: 4847919239233422180}
-  - component: {fileID: 7578759773878585244}
+  - component: {fileID: 5611856608516564612}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1065,8 +1065,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PlayerModule::PlayerModule.PlayerView
   _parametor: {fileID: 11400000, guid: 10bb741a24091c84586f596242390795, type: 2}
---- !u!65 &7578759773878585244
-BoxCollider:
+--- !u!136 &5611856608516564612
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1083,9 +1083,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.27, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.74
+  m_Height: 2.78
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.09, z: 0}
 --- !u!1 &6701027907712821857
 GameObject:
   m_ObjectHideFlags: 0
