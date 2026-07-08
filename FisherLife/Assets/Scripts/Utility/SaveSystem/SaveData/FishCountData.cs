@@ -5,6 +5,7 @@ namespace Utility
     /// <summary>
     /// 所持している魚の数(種類ごと)のセーブデータ
     /// </summary>
+    [System.Serializable]
     public class FishCountData
     {
         // Dictionaryの保存は6.5に移行してから
