@@ -303,6 +303,7 @@ MonoBehaviour:
   _worldStateType: 3
   _cameras:
   - {fileID: 1013198783}
+  - {fileID: 1339697795}
 --- !u!4 &352703453
 Transform:
   m_ObjectHideFlags: 0
@@ -1756,6 +1757,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1973365826}
     m_Modifications:
+    - target: {fileID: 1851127497099001323, guid: 367bd6022f32fa84bba71b8635b6016e, type: 3}
+      propertyPath: _fishListAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8743137c359368c47b28ace18938a16f, type: 2}
     - target: {fileID: 4118710828354987108, guid: 367bd6022f32fa84bba71b8635b6016e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1700296
