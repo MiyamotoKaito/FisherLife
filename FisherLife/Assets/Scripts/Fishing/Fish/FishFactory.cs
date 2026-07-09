@@ -21,7 +21,8 @@ namespace FishModule
 
             for (int i = 0; i < _defaultFishSpawnAmount; i++)
             {
-                var fishData = _fishListAsset.FishParameters[rod.Level];
+                var level = SelectSpawnLevel(rod.Level);
+                var fishData = _fishListAsset.FishParameters[level];
                 var selectedFishParameter = fishData[Random.Range(0, fishData.Count)];
                 _fishPresenters[i].SetFishParameter(selectedFishParameter);
 
@@ -42,6 +43,23 @@ namespace FishModule
                 fish.SetEnable(false);
             }
         }
+
+        /// <summary>
+        ///     スポーンする魚のレベルを決める。
+        ///     90%で現在レベル、10%で一つ上のレベル。ただし一つ上が辞書に無ければ現在レベル。
+        /// </summary>
+        private byte SelectSpawnLevel(byte rodLevel)
+        {
+            if (Random.value < HIGHER_LEVEL_RATE)
+            {
+                byte higher = (byte)(rodLevel + 1);
+                if (_fishListAsset.FishParameters.ContainsKey(higher))
+                {
+                    return higher;
+                }
+            }
+            return rodLevel;
+        }
         private void Awake()
         {
             _fishPresenters = new List<FishPresenter>();
@@ -60,6 +78,7 @@ namespace FishModule
                 _fishPresenters.Add(newFishPresenter);
             }
         }
+        private const float HIGHER_LEVEL_RATE = 0.1f; // 一つ上のレベルの魚がスポーンする確率(10%)
         [Inject] private FishListAsset _fishListAsset;
         [SerializeField] private GameObject _fishPrefab;
         [SerializeField] private int _defaultFishSpawnAmount = 3;
