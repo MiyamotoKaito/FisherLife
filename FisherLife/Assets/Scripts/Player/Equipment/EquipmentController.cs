@@ -42,7 +42,8 @@ namespace PlayerModule
             _entryAction.started -= Entry;
             if (_cancelAction != null) _cancelAction.started -= Cancel;
 
-            _panel.gameObject.SetActive(false);
+            // 破棄時(Play停止/シーン破棄)は panel が先に破棄されていることがあるためガードする。
+            if (_panel != null) _panel.gameObject.SetActive(false);
         }
 
         public void Dispose() => End();
