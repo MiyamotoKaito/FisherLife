@@ -48,4 +48,5 @@ MonoBehaviour:
     TypeName: Container.RootLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
-  _textAsset: {fileID: 4900000, guid: c845001badffabe42a2c256760f4fa72, type: 3}
+  _fishListAsset: {fileID: 11400000, guid: 8743137c359368c47b28ace18938a16f, type: 2}
+  _starterRod: {fileID: 11400000, guid: cd33eb276c3ef3641b9070cdf653fe2b, type: 2}
