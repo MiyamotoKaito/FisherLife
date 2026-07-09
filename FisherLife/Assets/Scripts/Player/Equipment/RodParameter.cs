@@ -1,5 +1,4 @@
-﻿using UnityEditor.MPE;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PlayerModule
 {
@@ -21,6 +20,8 @@ namespace PlayerModule
         public float CriticalMutiplier => _criticalMultiplier;
         /// <summary> クリティカル発生倍率。 </summary>
         public float CriticalRate => _criticalRate;
+        /// <summary> 釣り竿の画像。 </summary>
+        public Sprite Image => _image;
 
         [SerializeField, Tooltip("釣り竿の名前")]
         private string _name;
@@ -35,5 +36,7 @@ namespace PlayerModule
         private float _criticalMultiplier;
         [SerializeField, Tooltip("クリティカル発生倍率"),Range(1,100)]
         private float _criticalRate;
+        [SerializeField, Tooltip("釣り竿の画像")]
+        private Sprite _image;
     }
 }
