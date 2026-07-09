@@ -1,5 +1,6 @@
 ﻿using Commons;
 using R3;
+using UnityEngine;
 
 namespace FishModule
 {
@@ -31,6 +32,8 @@ namespace FishModule
         public int SellingPrice => _paramater.SellingPrice;
         /// <summary> レベル。 </summary>
         public int Level => _paramater.Level;
+        /// <summary> 魚の画像。 </summary>
+        public Sprite Image => _paramater.Image;
 
         /// <summary>
         ///     ダメージを受け、体力を減らす。
