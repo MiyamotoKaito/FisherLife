@@ -13,6 +13,7 @@ namespace PlayerModule
         private void Awake()
         {
             _mainCamera = Camera.main;
+            _interactionCanvas.enabled = false;
         }
         private void Update()
         {
@@ -26,7 +27,7 @@ namespace PlayerModule
         {
             if (other.CompareTag("Player"))
             {
-                _interactionCanvas.enabled = true; 
+                _interactionCanvas.enabled = true;
             }
         }
         private void OnTriggerExit(Collider other)
@@ -38,7 +39,7 @@ namespace PlayerModule
         }
         [Inject]
         private IWorldStateMachine _worldStateMachine;
-        [SerializeField] 
+        [SerializeField]
         private Canvas _interactionCanvas;
         private Camera _mainCamera;
     }
