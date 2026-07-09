@@ -7,6 +7,8 @@ namespace FishModule
     public class FishListAsset : ScriptableObject
     {
         public Dictionary<byte, List<FishParameter>> FishParameters => _fishParameterDictionary;
+        /// <summary> 登録されている全魚種（InitDictionaries不要で読める）。 </summary>
+        public IReadOnlyList<FishParameter> AllFishParameters => _fishParameters;
         /// <summary>
         /// 辞書の初期化
         /// </summary>
