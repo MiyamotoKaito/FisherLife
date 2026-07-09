@@ -1,33 +1,57 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShopModule
 {
+    /// <summary>
+    ///     ショップの1画面。ItemBaseの配列を「最大MaxVisible行の窓」で表示し、
+    ///     カーソルが窓の外へ出たら窓をスクロールさせる。Entryで各行に処理を委譲する。
+    ///     データ駆動の派生（SellPanel等）は ItemCount / MaxVisible / Render / Entry を override する。
+    /// </summary>
     public class ShoppingPanelBase : MonoBehaviour
     {
         [SerializeField]
         private ItemBase[] _items;
-        private int _index = 0;
-        public void Begin()
+        [SerializeField, Tooltip("同時に表示する最大行数。")]
+        private int _maxVisible = 6;
+        [SerializeField, Tooltip("画像を表示するためのUI")]
+        protected Image _image;
+        protected int _cursor; // 選択中の絶対インデックス
+        protected int _top;    // 表示している窓の先頭インデックス
+
+        /// <summary> 選択可能な項目数。データ駆動の派生はoverrideする。 </summary>
+        protected virtual int ItemCount => _items.Length;
+
+        /// <summary> 同時に表示する最大行数。固定行ビューの派生はビュー数を返す。 </summary>
+        protected virtual int MaxVisible => _maxVisible;
+
+        public virtual void Begin()
         {
-            _index = 0;
-            _items[_index].gameObject.SetActive(true);
+            _cursor = 0;
+            _top = 0;
+            Render();
         }
+
         public virtual void Up()
         {
-            if (_index == 0) return;
+            if (_cursor <= 0) return;
 
-            _items[_index].gameObject.SetActive(false);
-            _index--;
-            _items[_index].gameObject.SetActive(true);
+            _cursor--;
+            // カーソルが窓の上に出たら上へスクロール。
+            if (_cursor < _top) _top = _cursor;
+            Render();
         }
+
         public virtual void Down()
         {
-            if (_index + 1 == _items.Length) return;
+            if (_cursor >= ItemCount - 1) return;
 
-            _items[_index].gameObject.SetActive(false);
-            _index++;
-            _items[_index].gameObject.SetActive(true);
+            _cursor++;
+            // カーソルが窓の下に出たら下へスクロール。
+            if (_cursor >= _top + MaxVisible) _top = _cursor - MaxVisible + 1;
+            Render();
         }
+
         public virtual void Right()
         {
 
@@ -36,9 +60,34 @@ namespace ShopModule
         {
 
         }
-        public virtual void Entry()
+        public virtual void Entry(ShoppingController controller)
         {
-            _items[_index].Trade();
+            if (ItemCount == 0) return;
+
+            // 遷移も取引も、選択中の行の多態に委譲する。
+            _items[_cursor].OnEntry(controller);
+        }
+
+        /// <summary> 窓(_top .. _top+MaxVisible-1)だけ表示し、_cursorを選択状態にする。 </summary>
+        protected virtual void Render()
+        {
+            for (int i = 0; i < _items.Length; i++)
+            {
+                bool visible = i >= _top && i < _top + MaxVisible;
+                _items[i].gameObject.SetActive(visible);
+                _items[i].SetSelected(i == _cursor);
+            }
+
+            ShowImage(ItemCount > 0 ? _items[_cursor].Sprite : null);
+        }
+
+        /// <summary> 選択中アイテムの画像を表示する（nullなら非表示）。 </summary>
+        protected void ShowImage(Sprite sprite)
+        {
+            if (_image == null) return;
+
+            _image.sprite = sprite;
+            _image.enabled = sprite != null;
         }
     }
 }
