@@ -15,11 +15,13 @@ namespace TypingModule
         /// </summary>
         public TypingController(IWordSeparatorUsecase wordSeparatorUsecase,
             TypingPresenter typingPresenter,
-            TextAsset textAsset)
+            TextAsset textAsset,
+            ITypingView typingView)
         {
             _wordSeparatorUsecase = wordSeparatorUsecase;
             _typingPresenter = typingPresenter;
             _textAsset = textAsset;
+            _typingView = typingView;
             Init();
         }
 
@@ -37,6 +39,7 @@ namespace TypingModule
         /// </summary>
         public void Begin()
         {
+            _typingView.SetVisible(true);
             Start();
         }
 
@@ -45,6 +48,7 @@ namespace TypingModule
         /// </summary>
         public void End()
         {
+            _typingView.SetVisible(false);
             _typingPresenter.StopTyping();
             _typingPresenter.Completed -= Next;
         }
@@ -66,6 +70,7 @@ namespace TypingModule
         private readonly IWordSeparatorUsecase _wordSeparatorUsecase;
         private readonly TypingPresenter _typingPresenter;
         private readonly TextAsset _textAsset;
+        private readonly ITypingView _typingView;
         private Dictionary<uint, string[]> _wordDictionary;
         private Subject<Unit> _onAttack;
 
