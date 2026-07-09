@@ -29,7 +29,7 @@ namespace ShopModule
         {
             _worldStateMachine.CurrentStateType.Subscribe(type =>
             {
-                if (type == WorldStateType.Moving || type == WorldStateType.Fishing)
+                if (type == WorldStateType.Moving || type == WorldStateType.Fishing || type == WorldStateType.Shopping)
                 {
                     _moneyCanvas.enabled = true;
                 }
