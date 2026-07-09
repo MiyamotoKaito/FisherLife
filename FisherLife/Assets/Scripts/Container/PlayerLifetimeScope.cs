@@ -21,11 +21,17 @@ namespace Container
             builder.Register<IPlayerMoveUsecase, PlayerMoveUsecase>(Lifetime.Singleton);
             builder.Register<PlayerMoveState>(Lifetime.Singleton);
 
-            // 生成後にプレイヤー移動状態をステートマシンへ登録する。
+            // 装備切り替え（画面・入力・状態）。
+            builder.RegisterComponentInHierarchy<EquipmentPanel>();
+            builder.Register<EquipmentController>(Lifetime.Singleton).As<IController>().AsSelf();
+            builder.Register<EquipmentState>(Lifetime.Singleton).As<IState>().AsSelf();
+
+            // 生成後にプレイヤー移動状態・装備状態をステートマシンへ登録する。
             builder.RegisterBuildCallback(resolver =>
             {
                 var machine = resolver.Resolve<IWorldStateMachine>();
                 machine.AddState(resolver.Resolve<PlayerMoveState>());
+                machine.AddState(resolver.Resolve<EquipmentState>());
             });
         }
     }
