@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Commons
 {
@@ -13,5 +14,7 @@ namespace Commons
         int SellingPrice { get; }
         /// <summary> レベル。 </summary>
         int Level { get; }
+        /// <summary> 魚の画像。 </summary>
+        Sprite Image { get; }
     }
 }
