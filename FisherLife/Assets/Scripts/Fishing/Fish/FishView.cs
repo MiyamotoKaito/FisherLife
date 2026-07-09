@@ -15,5 +15,10 @@ namespace FishModule
         {
             transform.position = pos;
         }
+
+        public void Look(Vector3 pos)
+        {
+            transform.LookAt(pos);
+        }
     }
 }

@@ -12,6 +12,20 @@ namespace PlayerModule
     {
         public IInteractable Interactable => _currentInteractableObject != null ? _currentInteractableObject : null;
 
+        /// <summary> プレイヤーの現在の向き。 </summary>
+        public Vector3 FacingDirection => transform.forward;
+
+        /// <summary>
+        ///     指定した位置（釣りスポット）の方へ水平に向く。
+        /// </summary>
+        public void FaceTo(Vector3 targetPosition)
+        {
+            var flat = targetPosition - transform.position;
+            flat.y = 0f;
+            if (flat.sqrMagnitude < 0.0001f) return;
+            transform.rotation = Quaternion.LookRotation(flat);
+        }
+
         /// <summary>
         ///     移動方向を設定する。
         /// </summary>

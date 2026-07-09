@@ -1,5 +1,7 @@
 ﻿using Commons;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Utility;
 using VContainer;
 
 namespace PlayerModule
@@ -14,6 +16,8 @@ namespace PlayerModule
         {
             Debug.Log("ドアを開ける");
             _worldStateMachine.AllStop();
+
+            SceneTransitionManager.IrisIn(_sceneName).Forget();
         }
         private void Awake()
         {
@@ -44,6 +48,7 @@ namespace PlayerModule
         }
         [Inject] private IWorldStateMachine _worldStateMachine;
         [SerializeField] private Canvas _interactionCanvas;
+        [SerializeField] private string _sceneName;
         private Camera _mainCamera;
     }
 }

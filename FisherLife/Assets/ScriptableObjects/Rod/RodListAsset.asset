@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2556abe3bcb0f94bbf54932c23d544b, type: 3}
+  m_Name: RodListAsset
+  m_EditorClassIdentifier: PlayerModule::PlayerModule.RodListAsset
+  _parameters:
+  - {fileID: 11400000, guid: cd33eb276c3ef3641b9070cdf653fe2b, type: 2}
+  - {fileID: 11400000, guid: 17f59142e1610ed4d9ba943a49a0ba4f, type: 2}
+  - {fileID: 11400000, guid: 768ea2b752bc98c4683de13987011412, type: 2}
+  - {fileID: 11400000, guid: f02e60315ded2ef42bbd4eb0cead21b2, type: 2}
+  - {fileID: 11400000, guid: 5fe6598d7fcdb7c459f4eaa18b623056, type: 2}
+  - {fileID: 11400000, guid: beccddada4472cc4ebfbcbad4d0b2a2c, type: 2}

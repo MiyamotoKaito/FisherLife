@@ -22,6 +22,8 @@ namespace PlayerModule
         public float CriticalRate => _criticalRate;
         /// <summary> 釣り竿の画像。 </summary>
         public Sprite Image => _image;
+        /// <summary> 釣り竿の説明文。 </summary>
+        public string Description => _description;
 
         [SerializeField, Tooltip("釣り竿の名前")]
         private string _name;
@@ -38,5 +40,7 @@ namespace PlayerModule
         private float _criticalRate;
         [SerializeField, Tooltip("釣り竿の画像")]
         private Sprite _image;
+        [SerializeField, TextArea, Tooltip("釣り竿の説明文")]
+        private string _description;
     }
 }

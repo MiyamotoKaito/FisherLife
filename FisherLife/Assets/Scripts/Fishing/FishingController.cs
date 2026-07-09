@@ -18,7 +18,8 @@ namespace FishingModule
             IBattleUsecase battleUsecase,
             IPlayerFishingAnimation playerFishingAnimation,
             CatchResultPanel catchResultPanel,
-            InputActionAsset inputActions)
+            InputActionAsset inputActions,
+            IFishingModeRegistry fishingModeRegistry)
         {
             _fishFactory = fishFactory;
             _rod = rod;
@@ -26,6 +27,7 @@ namespace FishingModule
             _battleUsecase = battleUsecase;
             _playerFishingAnimation = playerFishingAnimation;
             _catchResultPanel = catchResultPanel;
+            _fishingModeRegistry = fishingModeRegistry;
 
             // 同名プロパティ（InputActionMapType.Fishing）の文字列でマップを取得する。
             _fishingActionMap = inputActions.FindActionMap(InputActionMapType.ToString(), true);
@@ -114,19 +116,27 @@ namespace FishingModule
         /// <returns></returns>
         private async UniTask RunAsync()
         {
+            // プレイヤーをスポットへ向けてから投げる。
+            _playerFishingAnimation.FaceTo(_fishFactory.SpotPosition);
             _playerFishingAnimation.Throw();
-            _currentFish = _fishFactory.CreateFish(_rod);
+            _currentFish = await _fishFactory.CreateFish(_rod, _playerFishingAnimation.FacingDirection);
 
             // 魚が釣れるまで待つ
             await UniTask.Delay(5000);
 
             // 魚が釣れたら戦闘状態に遷移する
             _fishFactory.HideFish();
+
+            // 魚のレベルに応じてタイピングの単語レベルを設定する（遷移前）。
+            _fishingModeRegistry.GetMode(FishingMode.Typing)?.SetLevel(_currentFish.Level);
+
             _worldStateMachine.ChangeState(WorldStateType.Typing);
 
-            // 戦闘開始
+            // 戦闘開始（戦闘中はループVFXを流す）
             _playerFishingAnimation.Fighting();
-            var result = await _battleUsecase.BattleStart(_rod, _currentFish);
+            _fishFactory.StartBattleVfx();
+            var result = await _battleUsecase.BattleStart(_rod, _currentFish, _currentFish.Level);
+            _fishFactory.StopBattleVfx();
             _battleResult = result;
 
             // 釣り上げた魚を所持データへ保存する。
@@ -171,6 +181,7 @@ namespace FishingModule
         private readonly IRod _rod;
         private readonly IPlayerFishingAnimation _playerFishingAnimation;
         private readonly CatchResultPanel _catchResultPanel;
+        private readonly IFishingModeRegistry _fishingModeRegistry;
         private readonly InputActionMap _fishingActionMap;
         private readonly InputAction _entryAction;
         private BattleResult _battleResult = BattleResult.None;

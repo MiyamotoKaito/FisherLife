@@ -1,7 +1,17 @@
 ﻿<Solution>
-  <Project Path="Develop.Core.csproj" />
-  <Project Path="Develo.Input.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
-  <Project Path="Develop.Mock.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="BattleModule.csproj" />
+  <Project Path="Commons.csproj" />
+  <Project Path="PlayerModule.csproj" />
+  <Project Path="TypingModule.csproj" />
+  <Project Path="ShopModule.csproj" />
+  <Project Path="FishModule.csproj" />
+  <Project Path="Utility.csproj" />
+  <Project Path="Assembly-CSharp-firstpass.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Container.csproj" />
+  <Project Path="InputModule.csproj" />
+  <Project Path="Tripolygon.UModelerX.PureCode.Hub.Editor.csproj" />
+  <Project Path="StateMachine.csproj" />
+  <Project Path="FishingModule.csproj" />
 </Solution>

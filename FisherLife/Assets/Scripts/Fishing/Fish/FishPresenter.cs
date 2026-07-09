@@ -31,6 +31,10 @@ namespace FishModule
         {
             _fishView.SetEnable(enable);
         }
+        public void SetRotate(Vector3 pos)
+        {
+            _fishView.Look(pos);
+        }
         public void SetFishParameter(FishParameter fishParameter)
         {
             _fishModel.SetParameter(fishParameter);

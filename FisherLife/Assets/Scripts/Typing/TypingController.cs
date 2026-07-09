@@ -54,6 +54,14 @@ namespace TypingModule
         }
 
         /// <summary>
+        ///     出題する単語のレベルを設定する（魚のレベルに連動）。
+        /// </summary>
+        public void SetLevel(int level)
+        {
+            _targetLevel = (uint)level;
+        }
+
+        /// <summary>
         ///     破棄時に購読を解除する。
         /// </summary>
         public void Dispose()
@@ -67,6 +75,7 @@ namespace TypingModule
 
         private const uint TARGET_LEVEL = 1;
 
+        private uint _targetLevel = TARGET_LEVEL;
         private readonly IWordSeparatorUsecase _wordSeparatorUsecase;
         private readonly TypingPresenter _typingPresenter;
         private readonly TextAsset _textAsset;
@@ -104,8 +113,10 @@ namespace TypingModule
         /// </summary>
         private void Next()
         {
-            Debug.Log($"[TypingController] レベル {TARGET_LEVEL} の単語からランダムに1問を出題します。");
-            var words = _wordDictionary[TARGET_LEVEL];
+            // 対象レベルの単語が無ければレベル1へフォールバックする。
+            var level = _wordDictionary.ContainsKey(_targetLevel) ? _targetLevel : TARGET_LEVEL;
+            Debug.Log($"[TypingController] レベル {level} の単語からランダムに1問を出題します。");
+            var words = _wordDictionary[level];
             var word = words[UnityEngine.Random.Range(0, words.Length)];
             _typingPresenter.StartTyping(word);
             _onAttack.OnNext(Unit.Default);

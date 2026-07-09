@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Commons;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -10,10 +11,19 @@ namespace FishModule
     /// </summary>
     public class FishFactory : MonoBehaviour, IFishFactory
     {
-        public IFish CreateFish(IRod rod)
-        {
-            Vector3 rodPos = rod.Position;
+        public Vector3 SpotPosition => _spot.Position;
 
+        public async UniTask<IFish> CreateFish(IRod rod, Vector3 facing)
+        {
+            // 投げてから着水するまで少し待つ。
+            await UniTask.Delay(1000);
+
+            // スポットを投げた方向へ向け、水しぶきを一回出す。
+            _spot.AimTo(facing);
+            _spot.PlaySplash();
+
+            Vector3 spotPos = _spot.Position;
+            await UniTask.Delay(1000);
             foreach (var fish in _fishPresenters)
             {
                 fish.SetEnable(true);
@@ -26,12 +36,16 @@ namespace FishModule
                 var selectedFishParameter = fishData[Random.Range(0, fishData.Count)];
                 _fishPresenters[i].SetFishParameter(selectedFishParameter);
 
+                // スポットを中心に Radius ぶん離して円状に配置する。
+                float angle = Random.Range(0f, 2f * Mathf.PI);
                 Vector3 initPos = new Vector3(
-                    rodPos.x + Mathf.Sin(Random.Range(0f, 2f * Mathf.PI)),
-                    rodPos.y,
-                    rodPos.z + Mathf.Cos(Random.Range(0f, 2f * Mathf.PI)));
+                    spotPos.x + Mathf.Sin(angle) * _spawnRadius,
+                    spotPos.y,
+                    spotPos.z + Mathf.Cos(angle) * _spawnRadius);
 
                 _fishPresenters[i].SetStartPosition(initPos);
+                // 位置を決めてからスポットの方を向かせる。
+                _fishPresenters[i].SetRotate(spotPos);
             }
             var randomIndex = Random.Range(0, _fishPresenters.Count);
             return _fishPresenters[randomIndex].FishModel;
@@ -43,6 +57,9 @@ namespace FishModule
                 fish.SetEnable(false);
             }
         }
+
+        public void StartBattleVfx() => _spot.StartBattleVfx();
+        public void StopBattleVfx() => _spot.StopBattleVfx();
 
         /// <summary>
         ///     スポーンする魚のレベルを決める。
@@ -80,8 +97,10 @@ namespace FishModule
         }
         private const float HIGHER_LEVEL_RATE = 0.1f; // 一つ上のレベルの魚がスポーンする確率(10%)
         [Inject] private FishListAsset _fishListAsset;
+        [Inject] private FishingSpot _spot;
         [SerializeField] private GameObject _fishPrefab;
         [SerializeField] private int _defaultFishSpawnAmount = 3;
+        [SerializeField, Tooltip("スポットからの生成半径。")] private float _spawnRadius = 3f;
         private List<FishPresenter> _fishPresenters;
     }
 }

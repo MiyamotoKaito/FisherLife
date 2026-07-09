@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace PlayerModule
@@ -12,6 +14,14 @@ namespace PlayerModule
     {
         [SerializeField, Tooltip("固定の行ビュー(LayoutGroup配下)。この数が表示行数になる。")]
         private RodRowView[] _rows;
+
+        [Header("選択中の竿の詳細表示")]
+        [SerializeField, Tooltip("全竿のマスタ(画像/説明の名前引き用)。")]
+        private RodListAsset _rodListAsset;
+        [SerializeField, Tooltip("選択中の竿の画像。")]
+        private Image _detailImage;
+        [SerializeField, Tooltip("選択中の竿の説明文。")]
+        private TextMeshProUGUI _detailDescription;
 
         [Inject]
         private RodInventoryModel _inventory;
@@ -74,6 +84,37 @@ namespace PlayerModule
                     _rows[i].gameObject.SetActive(false);
                 }
             }
+
+            UpdateDetail();
+        }
+
+        /// <summary>
+        ///     選択中の竿の画像・名前・説明文を表示する（RodParameterを名前引き）。
+        /// </summary>
+        private void UpdateDetail()
+        {
+            if (_inventory.Rods.Count == 0) return;
+
+            var rodName = _inventory.Rods[_cursor].RodName;
+
+            // 画像・説明は RodParameter(マスタ)から名前引き。
+            var param = FindParam(rodName);
+            if (param != null)
+            {
+                if (_detailImage != null) _detailImage.sprite = param.Image;
+                if (_detailDescription != null) _detailDescription.text = param.Description;
+            }
+        }
+
+        private RodParameter FindParam(string rodName)
+        {
+            if (_rodListAsset == null || _rodListAsset.RodParameters == null) return null;
+
+            foreach (var rod in _rodListAsset.RodParameters)
+            {
+                if (rod != null && rod.Name == rodName) return rod;
+            }
+            return null;
         }
     }
 }

@@ -19,3 +19,4 @@ MonoBehaviour:
   _criticalMultiplier: 1.7
   _criticalRate: 8
   _image: {fileID: 431415612, guid: b44b407396ec4fa429e1307fcf2a1b17, type: 3}
+  _description: "\u305F\u3060\u306E\u3064\u308A\u3056\u304A\n\u30EC\u30D9\u30EB\u304C2\u306E\u3055\u304B\u306A\u304C\u3064\u308C\u3084\u3059\u304F\u306A\u308B"

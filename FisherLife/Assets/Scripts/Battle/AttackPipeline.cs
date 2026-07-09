@@ -13,7 +13,7 @@ namespace FishingModule
         {
             var result = _attackCalculator.Calculate(attacker, target);
             target.TakeDamage(result.Damage);
-            Debug.Log($"攻撃が命中しました。ダメージ: {result.Damage}\n残りHP: {target.Hp}");
+            Debug.Log($"攻撃が命中しました。ダメージ: {result.Damage}\n残りHP: {target.Hp.CurrentValue}");
         }
         private readonly IAttackCalculator _attackCalculator;
     }

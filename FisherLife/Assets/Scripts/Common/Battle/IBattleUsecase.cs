@@ -4,6 +4,6 @@ namespace Commons
 {
     public interface IBattleUsecase
     {
-        UniTask<BattleResult> BattleStart(IAttacker attacker, IDamageable target);
+        UniTask<BattleResult> BattleStart(IAttacker attacker, IDamageable target, int level);
     }
 }

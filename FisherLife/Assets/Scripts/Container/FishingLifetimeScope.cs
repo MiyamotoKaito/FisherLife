@@ -21,6 +21,7 @@ namespace Container
             builder.Register<IFishingController,FishingController>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<FishFactory>().As<IFishFactory>();
             builder.RegisterComponentInHierarchy<CatchResultPanel>();
+            builder.RegisterComponentInHierarchy<FishingSpot>();
             builder.Register<FishingState>(Lifetime.Singleton);
             builder.RegisterBuildCallback(resolver =>
             {

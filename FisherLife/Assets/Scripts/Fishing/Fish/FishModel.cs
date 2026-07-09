@@ -40,7 +40,7 @@ namespace FishModule
         /// </summary>
         public void TakeDamage(int damage)
         {
-            _hp.Value -= damage;
+            _hp.Value = Mathf.Max(0, _hp.Value - damage);
         }
 
         public void Dispose()
