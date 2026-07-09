@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: PlayerModule::PlayerModule.RodParameter
   _name: "\u30AA\u30FC\u30B7\u30E3\u30F3\u30ED\u30C3\u30C9"
   _level: 4
+  _price: 2500
   _attackPower: 55
   _criticalMultiplier: 2.4
   _criticalRate: 16
+  _image: {fileID: -880221159, guid: b44b407396ec4fa429e1307fcf2a1b17, type: 3}
