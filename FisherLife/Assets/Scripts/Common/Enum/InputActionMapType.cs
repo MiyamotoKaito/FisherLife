@@ -15,5 +15,7 @@
         Typing = 3,
         /// <summary> 買い物操作。 </summary>
         Shopping = 4,
+        /// <summary> 装備操作。 </summary>
+        Equipment = 5,
     }
 }

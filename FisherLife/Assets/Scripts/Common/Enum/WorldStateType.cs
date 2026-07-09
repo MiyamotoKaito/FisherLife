@@ -17,5 +17,7 @@
         Shopping = 4,
         /// <summary> ゲーム外。 </summary>
         OutGame = 5,
+        /// <summary> 装備切り替え中。 </summary>
+        Equipment = 6,
     }
 }
