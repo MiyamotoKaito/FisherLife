@@ -56,6 +56,9 @@ namespace PlayerModule
             _moveAction.canceled -= MoveHandler;
             _interactAction.started -= InteractHandler;
             if (_equipmentAction != null) _equipmentAction.started -= OpenEquipmentHandler;
+
+            // 制御を手放す時に移動を止める（残った移動ベクトルで進み続けるのを防ぐ）。
+            _playerMovePresenter.SetMove(Vector3.zero);
         }
 
         /// <summary>
