@@ -15,7 +15,7 @@ namespace ShopModule
             _money.Value = data.Money;
         }
 
-        public bool TrySpend(int cost)
+        public bool CanSpend(int cost)
         {
             if (_money.Value < cost) return false;
             return true;
