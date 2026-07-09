@@ -1022,6 +1022,94 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Equipment",
+            "id": "01b6957d-7aa0-4f73-8868-2b66930268cf",
+            "actions": [
+                {
+                    "name": "Up",
+                    "type": "Button",
+                    "id": "18e834d8-e7eb-4b69-8d3a-603a0600c45f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "cfa8c1d2-151a-4a52-9c24-ac85ed37f8d5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Entry",
+                    "type": "Button",
+                    "id": "bb2cc0be-3d81-496b-8701-53448a3ad5bc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "e3037b30-3616-41ba-8856-8677e7bfb6fa",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "da131e47-2aa9-4c2f-b2ac-f53d9964d3d3",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0b4308b-162a-49fb-8733-ed8cde7b0bf3",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad3ab7e4-bb2e-4a2b-9452-61a3fa8a3368",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Entry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fadfa64c-74da-4aa0-b24c-cac286ecfd10",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
