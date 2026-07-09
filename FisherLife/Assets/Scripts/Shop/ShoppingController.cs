@@ -103,7 +103,9 @@ namespace ShopModule
         {
             while (_shoppingPanelStack.Count > 0)
             {
-                _shoppingPanelStack.Pop().gameObject.SetActive(false);
+                // 破棄時(Play停止/シーン破棄)はパネルが先に破棄されていることがあるためガードする。
+                var panel = _shoppingPanelStack.Pop();
+                if (panel != null) panel.gameObject.SetActive(false);
             }
         }
 
