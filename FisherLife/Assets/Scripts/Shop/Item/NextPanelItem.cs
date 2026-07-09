@@ -1,17 +1,24 @@
-﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace ShopModule
 {
+    /// <summary>
+    ///     選択すると次のパネルをスタックに積む行（買う/売る の分岐など）。
+    ///     取引はしないので IsTrade/Trade は持たない。
+    /// </summary>
     public class NextPanelItem : ItemBase
     {
-        public override UniTask<bool> IsTrade()
-        {
-            throw new System.NotImplementedException();
-        }
+        [SerializeField, Tooltip("行に表示するラベル。")]
+        private string _label;
+        [SerializeField, Tooltip("Entryで開くパネル。")]
+        private ShoppingPanelBase _nextPanel;
 
-        public override UniTask Trade()
+        public override void OnEntry(ShoppingController controller)
+            => controller.Push(_nextPanel);
+
+        private void Awake()
         {
-            throw new System.NotImplementedException();
+            _displayName = _label;
         }
     }
 }
