@@ -2,46 +2,44 @@
 using FishModule;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine;
 using Utility;
 
 namespace ShopModule
 {
-    public class SellItem : ItemBase
+    public class SellItem : TradeItem
     {
-        [SerializeField]
         private FishParameter _fishParameter;
-        private bool _isHaveFish;
+
+        /// <summary> 表示する魚を設定する（行ビュー再利用のたびに呼ばれる）。 </summary>
+        public void Setup(FishParameter param)
+        {
+            _fishParameter = param;
+            _displayName = param.Name;
+            _price = param.SellingPrice;
+            _sprite = param.Image;
+            ApplyDisplayName(); // テキストを更新
+        }
+
         public override async ValueTask<bool> IsTrade()
         {
-            IsHaveFish();
-
-            return _isHaveFish;
-        }
-        private async void IsHaveFish()
-        {
             var data = await SaveSystem.LoadAsync<FishCountData>();
-
-            _isHaveFish = data.Fishes.Exists(fish =>
-                 fish.FishName == _fishParameter.Name && fish.Count > 0);
+            return data.Fishes.Exists(fish =>
+                fish.FishName == _fishParameter.Name && fish.Count > 0);
         }
+
         public override async UniTask Trade()
         {
-            if (await IsTrade())
-            {
-                _moneyModel.Add(_fishParameter.SellingPrice);
+            var fishData = await SaveSystem.LoadAsync<FishCountData>();
+            var f = fishData.Fishes.FirstOrDefault(fish => fish.FishName == _fishParameter.Name);
 
-                var fishData = await SaveSystem.LoadAsync<FishCountData>();
+            // 在庫が無ければ売らない。
+            if (f == null || f.Count <= 0) return;
 
-                var f = fishData.Fishes.FirstOrDefault(fish => fish.FishName == _fishParameter.Name);
-                f.Count--;
-            }
-        }
+            f.Count--;
+            _moneyModel.Add(_fishParameter.SellingPrice);
 
-        private void Awake()
-        {
-            _displayName = _fishParameter.Name;
-            _price = _fishParameter.SellingPrice;
+            await SaveSystem.SaveAsync<FishCountData>();
+            await _moneyModel.SaveAsync();
         }
     }
 }
