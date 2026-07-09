@@ -25,6 +25,17 @@ namespace TypingModule
             _answer.text = answer;
         }
 
+        /// <summary>
+        ///     タイピング画面（背景＋テキスト）の表示/非表示を切り替える。
+        /// </summary>
+        public void SetVisible(bool visible)
+        {
+            _panel.SetActive(visible);
+        }
+
+        [SerializeField, Tooltip("背景＋テキストをまとめたパネル。初期は非アクティブにしておく。")]
+        private GameObject _panel;
+
         [SerializeField, Tooltip("解答を表示するテキスト。")]
         private TextMeshProUGUI _answer;
 

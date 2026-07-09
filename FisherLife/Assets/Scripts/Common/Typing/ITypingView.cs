@@ -14,5 +14,10 @@
         ///     解答欄の表示を更新する。
         /// </summary>
         void UpdateAnswer(string answer);
+
+        /// <summary>
+        ///     タイピング画面（背景＋テキスト）の表示/非表示を切り替える。
+        /// </summary>
+        void SetVisible(bool visible);
     }
 }
