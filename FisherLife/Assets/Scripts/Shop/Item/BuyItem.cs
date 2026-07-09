@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using PlayerModule;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,37 +6,36 @@ using Utility;
 
 namespace ShopModule
 {
-    public class BuyItem : ItemBase
+    public class BuyItem : TradeItem
     {
         [SerializeField]
         private RodParameter _rodParameter;
 
-        public override async ValueTask<bool> IsTrade()
-        {
-            return _moneyModel.Money.CurrentValue >= _rodParameter.Price;
-        }
+        public override ValueTask<bool> IsTrade()
+            => new ValueTask<bool>(_moneyModel.CanSpend(_rodParameter.Price));
 
         public override async UniTask Trade()
         {
-            if (!_moneyModel.TrySpend(_rodParameter.Price)) return;
+            if (!_moneyModel.CanSpend(_rodParameter.Price)) return;
 
             var rods = await SaveSystem.LoadAsync<RodCountData>();
-            if (!rods.RodList.Exists(rod =>
-               rod.RodName == _rodParameter.Name
-            ))
+
+            // まだ持っていない竿だけ所持リストへ追加する。
+            if (!rods.RodList.Exists(rod => rod.RodName == _rodParameter.Name))
             {
-                var rodData = new RodData()
+                rods.RodList.Add(new RodData
                 {
                     RodName = _rodParameter.Name,
                     RodLevel = _rodParameter.Level,
                     CriticalMultiplier = _rodParameter.CriticalMutiplier,
                     CriticalRate = _rodParameter.CriticalRate,
                     AttackPower = _rodParameter.AttackPower,
-                };
-                rods.RodList.Add(rodData);
+                });
             }
 
-            _moneyModel.Add(-(_rodParameter.Price));
+            _moneyModel.Add(-_rodParameter.Price);
+
+            await SaveSystem.SaveAsync<RodCountData>();
             await _moneyModel.SaveAsync();
         }
 
@@ -44,6 +43,7 @@ namespace ShopModule
         {
             _displayName = _rodParameter.Name;
             _price = _rodParameter.Price;
+            _sprite = _rodParameter.Image;
         }
     }
 }
