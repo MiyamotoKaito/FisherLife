@@ -1,6 +1,8 @@
 ﻿using Commons;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Utility;
 
 namespace FishingModule
 {
@@ -14,14 +16,20 @@ namespace FishingModule
             IRod rod,
             IWorldStateMachine worldStateMachine,
             IBattleUsecase battleUsecase,
-            IPlayerFishingAnimation playerFishingAnimation)
+            IPlayerFishingAnimation playerFishingAnimation,
+            CatchResultPanel catchResultPanel,
+            InputActionAsset inputActions)
         {
             _fishFactory = fishFactory;
             _rod = rod;
             _worldStateMachine = worldStateMachine;
             _battleUsecase = battleUsecase;
             _playerFishingAnimation = playerFishingAnimation;
+            _catchResultPanel = catchResultPanel;
 
+            // 同名プロパティ（InputActionMapType.Fishing）の文字列でマップを取得する。
+            _fishingActionMap = inputActions.FindActionMap(InputActionMapType.ToString(), true);
+            _entryAction = _fishingActionMap.FindAction(ENTRY_ACTION);
         }
         public InputActionMapType InputActionMapType => InputActionMapType.Fishing;
         public void Begin()
@@ -56,14 +64,49 @@ namespace FishingModule
             {
                 _playerFishingAnimation.GetFish();
                 Debug.Log($"魚を釣りました！");
+                // 釣果パネルを出し、Space入力で前のStateへ戻る。
+                ShowResultAsync(_currentFish).Forget();
             }
-            else if (result == BattleResult.Escaped)
+            else
             {
                 _playerFishingAnimation.Stop();
                 Debug.Log($"魚が逃げました。");
+                _worldStateMachine.BackState();
             }
+        }
 
+        /// <summary>
+        ///     釣果パネルを表示し、Space入力を待ってから前のStateへ戻る。
+        /// </summary>
+        private async UniTaskVoid ShowResultAsync(IFish fish)
+        {
+            _catchResultPanel.Show(fish);
+
+            await WaitForEntryAsync();
+
+            _catchResultPanel.Hide();
             _worldStateMachine.BackState();
+        }
+
+        /// <summary>
+        ///     Fishingの Entry アクションが発火するまで待つ。
+        /// </summary>
+        private async UniTask WaitForEntryAsync()
+        {
+            if (_entryAction == null) return; // 未設定なら待たない
+
+            var tcs = new UniTaskCompletionSource();
+            void Handler(InputAction.CallbackContext _) => tcs.TrySetResult();
+
+            _entryAction.started += Handler;
+            try
+            {
+                await tcs.Task;
+            }
+            finally
+            {
+                _entryAction.started -= Handler;
+            }
         }
         /// <summary>
         ///     釣りの非同期処理を実行する。
@@ -86,14 +129,50 @@ namespace FishingModule
             var result = await _battleUsecase.BattleStart(_rod, _currentFish);
             _battleResult = result;
 
+            // 釣り上げた魚を所持データへ保存する。
+            if (result == BattleResult.Caught)
+            {
+                await SaveCaughtFishAsync(_currentFish);
+            }
+
             // 戦闘終了後、釣り状態に戻る
             _worldStateMachine.BackState();
         }
+
+        /// <summary>
+        ///     釣り上げた魚を所持数へ加算し、入手済みにして保存する。
+        /// </summary>
+        private async UniTask SaveCaughtFishAsync(IFish fish)
+        {
+            var data = await SaveSystem.LoadAsync<FishCountData>();
+
+            var entry = data.Fishes.Find(f => f.FishName == fish.Name);
+            if (entry == null)
+            {
+                data.Fishes.Add(new FishCountEntry
+                {
+                    FishName = fish.Name,
+                    Count = 1,
+                    IsObtained = true,
+                });
+            }
+            else
+            {
+                entry.Count++;
+                entry.IsObtained = true;
+            }
+
+            await SaveSystem.SaveAsync<FishCountData>();
+        }
+        private const string ENTRY_ACTION = "Entry";
         private readonly IBattleUsecase _battleUsecase;
         private readonly IWorldStateMachine _worldStateMachine;
         private readonly IFishFactory _fishFactory;
         private readonly IRod _rod;
         private readonly IPlayerFishingAnimation _playerFishingAnimation;
+        private readonly CatchResultPanel _catchResultPanel;
+        private readonly InputActionMap _fishingActionMap;
+        private readonly InputAction _entryAction;
         private BattleResult _battleResult = BattleResult.None;
         private IFish _currentFish;
     }
