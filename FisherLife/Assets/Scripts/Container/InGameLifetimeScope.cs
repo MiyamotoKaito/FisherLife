@@ -16,6 +16,7 @@ namespace Container
     public class InGameLifetimeScope : LifetimeScope
     {
         [SerializeField] private FishListAsset _fishListAsset;
+        [SerializeField, Tooltip("新規時に付与する初期竿。")] private RodParameter _starterRod;
         /// <summary>
         ///     ワールドステートマシンと動作確認用コンポーネントを登録する。
         /// </summary>
@@ -30,7 +31,17 @@ namespace Container
             builder.Register<IBattleUsecase, BattleUsecase>(Lifetime.Singleton);
             builder.Register<IFishingModeRegistry, FishingModeRegistry>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<PlayerView>().As<IPlayerFishingAnimation>().AsSelf();
-            builder.Register<IRod, RodModel>(Lifetime.Singleton);
+
+            // 装備中の竿(IRod)と、その所持/装備を管理するインベントリ。
+            builder.Register<RodModel>(Lifetime.Singleton).As<IRod>().AsSelf();
+            builder.RegisterInstance(_starterRod);
+            builder.Register<RodInventoryModel>(Lifetime.Singleton);
+
+            // FishListAssetの辞書(レベル別・名前別)を構築する。
+            builder.RegisterBuildCallback(resolver =>
+            {
+                resolver.Resolve<FishListAsset>().InitDictionaries();
+            });
         }
     }
 }
