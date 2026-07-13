@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Commons;
+using UnityEngine;
 
 namespace FishModule
 {
@@ -6,7 +7,7 @@ namespace FishModule
     ///     魚のパラメータを保持するデータコンテナ。
     /// </summary>
     [CreateAssetMenu(fileName = "FishParamater", menuName = "Scriptable Objects/FishParamater")]
-    public class FishParameter : ScriptableObject
+    public class FishParameter : ScriptableObject, IFishParameter
     {
         /// <summary> レベル。 </summary>
         public byte Level => _level;
