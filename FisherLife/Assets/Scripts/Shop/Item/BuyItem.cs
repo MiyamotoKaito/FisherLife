@@ -1,49 +1,70 @@
+using Commons;
 using Cysharp.Threading.Tasks;
-using PlayerModule;
 using System.Threading.Tasks;
 using UnityEngine;
 using Utility;
+using VContainer;
 
 namespace ShopModule
 {
     public class BuyItem : TradeItem
     {
-        [SerializeField]
-        private RodParameter _rodParameter;
+        [SerializeField, Tooltip("買える竿の名前(カタログから引く)。")]
+        private string _rodName;
+
+        [Inject]
+        private IRodCatalog _rodCatalog;
+
+        private IRodParameter _rod;
 
         public override ValueTask<bool> IsTrade()
-            => new ValueTask<bool>(_moneyModel.CanSpend(_rodParameter.Price));
+            => new ValueTask<bool>(_rod != null && _moneyModel.CanSpend(_rod.Price));
 
         public override async UniTask Trade()
         {
-            if (!_moneyModel.CanSpend(_rodParameter.Price)) return;
+            if (_rod == null || !_moneyModel.CanSpend(_rod.Price)) return;
 
             var rods = await SaveSystem.LoadAsync<RodCountData>();
 
             // まだ持っていない竿だけ所持リストへ追加する。
-            if (!rods.RodList.Exists(rod => rod.RodName == _rodParameter.Name))
+            if (!rods.RodList.Exists(rod => rod.RodName == _rod.Name))
             {
                 rods.RodList.Add(new RodData
                 {
-                    RodName = _rodParameter.Name,
-                    RodLevel = _rodParameter.Level,
-                    CriticalMultiplier = _rodParameter.CriticalMutiplier,
-                    CriticalRate = _rodParameter.CriticalRate,
-                    AttackPower = _rodParameter.AttackPower,
+                    RodName = _rod.Name,
+                    RodLevel = _rod.Level,
+                    AttackPower = _rod.AttackPower,
+                    CriticalMultiplier = _rod.CriticalMutiplier,
+                    CriticalRate = _rod.CriticalRate,
                 });
             }
 
-            _moneyModel.Add(-_rodParameter.Price);
+            _moneyModel.Add(-_rod.Price);
 
             await SaveSystem.SaveAsync<RodCountData>();
             await _moneyModel.SaveAsync();
         }
 
-        private void Awake()
+        protected override void Start()
         {
-            _displayName = _rodParameter.Name;
-            _price = _rodParameter.Price;
-            _sprite = _rodParameter.Image;
+            _rod = FindRod(_rodName);
+            if (_rod != null)
+            {
+                _displayName = _rod.Name;
+                _price = _rod.Price;
+                _sprite = _rod.Image;
+            }
+
+            base.Start();
+        }
+
+        private IRodParameter FindRod(string rodName)
+        {
+            foreach (var rod in _rodCatalog.Rods)
+            {
+                if (rod != null && rod.Name == rodName) return rod;
+            }
+            return null;
         }
     }
 }

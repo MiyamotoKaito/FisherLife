@@ -1,5 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
-using FishModule;
+using Commons;
+using Cysharp.Threading.Tasks;
 using System.Linq;
 using System.Threading.Tasks;
 using Utility;
@@ -8,16 +8,18 @@ namespace ShopModule
 {
     public class SellItem : TradeItem
     {
-        private FishParameter _fishParameter;
+        private IFishParameter _fishParameter;
 
-        /// <summary> 表示する魚を設定する（行ビュー再利用のたびに呼ばれる）。 </summary>
-        public void Setup(FishParameter param)
+        ///<summary>
+        ///表示する魚を設定する（行ビュー再利用のたびに呼ばれる）。
+        ///</summary>
+        public void Setup(IFishParameter param)
         {
             _fishParameter = param;
             _displayName = param.Name;
             _price = param.SellingPrice;
             _sprite = param.Image;
-            ApplyDisplayName(); // テキストを更新
+            ApplyDisplayName();
         }
 
         public override async ValueTask<bool> IsTrade()
