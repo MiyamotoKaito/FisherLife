@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
+using Commons;
 using UnityEngine;
 
 namespace FishModule
 {
     [CreateAssetMenu(fileName = "FishListAsset", menuName = "Scriptable Objects/FishListAsset")]
-    public class FishListAsset : ScriptableObject
+    public class FishListAsset : ScriptableObject, IFishCatalog
     {
         public Dictionary<byte, List<FishParameter>> FishParameters => _fishParameterDictionary;
         /// <summary> 登録されている全魚種（InitDictionaries不要で読める）。 </summary>
         public IReadOnlyList<FishParameter> AllFishParameters => _fishParameters;
+        /// <summary> Commonのカタログとして公開する全魚種。 </summary>
+        public IReadOnlyList<IFishParameter> Fishes => _fishParameters;
         /// <summary>
         /// 辞書の初期化
         /// </summary>
