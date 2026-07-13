@@ -18,6 +18,9 @@ namespace Container
             builder.RegisterComponentInHierarchy<SelectTradePanel>();
             builder.RegisterComponentInHierarchy<ComfilmPanel>();
 
+            // SellPanelはIFishCatalogを注入されるため登録する。
+            builder.RegisterComponentInHierarchy<SellPanel>();
+
             // IController と 自身型の両方で解決できるようにする（ShoppingStateが具象を注入するため）。
             builder.Register<ShoppingController>(Lifetime.Singleton).As<IController>().AsSelf();
             builder.Register<ShoppingState>(Lifetime.Singleton).As<IState>().AsSelf();
