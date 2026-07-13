@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Commons;
+using UnityEngine;
 
 namespace PlayerModule
 {
@@ -6,7 +7,7 @@ namespace PlayerModule
     /// 釣り竿のSO
     /// </summary>
     [CreateAssetMenu(fileName = "RodParameter", menuName = "Scriptable Objects/RodParameter")]
-    public class RodParameter : ScriptableObject
+    public class RodParameter : ScriptableObject, IRodParameter
     {
         /// <summary> 釣り竿の名前。 </summary>
         public string Name => _name;
