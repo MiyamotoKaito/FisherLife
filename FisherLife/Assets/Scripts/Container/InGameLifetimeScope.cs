@@ -16,13 +16,16 @@ namespace Container
     public class InGameLifetimeScope : LifetimeScope
     {
         [SerializeField] private FishListAsset _fishListAsset;
+        [SerializeField, Tooltip("全釣り竿のカタログ。")] private RodListAsset _rodListAsset;
         [SerializeField, Tooltip("新規時に付与する初期竿。")] private RodParameter _starterRod;
         /// <summary>
         ///     ワールドステートマシンと動作確認用コンポーネントを登録する。
         /// </summary>
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_fishListAsset);
+            // 魚・竿カタログをCommonのインターフェースとしても公開する（Shopが参照）。
+            builder.RegisterInstance(_fishListAsset).AsSelf().As<IFishCatalog>();
+            builder.RegisterInstance(_rodListAsset).As<IRodCatalog>();
             builder.Register<IWorldStateMachine, WorldStateMachine>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<InGameInitializer>();
             builder.RegisterComponentInHierarchy<Camera>();
