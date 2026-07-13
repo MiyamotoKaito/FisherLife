@@ -2773,6 +2773,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1973365826}
     m_Modifications:
     - target: {fileID: 1851127497099001323, guid: 367bd6022f32fa84bba71b8635b6016e, type: 3}
+      propertyPath: _rodListAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a22ec4b925f58443b0a64cc7e06f27a, type: 2}
+    - target: {fileID: 1851127497099001323, guid: 367bd6022f32fa84bba71b8635b6016e, type: 3}
       propertyPath: autoInjectGameObjects.Array.size
       value: 1
       objectReference: {fileID: 0}
