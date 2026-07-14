@@ -109,7 +109,7 @@ namespace InputModule
                     ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -837,30 +837,8 @@ namespace InputModule
         {
             ""name"": ""Typing"",
             ""id"": ""d0e8c2a8-9a9d-4566-b840-b3380763ab3d"",
-            ""actions"": [
-                {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""685c1bf2-1837-415f-a9f6-cc2171641b02"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""86362fc7-980f-4041-8aaf-8051201a2910"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
+            ""actions"": [],
+            ""bindings"": []
         },
         {
             ""name"": ""Shopping"",
@@ -1164,7 +1142,6 @@ namespace InputModule
             m_Fishing_Entry = m_Fishing.FindAction("Entry", throwIfNotFound: true);
             // Typing
             m_Typing = asset.FindActionMap("Typing", throwIfNotFound: true);
-            m_Typing_Newaction = m_Typing.FindAction("New action", throwIfNotFound: true);
             // Shopping
             m_Shopping = asset.FindActionMap("Shopping", throwIfNotFound: true);
             m_Shopping_Up = m_Shopping.FindAction("Up", throwIfNotFound: true);
@@ -1673,7 +1650,6 @@ namespace InputModule
         // Typing
         private readonly InputActionMap m_Typing;
         private List<ITypingActions> m_TypingActionsCallbackInterfaces = new List<ITypingActions>();
-        private readonly InputAction m_Typing_Newaction;
         /// <summary>
         /// Provides access to input actions defined in input action map "Typing".
         /// </summary>
@@ -1685,10 +1661,6 @@ namespace InputModule
             /// Construct a new instance of the input action map wrapper class.
             /// </summary>
             public TypingActions(@FisherLifeInputActionAsset wrapper) { m_Wrapper = wrapper; }
-            /// <summary>
-            /// Provides access to the underlying input action "Typing/Newaction".
-            /// </summary>
-            public InputAction @Newaction => m_Wrapper.m_Typing_Newaction;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1715,9 +1687,6 @@ namespace InputModule
             {
                 if (instance == null || m_Wrapper.m_TypingActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_TypingActionsCallbackInterfaces.Add(instance);
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
             }
 
             /// <summary>
@@ -1729,9 +1698,6 @@ namespace InputModule
             /// <seealso cref="TypingActions" />
             private void UnregisterCallbacks(ITypingActions instance)
             {
-                @Newaction.started -= instance.OnNewaction;
-                @Newaction.performed -= instance.OnNewaction;
-                @Newaction.canceled -= instance.OnNewaction;
             }
 
             /// <summary>
@@ -2239,13 +2205,6 @@ namespace InputModule
         /// <seealso cref="TypingActions.RemoveCallbacks(ITypingActions)" />
         public interface ITypingActions
         {
-            /// <summary>
-            /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-            /// </summary>
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnNewaction(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Shopping" which allows adding and removing callbacks.

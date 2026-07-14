@@ -36,7 +36,7 @@ namespace Container
 
         private void Start()
         {
-            var num = Random.Range(0, 2);
+            var num = Random.Range(0, 3);
             switch (num)
             {
                 case 0:

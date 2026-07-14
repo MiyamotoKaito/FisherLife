@@ -1,4 +1,6 @@
-﻿namespace PlayerModule
+﻿using UnityEngine;
+
+namespace PlayerModule
 {
     /// <summary>
     /// プレイヤーのインタラクションを管理するクラス。
@@ -14,6 +16,7 @@
         /// </summary>
         public void Interact()
         {
+            Debug.Log($"[Interact] Interactable = {_playerView.Interactable}");
             if (_playerView.Interactable != null)
             {
                 _playerView.Interactable.Interact();

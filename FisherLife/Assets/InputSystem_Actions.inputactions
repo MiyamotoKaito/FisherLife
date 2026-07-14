@@ -21,7 +21,7 @@
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -749,30 +749,8 @@
         {
             "name": "Typing",
             "id": "d0e8c2a8-9a9d-4566-b840-b3380763ab3d",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "685c1bf2-1837-415f-a9f6-cc2171641b02",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "86362fc7-980f-4041-8aaf-8051201a2910",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "actions": [],
+            "bindings": []
         },
         {
             "name": "Shopping",
