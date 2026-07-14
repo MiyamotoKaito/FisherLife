@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace ShopModule
 {
-    /// <summary>
-    ///     ショップの1行の基底。選択(Entry)された時の振る舞いだけを共通に持つ。
-    /// </summary>
+    ///<summary>
+    ///ショップの1行の基底。選択(Entry)された時の振る舞いだけを共通に持つ。
+    ///</summary>
     public abstract class ItemBase : MonoBehaviour
     {
         public string DisplayName => _displayName;
         public int Price => _price;
         public Sprite Sprite => _sprite;
+
         protected string _displayName;
         protected int _price;
         protected Sprite _sprite;
@@ -22,14 +23,17 @@ namespace ShopModule
         private float _selectedScale = 1.2f;
         [SerializeField, Tooltip("スケール変化の時間(秒)。")]
         private float _scaleDuration = 0.15f;
-
         private Vector3 _baseScale;
         private bool _scaleCaptured;
 
-        /// <summary> この行が選択(Entry)された時の遷移。 </summary>
+        ///<summary>
+        ///この行が選択(Entry)された時の遷移。
+        ///</summary>
         public abstract void OnEntry(ShoppingController controller);
 
-        /// <summary> カーソルが乗っている行だけ少し拡大する。 </summary>
+        ///<summary>
+        ///カーソルが乗っている行だけ少し拡大する。
+        ///</summary>
         public void SetSelected(bool selected)
         {
             if (!_scaleCaptured)
@@ -42,7 +46,7 @@ namespace ShopModule
             transform.DOScale(selected ? _baseScale * _selectedScale : _baseScale, _scaleDuration);
         }
 
-        /// <summary> _displayName をテキストへ反映する（再バインド時にも呼ぶ）。 </summary>
+        // 再バインド時にもテキストへ反映できるよう分けている。
         protected void ApplyDisplayName()
         {
             if (_displayText != null)
@@ -51,7 +55,6 @@ namespace ShopModule
             }
         }
 
-        // 各サブクラスの Awake で _displayName を設定した後(Start)に反映する。
         protected virtual void Start()
         {
             ApplyDisplayName();

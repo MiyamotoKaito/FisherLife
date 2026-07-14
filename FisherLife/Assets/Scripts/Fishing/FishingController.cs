@@ -36,6 +36,8 @@ namespace FishingModule
         public InputActionMapType InputActionMapType => InputActionMapType.Fishing;
         public void Begin()
         {
+            AudioManager.Instance.StopBGM();
+
             if (_battleResult == BattleResult.None)
             {
                 RunAsync().Forget();
@@ -64,6 +66,8 @@ namespace FishingModule
         {
             if (result == BattleResult.Caught)
             {
+                AudioManager.Instance.PlayBGM("Star");
+
                 _playerFishingAnimation.GetFish();
                 Debug.Log($"魚を釣りました！");
                 // 釣果パネルを出し、Space入力で前のStateへ戻る。
@@ -88,6 +92,7 @@ namespace FishingModule
 
             _catchResultPanel.Hide();
             _worldStateMachine.BackState();
+            AudioManager.Instance.PlayBGM("Chill");
         }
 
         /// <summary>

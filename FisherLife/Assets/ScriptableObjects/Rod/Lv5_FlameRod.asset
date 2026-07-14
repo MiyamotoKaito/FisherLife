@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32698a2fe3d6e364c81f9623eef946fa, type: 3}
   m_Name: Lv5_FlameRod
   m_EditorClassIdentifier: PlayerModule::PlayerModule.RodParameter
-  _name: "\u30AA\u30FC\u30B7\u30E3\u30F3\u30ED\u30C3\u30C9"
+  _name: "\u30D5\u30EC\u30FC\u30E0\u30ED\u30C3\u30C9"
   _level: 5
   _price: 6500
   _attackPower: 80

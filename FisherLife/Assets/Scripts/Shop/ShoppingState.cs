@@ -2,9 +2,9 @@ using Commons;
 
 namespace ShopModule
 {
-    /// <summary>
-    ///     買い物中のワールド状態。アクションマップを積んでショップ操作を開始する。
-    /// </summary>
+    ///<summary>
+    ///買い物中のワールド状態。アクションマップを積んでショップ操作を開始する。
+    ///</summary>
     public class ShoppingState : IState
     {
         public ShoppingState(IInputActionMapStack inputActionMapStack, ShoppingController shoppingController)
@@ -14,6 +14,9 @@ namespace ShopModule
         }
 
         public WorldStateType WorldState => WorldStateType.Shopping;
+
+        private readonly IInputActionMapStack _inputActionMapStack;
+        private readonly ShoppingController _shoppingController;
 
         public void Entry()
         {
@@ -26,8 +29,5 @@ namespace ShopModule
             _shoppingController.End();
             _inputActionMapStack.Pop();
         }
-
-        private readonly IInputActionMapStack _inputActionMapStack;
-        private readonly ShoppingController _shoppingController;
     }
 }

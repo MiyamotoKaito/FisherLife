@@ -1,6 +1,8 @@
 ﻿using Commons;
 using PlayerModule;
 using ShopModule;
+using UnityEngine;
+using Utility;
 using VContainer;
 using VContainer.Unity;
 
@@ -30,6 +32,29 @@ namespace Container
                 var machine = resolver.Resolve<IWorldStateMachine>();
                 machine.AddState(resolver.Resolve<ShoppingState>());
             });
+        }
+
+        private void Start()
+        {
+            var num = Random.Range(0, 2);
+            switch (num)
+            {
+                case 0:
+                    AudioManager.Instance.PlayBGM("Love");
+                    break;
+
+                case 1:
+                    AudioManager.Instance.PlayBGM("Wide");
+                    break;
+
+                case 2:
+                    AudioManager.Instance.PlayBGM("Meow");
+                    break;
+
+                default:
+                    AudioManager.Instance.StopBGM();
+                    break;
+            }
         }
     }
 }

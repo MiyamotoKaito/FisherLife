@@ -45,21 +45,22 @@ namespace ShopModule
             await _moneyModel.SaveAsync();
         }
 
-        protected override void Start()
+        private void Awake()
         {
             _rod = FindRod(_rodName);
-            if (_rod != null)
-            {
-                _displayName = _rod.Name;
-                _price = _rod.Price;
-                _sprite = _rod.Image;
-            }
+            if (_rod == null) return;
 
-            base.Start();
+            _displayName = _rod.Name;
+            _price = _rod.Price;
+            _sprite = _rod.Image;
+            ApplyDisplayName();
         }
 
         private IRodParameter FindRod(string rodName)
         {
+            // 起動時に活性化前でも注入済みだが、念のためガードする。
+            if (_rodCatalog == null) return null;
+
             foreach (var rod in _rodCatalog.Rods)
             {
                 if (rod != null && rod.Name == rodName) return rod;

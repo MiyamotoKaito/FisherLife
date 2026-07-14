@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using R3;
 using Utility;
 
@@ -7,6 +7,7 @@ namespace ShopModule
     public class MoneyModel
     {
         public ReadOnlyReactiveProperty<int> Money => _money;
+
         private readonly ReactiveProperty<int> _money = new(0);
 
         public async UniTask InitializeAsync()

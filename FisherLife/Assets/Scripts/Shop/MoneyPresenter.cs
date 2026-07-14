@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using R3;
 using System.Threading;
 using UnityEngine;
@@ -6,8 +6,12 @@ using VContainer;
 
 namespace ShopModule
 {
-    public class MoneyPresenter　: MonoBehaviour
+    public class MoneyPresenter : MonoBehaviour
     {
+        private MoneyModel _moneyModel;
+        private MoneyView _moneyView;
+        private CancellationTokenSource _cancellationTokenSource;
+
         [Inject]
         public void Inject(MoneyModel model, MoneyView view)
         {
@@ -15,11 +19,13 @@ namespace ShopModule
             _moneyView = view;
             _cancellationTokenSource = new CancellationTokenSource();
         }
+
         private async void Start()
         {
-            await SubscribeAsynce();
+            await SubscribeAsync();
         }
-        private async UniTask SubscribeAsynce()
+
+        private async UniTask SubscribeAsync()
         {
             Debug.Log("金を設定");
             await _moneyModel.InitializeAsync();
@@ -29,8 +35,5 @@ namespace ShopModule
                 _moneyView.SetMoney(money);
             }).RegisterTo(_cancellationTokenSource.Token);
         }
-        private  MoneyModel _moneyModel;
-        private  MoneyView _moneyView;
-        private  CancellationTokenSource _cancellationTokenSource;
     }
 }

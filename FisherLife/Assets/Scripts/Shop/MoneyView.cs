@@ -1,4 +1,4 @@
-﻿using Commons;
+using Commons;
 using DG.Tweening;
 using R3;
 using TMPro;
@@ -25,8 +25,10 @@ namespace ShopModule
                 _text.text = x.ToString();
             });
         }
+
         private void Start()
         {
+            // 移動・釣り・買い物中だけ所持金を表示する。
             _worldStateMachine.CurrentStateType.Subscribe(type =>
             {
                 if (type == WorldStateType.Moving || type == WorldStateType.Fishing || type == WorldStateType.Shopping)

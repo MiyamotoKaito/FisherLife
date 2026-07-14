@@ -17,5 +17,10 @@ namespace Container
             builder.RegisterComponentInHierarchy<MoneyPresenter>();
             builder.Register<MoneyModel>(Lifetime.Singleton);
         }
+
+        private void Start()
+        {
+            AudioManager.Instance.PlayBGM("Chill");
+        }
     }
 }

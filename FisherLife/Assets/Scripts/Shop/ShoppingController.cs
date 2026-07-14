@@ -1,6 +1,8 @@
-using Commons;
+﻿using Commons;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 namespace ShopModule
 {
@@ -28,6 +30,19 @@ namespace ShopModule
 
         public InputActionMapType InputActionMapType => InputActionMapType.Shopping;
 
+        private readonly Stack<ShoppingPanelBase> _shoppingPanelStack = new();
+        private readonly InputActionAsset _inputActions;
+        private readonly IWorldStateMachine _worldStateMachine;
+        private readonly SelectTradePanel _rootPanel;
+        private readonly ComfilmPanel _comfilmPanel;
+        private readonly InputActionMap _shoppingActionMap;
+        private readonly InputAction _upAction;
+        private readonly InputAction _downAction;
+        private readonly InputAction _rightAction;
+        private readonly InputAction _leftAction;
+        private readonly InputAction _entryAction;
+        private readonly InputAction _cancelAction;
+
         public void Begin()
         {
             _upAction.started += Up;
@@ -37,7 +52,6 @@ namespace ShopModule
             _entryAction.started += Entry;
             if (_cancelAction != null) _cancelAction.started += Cancel;
 
-            // 最初のパネル(買う/売る)を開く。
             Push(_rootPanel);
         }
 
@@ -50,7 +64,6 @@ namespace ShopModule
             _entryAction.started -= Entry;
             if (_cancelAction != null) _cancelAction.started -= Cancel;
 
-            // 残っているパネルを閉じてスタックを空にする。
             Clear();
         }
 
@@ -71,7 +84,9 @@ namespace ShopModule
             panel.Begin();
         }
 
-        /// <summary> 取引対象をセットして確認パネルを積む。 </summary>
+        ///<summary>
+        ///取引対象をセットして確認パネルを積む。
+        ///</summary>
         public void PushConfirm(TradeItem item)
         {
             _comfilmPanel.Setup(item);
@@ -92,18 +107,17 @@ namespace ShopModule
                 return;
             }
 
-            // 一つ前のパネルを再表示する。
             var prev = _shoppingPanelStack.Peek();
             prev.gameObject.SetActive(true);
             prev.Begin();
         }
 
-        /// <summary> スタックを空にして全パネルを閉じる（退店時の後始末）。 </summary>
+        // 退店時の後始末として全パネルを閉じてスタックを空にする。
         private void Clear()
         {
             while (_shoppingPanelStack.Count > 0)
             {
-                // 破棄時(Play停止/シーン破棄)はパネルが先に破棄されていることがあるためガードする。
+                // Play停止/シーン破棄ではパネルが先に破棄されていることがあるためガードする。
                 var panel = _shoppingPanelStack.Pop();
                 if (panel != null) panel.gameObject.SetActive(false);
             }
@@ -115,18 +129,5 @@ namespace ShopModule
         private void Left(InputAction.CallbackContext context) => Peak().Left();
         private void Entry(InputAction.CallbackContext context) => Peak().Entry(this);
         private void Cancel(InputAction.CallbackContext context) => Pop();
-
-        private readonly Stack<ShoppingPanelBase> _shoppingPanelStack = new();
-        private readonly InputActionAsset _inputActions;
-        private readonly IWorldStateMachine _worldStateMachine;
-        private readonly SelectTradePanel _rootPanel;
-        private readonly ComfilmPanel _comfilmPanel;
-        private readonly InputActionMap _shoppingActionMap;
-        private readonly InputAction _upAction;
-        private readonly InputAction _downAction;
-        private readonly InputAction _rightAction;
-        private readonly InputAction _leftAction;
-        private readonly InputAction _entryAction;
-        private readonly InputAction _cancelAction;
     }
 }
