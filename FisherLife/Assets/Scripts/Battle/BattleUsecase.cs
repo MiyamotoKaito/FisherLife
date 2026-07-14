@@ -2,6 +2,7 @@
 using Commons;
 using Cysharp.Threading.Tasks;
 using R3;
+using Utility;
 
 namespace BattleModule
 {
@@ -17,6 +18,7 @@ namespace BattleModule
         }
         public async UniTask<BattleResult> BattleStart(IAttacker attacker, IDamageable target, int level)
         {
+
             // 戦闘ごとに新しいCTSを作り、終了時にCancelして購読を確実に破棄する。
             // （使い回すと購読が次の戦闘へ残り、遷移中に幽霊攻撃が飛ぶ）
             using var cts = new CancellationTokenSource();

@@ -1,6 +1,7 @@
 ﻿using Commons;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 namespace PlayerModule
 {
@@ -48,6 +49,7 @@ namespace PlayerModule
         /// </summary>
         public void Throw()
         {
+            AudioManager.Instance.PlaySE("Throw");
             _animator.SetTrigger(THROW_ANIMATION);
         }
         /// <summary>
@@ -55,6 +57,7 @@ namespace PlayerModule
         /// </summary>
         public void Fighting()
         {
+            AudioManager.Instance.PlayBGM("Battle");
             _animator.SetTrigger(FISHON_ANIMATION);
         }
         /// <summary>
@@ -70,6 +73,7 @@ namespace PlayerModule
         /// </summary>
         public void GetFish()
         {
+            AudioManager.Instance.PlaySE("GetFish");
             _animator.SetTrigger(CAUGHT_ANIMATION);
         }
         private const string MOVE_ANIMATION = "Move";

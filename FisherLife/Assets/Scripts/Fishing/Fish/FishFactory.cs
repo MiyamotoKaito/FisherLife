@@ -2,6 +2,7 @@
 using Commons;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Utility;
 using VContainer;
 
 namespace FishModule
@@ -17,7 +18,7 @@ namespace FishModule
         {
             // 投げてから着水するまで少し待つ。
             await UniTask.Delay(1000);
-
+            AudioManager.Instance.PlaySE("WaterDrop");
             // スポットを投げた方向へ向け、水しぶきを一回出す。
             _spot.AimTo(facing);
             _spot.PlaySplash();
