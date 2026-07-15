@@ -1,6 +1,5 @@
 ﻿using Commons;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Utility;
 
 namespace PlayerModule

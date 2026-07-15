@@ -20,5 +20,10 @@ namespace FishModule
         {
             transform.LookAt(pos);
         }
+
+        private void Update()
+        {
+
+        }
     }
 }

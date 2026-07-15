@@ -1,9 +1,9 @@
 ﻿<Solution>
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="BattleModule.csproj" />
   <Project Path="Commons.csproj" />
   <Project Path="PlayerModule.csproj" />
   <Project Path="TypingModule.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="ShopModule.csproj" />
   <Project Path="FishModule.csproj" />
   <Project Path="Utility.csproj" />

@@ -34,6 +34,9 @@ namespace Container
             builder.Register<IBattleUsecase, BattleUsecase>(Lifetime.Singleton);
             builder.Register<IFishingModeRegistry, FishingModeRegistry>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<PlayerView>().As<IPlayerFishingAnimation>().AsSelf();
+            builder.RegisterComponentInHierarchy<TimeLimitView>();
+            builder.RegisterComponentInHierarchy<TimeLimitPresenter>();
+            builder.Register<TimeLimitModel>(Lifetime.Singleton);
 
             // 装備中の竿(IRod)と、その所持/装備を管理するインベントリ。
             builder.Register<RodModel>(Lifetime.Singleton).As<IRod>().AsSelf();
@@ -45,6 +48,11 @@ namespace Container
             {
                 resolver.Resolve<FishListAsset>().InitDictionaries();
             });
+        }
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

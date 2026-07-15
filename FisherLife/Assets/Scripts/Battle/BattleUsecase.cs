@@ -10,11 +10,13 @@ namespace BattleModule
     {
         public BattleUsecase(IAttackPipeline attackPipeline,
             IWorldStateMachine worldStateMachine,
-            IFishingModeRegistry fishingModeRegistry)
+            IFishingModeRegistry fishingModeRegistry,
+            TimeLimitPresenter timeLimitPresenter)
         {
             _attackPipeline = attackPipeline;
             _timeLimit = 10;
             _fishingModeRegistry = fishingModeRegistry;
+            _timeLimitPresenter = timeLimitPresenter;
         }
         public async UniTask<BattleResult> BattleStart(IAttacker attacker, IDamageable target, int level)
         {
@@ -27,9 +29,10 @@ namespace BattleModule
                 Subscribe(_ => _attackPipeline.Attack(attacker, target)).
                 RegisterTo(cts.Token);
 
+            var timeLimit = _timeLimit * level;
             var dead = target.Hp.FirstAsync(hp => hp <= 0, cts.Token);
-            var timeOut = UniTask.Delay((int)(_timeLimit * 1000 * level), cancellationToken: cts.Token);
-
+            var timeOut = UniTask.Delay((int)(timeLimit * 1000), cancellationToken: cts.Token);
+            _timeLimitPresenter.SetLimit(timeLimit);
             try
             {
                 //　どちらかが先に完了するまで待機する
@@ -39,6 +42,7 @@ namespace BattleModule
             {
                 // OnAttackの購読と待機を破棄する（次の戦闘へ持ち越さない）。
                 cts.Cancel();
+                _timeLimitPresenter.End();
             }
 
             return target.Hp.Value <= 0 ? BattleResult.Caught : BattleResult.Escaped;
@@ -46,5 +50,6 @@ namespace BattleModule
         private readonly float _timeLimit;
         private readonly IAttackPipeline _attackPipeline;
         private readonly IFishingModeRegistry _fishingModeRegistry;
+        private readonly TimeLimitPresenter _timeLimitPresenter;
     }
 }
