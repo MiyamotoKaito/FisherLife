@@ -21,6 +21,7 @@ namespace BattleModule
         /// <param name="timeLimit"></param>
         public void SetLimit(float timeLimit)
         {
+            Debug.Log("時間を設定");
             _timeLimitModel.Start(timeLimit);
             _active = true;
         }
@@ -29,7 +30,7 @@ namespace BattleModule
         /// </summary>
         public void UpdateView()
         {
-            var elapsedTime = _timeLimitModel.ElapsedTime / _timeLimitModel.TimeLimit;
+            float elapsedTime = _timeLimitModel.ElapsedTime / _timeLimitModel.TimeLimit;
 
             _timeLimitView.UpdateImage(1 - elapsedTime);
         }
@@ -45,6 +46,7 @@ namespace BattleModule
             if (_active)
             {
                 UpdateView();
+                _timeLimitModel.UpdateCurrentTime(Time.deltaTime);
             }
         }
     }
