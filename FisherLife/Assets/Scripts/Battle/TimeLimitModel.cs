@@ -25,7 +25,7 @@ namespace BattleModule
         /// <param name="currentTime"></param>
         public void UpdateCurrentTime(float currentTime)
         {
-            _elapsedTime = currentTime;
+            _elapsedTime += currentTime;
         }
         private float _timeLimit;
         private float _elapsedTime;
