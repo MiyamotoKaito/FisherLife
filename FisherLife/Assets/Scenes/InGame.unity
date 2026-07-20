@@ -4834,26 +4834,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4031485128775426405, guid: 861ea722e7445bd47acf4aca5c208b1b, type: 3}
-      propertyPath: _bgmList.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4031485128775426405, guid: 861ea722e7445bd47acf4aca5c208b1b, type: 3}
-      propertyPath: _bgmList.Array.data[5]._clip
-      value: 
-      objectReference: {fileID: 8300000, guid: f671533a89508b04dbfb65268f808d45, type: 3}
-    - target: {fileID: 4031485128775426405, guid: 861ea722e7445bd47acf4aca5c208b1b, type: 3}
-      propertyPath: _bgmList.Array.data[5]._name
-      value: Battle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4031485128775426405, guid: 861ea722e7445bd47acf4aca5c208b1b, type: 3}
-      propertyPath: _bgmList.Array.data[4]._volume
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4031485128775426405, guid: 861ea722e7445bd47acf4aca5c208b1b, type: 3}
-      propertyPath: _bgmList.Array.data[5]._volume
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
