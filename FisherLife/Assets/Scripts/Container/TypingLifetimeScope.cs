@@ -1,3 +1,4 @@
+using BattleModule;
 using Commons;
 using InputModule;
 using TypingModule;
@@ -30,8 +31,8 @@ namespace Container
             builder.RegisterInstance(_textAsset);
             builder.Register<TypingPresenter>(Lifetime.Singleton);
             builder.Register<IWordSeparatorUsecase, CSVSeparatorUsecase>(Lifetime.Singleton);
-
             builder.Register<TypingState>(Lifetime.Singleton).As<IState>().AsSelf();
+
 
             // 生成後にタイピング状態をステートマシンへ登録する。
             builder.RegisterBuildCallback(resolver =>
