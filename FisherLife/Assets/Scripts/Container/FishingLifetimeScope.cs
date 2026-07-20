@@ -1,4 +1,5 @@
-﻿using Commons;
+﻿using BattleModule;
+using Commons;
 using FishingModule;
 using FishModule;
 using UnityEngine;
@@ -23,6 +24,12 @@ namespace Container
             builder.RegisterComponentInHierarchy<CatchResultPanel>();
             builder.RegisterComponentInHierarchy<FishingSpot>();
             builder.Register<FishingState>(Lifetime.Singleton);
+            builder.RegisterComponentInHierarchy<TimeLimitView>();
+            builder.RegisterComponentInHierarchy<TimeLimitPresenter>();
+            builder.Register<TimeLimitModel>(Lifetime.Singleton);
+            builder.Register<IAttackPipeline, AttackPipeline>(Lifetime.Singleton);
+            builder.Register<IAttackCalculator, AttackCalculator>(Lifetime.Singleton);
+            builder.Register<IBattleUsecase, BattleUsecase>(Lifetime.Singleton);
             builder.RegisterBuildCallback(resolver =>
             {
                 var machine = resolver.Resolve<IWorldStateMachine>();
