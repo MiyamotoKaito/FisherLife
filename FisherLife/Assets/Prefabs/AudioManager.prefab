@@ -62,6 +62,21 @@ MonoBehaviour:
   - _clip: {fileID: 8300000, guid: 2cbfc9eea922c274a815978676f64af5, type: 3}
     _name: Throw
     _volume: 0.1
+  - _clip: {fileID: 8300000, guid: 8d919cdd281098f46b25d2715d3ac18a, type: 3}
+    _name: Cash
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: bd1555d522455ae4da42c44ca7135925, type: 3}
+    _name: MoveItem
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: e6407a48c45bef141b375f33f690ff66, type: 3}
+    _name: ShowPanel
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: 23718df906d16d44291aef02197bf2d4, type: 3}
+    _name: IrisIn
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: c4dd4be2f4c395d4990220c613bf4ea0, type: 3}
+    _name: IrisOut
+    _volume: 0.1
   _bgmList:
   - _clip: {fileID: 8300000, guid: 777b4103bb69b264484c57872c1942db, type: 3}
     _name: Chill
@@ -75,8 +90,11 @@ MonoBehaviour:
   - _clip: {fileID: 8300000, guid: 70ec1022e321651499e43d4b756efb78, type: 3}
     _name: Love
     _volume: 0.1
-  - _clip: {fileID: 8300000, guid: 147dbee1a7800454e86393e19a961ada, type: 3}
+  - _clip: {fileID: 8300000, guid: dfaa0ea15003c4e4e96901d3dd137e02, type: 3}
     _name: Star
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: f671533a89508b04dbfb65268f808d45, type: 3}
+    _name: Battle
     _volume: 0.1
 --- !u!1 &7117661538917177897
 GameObject:
