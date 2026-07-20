@@ -1,4 +1,5 @@
-﻿using PlayerModule;
+﻿using BattleModule;
+using PlayerModule;
 using ShopModule;
 using Utility;
 using VContainer;
