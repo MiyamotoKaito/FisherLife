@@ -33,6 +33,8 @@ namespace Utility
 
         public static async UniTask IrisIn(string sceneName)
         {
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlaySE("IrisIn");
             Instance._canvas.SetActive(true);
             await Instance.Image.rectTransform
                 .DOScale(0f, 2f).SetEase(Instance._ease)
@@ -43,6 +45,7 @@ namespace Utility
         }
         public static async UniTask IrisOut()
         {
+            AudioManager.Instance.PlaySE("IrisOut");
             await Instance.Image.rectTransform
                  .DOScale(2.6f, 2f).SetEase(Instance._ease)
                  .ToUniTask();

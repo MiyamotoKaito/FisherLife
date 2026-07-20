@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 namespace ShopModule
 {
@@ -33,6 +34,7 @@ namespace ShopModule
         {
             if (_cursor <= 0) return;
 
+            AudioManager.Instance.PlaySE("MoveItem");
             _cursor--;
             // カーソルが窓の上に出たら上へスクロール。
             if (_cursor < _top) _top = _cursor;
@@ -43,6 +45,8 @@ namespace ShopModule
         {
             if (_cursor >= ItemCount - 1) return;
 
+
+            AudioManager.Instance.PlaySE("MoveItem");
             _cursor++;
             // カーソルが窓の下に出たら下へスクロール。
             if (_cursor >= _top + MaxVisible) _top = _cursor - MaxVisible + 1;
@@ -61,6 +65,8 @@ namespace ShopModule
         {
             if (ItemCount == 0) return;
 
+
+            AudioManager.Instance.PlaySE("MoveItem");
             // 遷移も取引も選択中の行の多態に委譲する。
             _items[_cursor].OnEntry(controller);
         }

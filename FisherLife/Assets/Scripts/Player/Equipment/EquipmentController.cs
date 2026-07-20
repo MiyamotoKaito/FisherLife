@@ -1,5 +1,6 @@
 using Commons;
 using UnityEngine.InputSystem;
+using Utility;
 
 namespace PlayerModule
 {
@@ -29,8 +30,9 @@ namespace PlayerModule
             _upAction.started += Up;
             _downAction.started += Down;
             _entryAction.started += Entry;
-            if (_cancelAction != null) _cancelAction.started += Cancel;
+            _cancelAction.started += Cancel;
 
+            AudioManager.Instance.PlaySE("ShowPanel");
             _panel.gameObject.SetActive(true);
             _panel.Begin();
         }
@@ -51,8 +53,12 @@ namespace PlayerModule
         private void Up(InputAction.CallbackContext c) => _panel.Up();
         private void Down(InputAction.CallbackContext c) => _panel.Down();
         private void Entry(InputAction.CallbackContext c) => _panel.Entry();
-        private void Cancel(InputAction.CallbackContext c) => _worldStateMachine.BackState();
+        private void Cancel(InputAction.CallbackContext c)
+        {
+            _worldStateMachine.BackState();
 
+            AudioManager.Instance.PlaySE("ShowPanel");
+        }
         private readonly IWorldStateMachine _worldStateMachine;
         private readonly EquipmentPanel _panel;
         private readonly InputActionMap _map;

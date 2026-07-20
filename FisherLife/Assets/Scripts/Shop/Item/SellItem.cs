@@ -37,6 +37,7 @@ namespace ShopModule
             // 在庫が無ければ売らない。
             if (f == null || f.Count <= 0) return;
 
+            AudioManager.Instance.PlaySE("Cash");
             f.Count--;
             _moneyModel.Add(_fishParameter.SellingPrice);
 

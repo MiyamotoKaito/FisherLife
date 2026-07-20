@@ -43,6 +43,7 @@ namespace ShopModule
 
             await SaveSystem.SaveAsync<RodCountData>();
             await _moneyModel.SaveAsync();
+            AudioManager.Instance.PlaySE("Cash");
         }
 
         private void Awake()

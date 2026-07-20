@@ -96,7 +96,7 @@ namespace ShopModule
         public void Pop()
         {
             if (_shoppingPanelStack.Count == 0) return;
-
+            AudioManager.Instance.PlaySE("MoveItem");
             var closed = _shoppingPanelStack.Pop();
             closed.gameObject.SetActive(false);
 
