@@ -1,8 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 using VContainer;
 
 namespace BattleModule
 {
+    /// <summary>
+    /// タイムリミットのPresenter
+    /// </summary>
     public class TimeLimitPresenter : MonoBehaviour
     {
         [Inject]
