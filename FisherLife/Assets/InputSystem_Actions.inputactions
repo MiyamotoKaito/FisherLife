@@ -967,6 +967,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Title",
+            "id": "99903ea0-3dd5-4ef0-ac9a-8b1fef0160b7",
+            "actions": [
+                {
+                    "name": "Entry",
+                    "type": "Button",
+                    "id": "d04c6b7e-2e81-43fb-a79a-2ee13ade79c5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3edcf93a-43f6-4aba-a3a9-a78f74961dc6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Entry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

@@ -47,5 +47,6 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 0}
   _action: {fileID: -944628639613478452, guid: aa9e52b4dafaf2547acc8cda792b3724, type: 3}

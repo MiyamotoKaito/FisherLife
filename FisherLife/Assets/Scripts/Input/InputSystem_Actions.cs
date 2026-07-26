@@ -1055,6 +1055,34 @@ namespace InputModule
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Title"",
+            ""id"": ""99903ea0-3dd5-4ef0-ac9a-8b1fef0160b7"",
+            ""actions"": [
+                {
+                    ""name"": ""Entry"",
+                    ""type"": ""Button"",
+                    ""id"": ""d04c6b7e-2e81-43fb-a79a-2ee13ade79c5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3edcf93a-43f6-4aba-a3a9-a78f74961dc6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Entry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1156,6 +1184,9 @@ namespace InputModule
             m_Equipment_Down = m_Equipment.FindAction("Down", throwIfNotFound: true);
             m_Equipment_Entry = m_Equipment.FindAction("Entry", throwIfNotFound: true);
             m_Equipment_Cancel = m_Equipment.FindAction("Cancel", throwIfNotFound: true);
+            // Title
+            m_Title = asset.FindActionMap("Title", throwIfNotFound: true);
+            m_Title_Entry = m_Title.FindAction("Entry", throwIfNotFound: true);
         }
 
         ~@FisherLifeInputActionAsset()
@@ -1166,6 +1197,7 @@ namespace InputModule
             UnityEngine.Debug.Assert(!m_Typing.enabled, "This will cause a leak and performance issues, FisherLifeInputActionAsset.Typing.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_Shopping.enabled, "This will cause a leak and performance issues, FisherLifeInputActionAsset.Shopping.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_Equipment.enabled, "This will cause a leak and performance issues, FisherLifeInputActionAsset.Equipment.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_Title.enabled, "This will cause a leak and performance issues, FisherLifeInputActionAsset.Title.Disable() has not been called.");
         }
 
         /// <summary>
@@ -2011,6 +2043,102 @@ namespace InputModule
         /// Provides a new <see cref="EquipmentActions" /> instance referencing this action map.
         /// </summary>
         public EquipmentActions @Equipment => new EquipmentActions(this);
+
+        // Title
+        private readonly InputActionMap m_Title;
+        private List<ITitleActions> m_TitleActionsCallbackInterfaces = new List<ITitleActions>();
+        private readonly InputAction m_Title_Entry;
+        /// <summary>
+        /// Provides access to input actions defined in input action map "Title".
+        /// </summary>
+        public struct TitleActions
+        {
+            private @FisherLifeInputActionAsset m_Wrapper;
+
+            /// <summary>
+            /// Construct a new instance of the input action map wrapper class.
+            /// </summary>
+            public TitleActions(@FisherLifeInputActionAsset wrapper) { m_Wrapper = wrapper; }
+            /// <summary>
+            /// Provides access to the underlying input action "Title/Entry".
+            /// </summary>
+            public InputAction @Entry => m_Wrapper.m_Title_Entry;
+            /// <summary>
+            /// Provides access to the underlying input action map instance.
+            /// </summary>
+            public InputActionMap Get() { return m_Wrapper.m_Title; }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+            public void Enable() { Get().Enable(); }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+            public void Disable() { Get().Disable(); }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+            public bool enabled => Get().enabled;
+            /// <summary>
+            /// Implicitly converts an <see ref="TitleActions" /> to an <see ref="InputActionMap" /> instance.
+            /// </summary>
+            public static implicit operator InputActionMap(TitleActions set) { return set.Get(); }
+            /// <summary>
+            /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+            /// </summary>
+            /// <param name="instance">Callback instance.</param>
+            /// <remarks>
+            /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+            /// </remarks>
+            /// <seealso cref="TitleActions" />
+            public void AddCallbacks(ITitleActions instance)
+            {
+                if (instance == null || m_Wrapper.m_TitleActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_TitleActionsCallbackInterfaces.Add(instance);
+                @Entry.started += instance.OnEntry;
+                @Entry.performed += instance.OnEntry;
+                @Entry.canceled += instance.OnEntry;
+            }
+
+            /// <summary>
+            /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+            /// </summary>
+            /// <remarks>
+            /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+            /// </remarks>
+            /// <seealso cref="TitleActions" />
+            private void UnregisterCallbacks(ITitleActions instance)
+            {
+                @Entry.started -= instance.OnEntry;
+                @Entry.performed -= instance.OnEntry;
+                @Entry.canceled -= instance.OnEntry;
+            }
+
+            /// <summary>
+            /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="TitleActions.UnregisterCallbacks(ITitleActions)" />.
+            /// </summary>
+            /// <seealso cref="TitleActions.UnregisterCallbacks(ITitleActions)" />
+            public void RemoveCallbacks(ITitleActions instance)
+            {
+                if (m_Wrapper.m_TitleActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            /// <summary>
+            /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+            /// </summary>
+            /// <remarks>
+            /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+            /// </remarks>
+            /// <seealso cref="TitleActions.AddCallbacks(ITitleActions)" />
+            /// <seealso cref="TitleActions.RemoveCallbacks(ITitleActions)" />
+            /// <seealso cref="TitleActions.UnregisterCallbacks(ITitleActions)" />
+            public void SetCallbacks(ITitleActions instance)
+            {
+                foreach (var item in m_Wrapper.m_TitleActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_TitleActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        /// <summary>
+        /// Provides a new <see cref="TitleActions" /> instance referencing this action map.
+        /// </summary>
+        public TitleActions @Title => new TitleActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         /// <summary>
         /// Provides access to the input control scheme.
@@ -2291,6 +2419,21 @@ namespace InputModule
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnCancel(InputAction.CallbackContext context);
+        }
+        /// <summary>
+        /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Title" which allows adding and removing callbacks.
+        /// </summary>
+        /// <seealso cref="TitleActions.AddCallbacks(ITitleActions)" />
+        /// <seealso cref="TitleActions.RemoveCallbacks(ITitleActions)" />
+        public interface ITitleActions
+        {
+            /// <summary>
+            /// Method invoked when associated input action "Entry" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnEntry(InputAction.CallbackContext context);
         }
     }
 }

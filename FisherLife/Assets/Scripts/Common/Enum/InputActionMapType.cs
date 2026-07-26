@@ -17,5 +17,7 @@
         Shopping = 4,
         /// <summary> 装備操作。 </summary>
         Equipment = 5,
+        /// <summary> タイトル操作。 </summary>
+        Title = 6,
     }
 }
